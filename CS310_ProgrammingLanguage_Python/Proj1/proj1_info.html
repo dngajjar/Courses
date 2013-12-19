@@ -1,0 +1,629 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0030)http://menzies.us/cs310/?proj1 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title> proj1 </title>
+<link rel="stylesheet" href="./proj1_info_files/style.css" type="text/css">
+<link rel="icon" href="http://www.unbox.org/open/trunk/310/13/fall/doc/img/favicon.png" type="image/png" <meta="" http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<style>#haloword-pron { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -34px; }#haloword-pron:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -34px; }#haloword-open { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -17px; }#haloword-open:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -17px; }#haloword-close { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px 0; }#haloword-close:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px 0; }#haloword-add { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -51px; }#haloword-add:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -51px; }#haloword-remove { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -68px; }#haloword-remove:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -68px; }</style></head>
+<body>
+<div id="wrapper">
+  <div id="header">  <!--header-->
+		<div id="logo"><img src="./proj1_info_files/LOGO.png" alt=""></div>
+    		<h1><a href="http://menzies.us/cs310/">cs310</a></h1>
+   			<h2>A language that 
+doesn't affect the way you think about programming, 
+is not worth knowing. --Alan Perlis </h2>
+ </div>
+  <div id="menu">
+    <ul>
+        <li class="m-item"><a href="http://menzies.us/cs310/?index">Home</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?syllabus">Syllabus</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?timetable">Timetable</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?sitemap#review">Review</a></li>
+        <li class="m-item"><a href="http://menzies.us/var/310/13/fall">Sandbox</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?sitemap">Site map</a></li>
+    </ul>
+  </div><!--menu--> 
+  <div id="main">  
+    <div id="content">
+
+<h1>Project 1</h1>
+<h2>Goal</h2>
+<p>The "manta" of this class is that:</p>
+<ul>
+<li>There are <em>programmers</em> who design and implement languages;</li>
+<li>There are <em>users</em> who use that language to complete their tasks.</li>
+</ul>
+<p>Further, we say that:</p>
+<ul>
+<li>A programming language is the syntactic sugar that makes some underlying maths
+palatable to <em>users</em> .<ul>
+<li>Where that sugar has three parts:<ul>
+<li>Succinct structures (so <em>programmer</em> can
+     code one thing in less space);</li>
+<li>Shortcuts (so <em>users</em>
+    can specify repeated things in less time);          </li>
+<li>Watchdogs that alert us to possible problems.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>That the better we understand the maths, the better
+  we can design a language.<ul>
+<li>E.g. our watchdogs can refer to the maths to find some problems.</li>
+</ul>
+</li>
+</ul>
+<p>The goal of this project is to </p>
+<ul>
+<li>Show students aspects of <em>succinct, shortcuts, watchdogs, maths</em> using
+  a simple engine for text adventure games;</li>
+<li>All the while, learning some basic Python coding techniques.</li>
+</ul>
+<h2>Caution to Advanced Students</h2>
+<p>This is a simple <em>introductory</em> exercise for beginners to language
+design.  By the end of the semester, we will be using our own LISP
+interpreter (built in this class) to implement recursive functions,
+closures, nested name spaces, and lots of other good stuff
+besides. But that is for later. For now, we just want to make sure our
+group members are all walking at the same speed, before we start
+running.</p>
+<h2>Example</h2>
+<p>Here's a simple gaming engine. Your question is, how to make it better:</p>
+<ol>
+<li>Hint: what do program users need to let them succinctly write this kind of program?</li>
+<li>Hint: what do program designers need to simplify build programs of this type?</li>
+<li>Hint: consider the underlying maths. What watchdogs can you offer?</li>
+</ol>
+<p>Code:</p>
+<pre><code>#!/usr/bin/env python
+
+'''
+LIFE: THE GAME
+'''
+character = {'stage': 'Birth'}
+choice = {
+    'Birth': {
+        'description': 'You have entered the world. What will you do?',
+        'options': '1) Go home with a family\n2) Flee the hospital to live with cats',
+        'exits': {'1':'one', '2':'two'}
+    },
+    'one': {
+        'description': 'You have chosen to go live with your family! What to do next?',
+        'options': '1) Get a job\n2) Go to school\n3) Go live in the woods',
+        'exits': {'1':'three', '2':'four' , '3':'five'}
+    },
+    'two': {
+        'description': 'You find an alley with cats. What to do next?',
+        'options': '1) Go to school\n2) Go live in the woods\n3) Become cat president',
+        'exits': {'1':'four', '2':'five' , '3':'six'}
+    },
+    'three': {
+        'description': 'You decide to go get a minimum-wage job. Now what?',
+        'options': '1) Start a family\n2) Work toward a better job',
+        'exits': {'1':'seven', '2':'eight'}
+    },
+    'four': {
+        'description': 'You go to school. You Now what?',
+        'options': '1) Start a family\n2) Get a hot new job',
+        'exits': {'1':'seven', '2':'eight'}
+    },
+    'five': {
+        'description': 'You take a page from Thoreau and go live in the woods. Now what?',
+        'options': '1) Terrorize children at summer camp\n2) Become an acorn peddlar',
+        'exits': {'1':'nine', '2':'ten'}
+    },
+    'six': {
+        'description': 'You have been elected the president of cats! Now what?',
+        'options': '1) Become somewhat normal and start a family\n2) Retire to Cat-topia',
+        'exits': {'1':'seven', '2':'eleven'}
+    },
+    'seven': {
+        'description': 'You meet someone, and create little someones. And now?',
+        'options': '1) And...',
+        'exits': {'1':'thirteen'}
+    },
+    'eight': {
+        'description': 'You have taken an exciting job at Technology Man Co. What do you do now?',
+        'options': '1) Slip into insanity\n2) Handle your money reasonably',
+        'exits': {'1':'twelxe', '2':'thirteen'}
+    },
+    'nine': {
+        'description': 'Dress up as an evil dwarf and terrorize summer camp goers. And now?',
+        'options': '1) And...',
+        'exits': {'1':'thirteen'}
+    },
+    'ten': {
+        'description': 'Unlike squirrels, you can't find and live on acorns . And now?',
+        'options': '1) And...',
+        'exits': {'1':'thirteen'}
+    },
+    'eleven': {
+        'description': 'You retire to Cat-topia. And now?',
+        'options': '1) And...',
+        'exits': {'1':'thirteen'}
+    },
+    'twelve': {
+        'description': 'You have become a deranged millionare. And now?',
+        'options': '1) And...',
+        'exits': {'1':'thrteen'}
+    },
+    'thirteen': {
+        'description': 'Congratulations, you are dead!',
+        'options': 'RIP in peace',
+        'exits': {'1':'thirteen'}
+    }
+}
+</code></pre>
+<p>Btw, in the above, our user has made some boo-boos and mistyped
+some node names.  So there are errors in the above an, clearly, we
+need some watchdogs to help the developer find and fix those issues.</p>
+<h3>Not Succinct Enough for Users</h3>
+<p>Here are some user-level annoyances in the above:</p>
+<ul>
+<li>The full name of states have to be given, every time they are used.<ul>
+<li>WANTED1:  some partial match so you only have to type the first N unique letters
+   of a state to identify it.</li>
+<li>WANTED2:  a warning if the typed letters match nothing or more than one thing.</li>
+</ul>
+</li>
+<li>Having to add text like <code>\n</code> <code>what to do next?</code>. <ul>
+<li>WANTED3: these should be auto-added.</li>
+</ul>
+</li>
+<li>Opening brackets have to matched. Can we do better with some other syntax? e.g.<ul>
+<li>WANTED4: <ul>
+<li>Every node is one paragraph  (paragraphs are separated by one blank line).</li>
+<li>Every line not starting with <code>&gt;</code> is a description.</li>
+<li>Every line starting with <code>&gt;</code> followed by  a state name and 
+     a question is a link to another state.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>With the syntax of the last point, we could greatly simplify the following:</p>
+<pre><code>    'Birth': {
+        'description': 'You have entered the world. What will you do?',
+        'options': '1) Go home with a family\n2) Flee the hospital to live with cats',
+        'exits': {'1':'one', '2':'two'}
+    },
+    'one': {
+        'description': 'You have chosen to go live with your family! What to do next?',
+        'options': '1) Get a job\n2) Go to school\n3) Go live in the woods',
+        'exits': {'1':'three', '2':'four' , '3':'five'}
+    },
+    etc
+</code></pre>
+<p>with something we will call StageText:</p>
+<pre><code># stage text
+Birth
+You have entered the world
+&gt; H Go home with a family
+&gt; P Flee the hospital to live with cats
+
+Home
+You have chosen to go live with your family
+&gt; J Get a job
+&gt; S Go to school
+&gt; W Go live in the woods
+
+etc
+</code></pre>
+<p>Of course, that surface form would have to be read into some 
+structure. WANTED5: the following
+internal class structure.</p>
+<p>Edges:</p>
+<pre><code>class Edge:
+    def __init__(self,here,there,txt):
+      self.description = txt     # why am i making this jump? 
+      self.here        = here    # where do i start
+      self.there       = there   # where to i end
+      self.here.out   += [self]  # btw, tell here that they can go there
+
+    def __repr__(self):
+      return "E(" + self.here.name + " &gt; " + self.there.name + ")"
+</code></pre>
+<p>Nodes:</p>
+<pre><code>class Node:
+  end   = "."
+  start = "!"
+
+  def __init__(self,g,id,name,stop=False,start=False):
+      self.id = id
+      self.graph = g          # where do i live?
+      self.name = name        # what is my name?
+      self.description = ""   # tell me about myself
+      self.stop = stop        # am i a stop node?
+      self.start = start      # am i a start node?
+      self.out = []           # where do i connect to
+
+  def also(self,txt):
+      "adds text to description"
+      sep = "\n" if self.description else ""
+      self.description += sep + txt
+
+  def __repr__(self):
+      return "N( :id " + str(self.id) + \
+             "\n   :name " + self.name + \
+             "\n   :about '" + self.description + "'" + \
+             "\n   :out " + str(self.out) + ") "
+</code></pre>
+<p>Graphs:</p>
+<pre><code>class Graph:
+    def __init__(self):
+      self.nodes = []    # nodes, stored in creation order
+      self.keys  = {}    # nodes indexed by name
+      self.m = None      # adjacency matrix
+      self.mPrime = None # transitive closure matrix
+
+    def node(self,name):
+      "returns a old node from cache or a new node"
+      if not name in self.keys:
+        self.keys[name] = self.newNode(name)
+      return self.keys[name]
+
+    def newNode(self,name):
+      " create a new node"
+      id = len(self.nodes) 
+      tmp = Node(self,id,name)
+      tmp.start = Node.start in name
+      tmp.end   = Node.end   in name
+      self.nodes += [tmp]
+      return tmp
+</code></pre>
+<h3>Not Simple Enough for Programmers</h3>
+<p>The raw Python syntax shown above is processed by the following PYTHON code. The details
+of the follow do not concern us at this stage except to say:</p>
+<ul>
+<li>This is an event-driven loop: while not end of time, look for user
+  input and react to it.</li>
+<li>At each <code>stage</code>, look at the steps to the next stage,
+  ask what the end-user wants to do, then go there.</li>
+</ul>
+<p>For the programmer writing the support code, to execute the above,
+there are several drawbacks with the current implementation. Can you see them?</p>
+<pre><code>print "Congratulations, you have been born!"
+while True:
+    next = choice[character['stage']]
+    command = raw_input(next['description'] + ' &gt; ')
+    command_parts = command.split(None, 1)
+    next_stage = command_parts[0]
+    if next_stage in ['1', '2', '3', '4', '5', 
+                      '6', '7', '8', '9', '10', '11', '12', '13']:
+        if next_stage in next['exits']:
+            character['stage'] = next['exits'][next_stage]
+            next = choice[character['stage']]
+        else:
+            print 'You cannot do that. Enter "o" for options.'
+    elif next_stage not in ['o', 'quit', 'exit', 'stop']:
+            print 'You cannot do that. Enter "o" for options.'
+    if next_stage == 'o':
+    print next['options']
+    if next_stage in ['quit', 'exit', 'stop']:
+        print 'Goodbye'
+        break
+</code></pre>
+<p>The general problem with the above is that if we change the nodes and edges,
+then we have to change the code:</p>
+<ul>
+<li>The start and end nodes should not be hard-wired
+  into the interpreter:<ul>
+<li>WANTED6: it should be inferred from the specification- it </li>
+</ul>
+</li>
+<li>The number of stages in the code should not be hard-wired into the code (as done above).<ul>
+<li>WANTED7: it should be found via a query to the structures.</li>
+</ul>
+</li>
+<li>The pop-up menu of what to do next should not be manually generated:<ul>
+<li>WANTED8: it should be auto-generated</li>
+</ul>
+</li>
+<li>The interpreter should not appear in the same file as the StageText<ul>
+<li>WANTED9: a system that can load in different StageText specs from different files.</li>
+</ul>
+</li>
+</ul>
+<h3>Watch dogs</h3>
+<p>We cannot define watch dogs unless we can efficiently query the underlying
+maths. What is that maths?</p>
+<p>Beneath the above is <em>directed graph</em> of <em>nodes</em> and <em>edges</em> where
+each <em>edge</em> is a pair <em>from,to</em>.  We could write down such a graph (in
+<em>grahviz</em> notation) as follows (warning, the above example was done
+manually, may contain errors):</p>
+<pre><code> # sample "edge text"
+ birth           -&gt; one;two
+ one             -&gt; three;four;five
+ two             -&gt; four;five;six
+ three           -&gt; seven;eight
+ four            -&gt; seven;eight
+ five            -&gt; nine;ten
+ six             -&gt; seven;eleven
+ seven           -&gt; thirteen
+ eight           -&gt; twelxe,thirteen #typo in "twelve"
+ nine;ten;eleven -&gt; thirteen 
+ twelve          -&gt; thrteen         #type in "thirteen"
+</code></pre>
+<p>This looks like this:</p>
+<p></p><center>
+<img src="./proj1_info_files/game.dot.png">
+</center><p></p>
+<p>Note the dead-ends (the nodes that do not lead on to the end node of
+<em>thirteen</em>) and and islands (nodes that do not connect to the rest).</p>
+<h3>Adjacency Matrix</h3>
+<p>That's a little hard to reason about so we'll write it again as an <em>adjacency matrix</em> (where <em>M[x,y]=1</em> if
+there is an edge between <em>x</em> and <em>y</em>).</p>
+<pre><code># adjacency matrix
+0110000000000000
+0011100000000000
+0001110000000000
+0000000110000000
+0000000110000000
+0000000001100000
+0000000100010000
+0000000000000100
+0000000000000110
+0000000000000100
+0000000000000100
+0000000000000100
+0000000000000010
+0000000000000000
+0000000000000000
+0000000000000000
+</code></pre>
+<p>That's a little hard to read so we'll add some syntactic sugar:</p>
+<ul>
+<li>Instead of zero, we'll type blank</li>
+<li>We'll add a key top and right and type one character per column.
+  Since our key can only be one
+  character long, if we need more than 10 labels, we'll use a,b,c etc.</li>
+<li>Then, on the right, we'll write down the the one character
+  label next to the long name of the label:</li>
+</ul>
+<p>Which leads to:</p>
+<pre><code>123456789abcdefg
+.11............. 1 birth
+..111........... 2 one
+...111.......... 3 two
+.......11....... 4 three
+.......11....... 5 four
+.........11..... 6 five
+.......1...1.... 7 six
+.............1.. 8 seven
+.............11. 9 eight
+.............1.. a nine
+.............1.. b ten
+.............1.. c eleven
+..............1. d twelve
+................ e thirteen
+................ f twlxe
+................ g thrteen
+</code></pre>
+<p>By the way, here's some Python code to convert an arbitary number into
+a small number of letters.</p>
+<pre><code>mySyms=list("0123456789abcdefghojklmnopqrstuvwzyz=?+*-@$:;ABCDEFGHIJKLMNOPQRSTUVWYZ")
+
+def mySym(n) :
+  return mySyms[n% len(mySyms)]
+</code></pre>
+<h3>Zone Matrix</h3>
+<p>Two reasonable watch dogs for this kind of graph is that they have one
+<em>start</em> and one <em>end</em> note.  That watch dog needs some
+add some sugar to denote that information</p>
+<ul>
+<li><code>!</code> means <em>start</em></li>
+<li>'.' means <em>end</em></li>
+</ul>
+<p>Adding that results in what we call <em>zone matrix</em> (which is just
+a human readable adjacency matrix):</p>
+<pre><code># zone matrix
+123456789abcdefg
+.11............. 1 !birth
+..111........... 2 one
+...111.......... 3 two
+.......11....... 4 three
+.......11....... 5 four
+.........11..... 6 five
+.......1...1.... 7 six
+.............1.. 8 seven
+.............11. 9 eight
+.............1.. a nine
+.............1.. b ten
+.............1.. c eleven
+..............1. d twelve
+................ e thirteen.
+................ f twlxe
+................ g thrteen
+</code></pre>
+<h3>Islands</h3>
+<p>Graphs have components, i.e. nodes that connect to each other.
+Two nodes are in different components if they do not connect. </p>
+<p>Edges can be labeled according to what <em>island</em> they belong to.
+In our case, our game has two islands so our <em>island matrix</em> is:</p>
+<pre><code># island matrix
+123456789abcdefg
+.11............. 1 !birth
+..111........... 2 one
+...111.......... 3 two
+.......11....... 4 three
+.......11....... 5 four
+.........11..... 6 five
+.......1...1.... 7 six
+.............1.. 8 seven
+.............11. 9 eight
+.............1.. a nine
+.............1.. b ten
+.............1.. c eleven
+..............2. d twelve   # &lt;== note: separate island 
+................ e thirteen.
+................ f twlxe
+................ g thrteen
+</code></pre>
+<p>WANTED9: Something that reads StateText and prints the island matrix</p>
+<h3>Watchdogs</h3>
+<p>So here are the watch 
+dogs we can apply to the island matrix. If any of the
+following are false, then report an error:</p>
+<ul>
+<li>There is one and one only start node.</li>
+<li>There is one and one only stop node.</li>
+<li>Start nodes have no incoming edges.</li>
+<li>Stop nodes have no outgoing edges.</li>
+<li>All nodes should connect downstream to the stop node.</li>
+<li>The start node should connect to all other nodes.</li>
+<li>There should only be one island.</li>
+<li>All internal nodes (that are not start or stop nodes)<ul>
+<li>Need at least one in-coming edge.</li>
+<li>Need at least one out-going edge</li>
+</ul>
+</li>
+</ul>
+<p>Note that all of these are queries to the island matrix. There are two
+ways to do that:</p>
+<ul>
+<li>The dumb, slow way<ul>
+<li>Go to every node and walk upstream and downstream to see what you can find.</li>
+</ul>
+</li>
+<li>The smarter way:<ul>
+<li>Compute at one go, a matrix showing what everything can reach.</li>
+<li>Then query that matrix.</li>
+</ul>
+</li>
+</ul>
+<p>This brings us to transitive closure:</p>
+<ul>
+<li>If Oregon touches Idaho and Idaho touches Utah</li>
+<li>Therefore, transitively, I can travel from Oregon to Utah.</li>
+</ul>
+<p>Consider the adjacency matrix for:</p>
+<p></p><center>
+<img src="./proj1_info_files/trans.dot.png">
+</center><p></p>
+<p>It would be:</p>
+<pre><code> M=
+ 0100
+ 0001
+ 0000
+ 1010
+</code></pre>
+<p>Now write everywhere you can get to from everywhere else. Note that
+from <em>c</em>, you can't go anywhere (so the transitive closure of <em>c</em>
+should be empty). But <em>a,b,d</em> are in a loop so from any of them, we
+can go anywhere else:</p>
+<pre><code> M' =
+ 1111
+ 1111
+ 0000
+ 1111
+</code></pre>
+<p>The transitive closure algorithm says for an adjacency matrix <em>M</em> with
+ indexes 0..N, if can get from <em>i</em> to <em>k</em> and <em>k</em> to <em>j</em> then I can go
+ <em>i</em> to <em>k</em>:</p>
+<pre><code>for k in range(n):
+  for i in range(n):
+     for j i range(n):
+        M[i][j] = M[i][j] or (M[i][k] and M[k][j])
+</code></pre>
+<p>Note that the inputs and outputs of the above are all adjacency matrices</p>
+<p>WANTED10: a tool that inputs StageText from disk and prints the <em>M'</em> matrix.</p>
+<p>WANTED11: Something that reports on any violations of the watch dogs
+using, as much as possible, the adjacency  matrix  (e.g. to see what nodes
+connect to node j, look at the j-th <em>column</em> of the matrix).</p>
+<h2>To do</h2>
+<p>At <a href="http://unbox.org/open/trunk/310/13/fall/src/proj1/">310/src</a> 
+there are three games 1,2,3 written in the above clumsy syntax.</p>
+<p>Convert these by hand into 12 StageText files 1abcd 2acbd 3abcd where</p>
+<ul>
+<li>1a, 2a, 3a has no errors</li>
+<li>The rest has enough errors to trigger the watch dogs</li>
+</ul>
+<p>Write a tool <code>python stagereader.py file</code> that inputs a StageReader file
+and can handle WANTED123456789,WANTED10,WANTED11</p>
+<ul>
+<li>Note that 1a 2a 3a will not exercise WANTED11</li>
+<li>But WANTED11 should go crazy on 1bcd, 2bcd, 3bcd</li>
+</ul>
+<p>Hand in:</p>
+<ul>
+<li>All your source code, with line numbers.</li>
+<li>Print outs of 1abcd 2abcd 3abcd</li>
+<li>For 1a 2a 2c    <ul>
+<li>Print outs of the island matrices</li>
+<li>Print outs of the transitive closure (WANTED10)</li>
+<li>Transcripts of playing that game.</li>
+</ul>
+</li>
+<li>For 1bcd 2bcd 3bcd      <ul>
+<li>The errors generated from reading them in (WANTED11)
+         + Ensure that this error listing has line numbers.</li>
+</ul>
+</li>
+<li>2 to 5 pages of text describing<ul>
+<li>How you implemented WANTED1...11</li>
+<li>Include line numbers to the source code and error listings
+    to illustrate your text.</li>
+</ul>
+</li>
+</ul>
+<p>Note that you will be marked by:</p>
+<ul>
+<li><em>Testability</em> : Do your games 1bcd 2bcd 3bcd contain an interesting range of errors?</li>
+<li><em>Functionality</em> : Does all of WANTED1..11 work?</li>
+<li><em>Comprehension</em> : Do you know how to most exploit the island matrices to
+  implement the watch dogs? </li>
+<li><em>Clarity</em> : Does your 2-5 pages show that you know what is going on?</li>
+</ul>
+<p>Suggestions:</p>
+<ul>
+<li>Your fist step is to read in StageText then generate the Graph, Node, Edge instances.</li>
+<li>Your second step is to query the Graph, Node, Edge instances to generate
+  the <code>M</code> adjacency matrix.</li>
+</ul></div> <div id="sidebar">
+<div id="block-1">      
+      <h2>About</h2>
+<ul>
+<li> CS310: Programming Languages
+</li><li>Spring 2013
+</li><li>LCSEE, WVU
+</li><li>Lecturer= Tim Menzies
+</li><li>Tutor= Cheyenne Parsley
+	</li></ul>     
+      </div>
+      <div id="block-2">
+      <h2>Contact </h2>
+<ul><li> Email to class:<br>cs310@googlegroups.com
+</li></ul>
+
+<h2>On Travel?</h2>
+<img align="left" src="./proj1_info_files/avatar_c1374a470f8d_64.png">
+<ul>
+<li>Registered for an authorized absence? 
+<a href="https://docs.google.com/spreadsheet/ccc?key=0AqtLfKAJzgNrdHJETlh3NGlZcGRULTlpWVZNYTk4eHc&usp=sharing">Check here</a>
+</li></ul>
+
+<br clear="all">
+<hr>
+<ul><p><a href="http://registrar.wvu.edu/current_students/finals">Offical WVU exam timetable</a></p></ul>
+</div>
+
+
+
+<center>
+<img src="./proj1_info_files/081509083351_wvu-logo2.jpg" width="150">
+</center>
+
+
+</div> 
+    <div class="clr"></div> 
+  </div><!--content-->
+  <div id="footer">
+    ©copyright 2013, <a href="http://menzies.us/">Tim Menzies</a>, share and enjoy.
+  </div>
+</div><!--wrapper-->
+
+
+ 
+<div id="haloword-lookup" class="ui-widget-content ui-draggable"><div id="haloword-title"><span id="haloword-word"></span><a herf="#" id="haloword-pron" class="haloword-button" title="&#21457;&#38899;"></a><audio id="haloword-audio"></audio><div id="haloword-control-container"><a herf="#" id="haloword-add" class="haloword-button" title="&#21152;&#20837;&#21333;&#35789;&#34920;"></a><a herf="#" id="haloword-remove" class="haloword-button" title="&#31227;&#20986;&#21333;&#35789;&#34920;"></a><a href="http://menzies.us/cs310/?proj1#" id="haloword-open" class="haloword-button" title="&#26597;&#30475;&#21333;&#35789;&#35814;&#32454;&#37322;&#20041;" target="_blank"></a><a herf="#" id="haloword-close" class="haloword-button" title="&#20851;&#38381;&#26597;&#35810;&#31383;"></a></div><br style="clear: both;"></div><div id="haloword-content"></div></div></body></html>

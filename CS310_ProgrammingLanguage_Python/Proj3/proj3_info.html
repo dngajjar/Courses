@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0030)http://menzies.us/cs310/?proj3 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title> proj3 </title>
+<link rel="stylesheet" href="./proj3_info_files/style.css" type="text/css">
+<link rel="icon" href="http://www.unbox.org/open/trunk/310/13/fall/doc/img/favicon.png" type="image/png" <meta="" http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<style>#haloword-pron { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -34px; }#haloword-pron:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -34px; }#haloword-open { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -17px; }#haloword-open:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -17px; }#haloword-close { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px 0; }#haloword-close:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px 0; }#haloword-add { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -51px; }#haloword-add:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -51px; }#haloword-remove { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -68px; }#haloword-remove:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -68px; }</style></head>
+<body>
+<div id="wrapper">
+  <div id="header">  <!--header-->
+		<div id="logo"><img src="./proj3_info_files/LOGO.png" alt=""></div>
+    		<h1><a href="http://menzies.us/cs310/">cs310</a></h1>
+   			<h2>A language that 
+doesn't affect the way you think about programming, 
+is not worth knowing. --Alan Perlis </h2>
+ </div>
+  <div id="menu">
+    <ul>
+        <li class="m-item"><a href="http://menzies.us/cs310/?index">Home</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?syllabus">Syllabus</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?timetable">Timetable</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?sitemap#review">Review</a></li>
+        <li class="m-item"><a href="http://menzies.us/var/310/13/fall">Sandbox</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?sitemap">Site map</a></li>
+    </ul>
+  </div><!--menu--> 
+  <div id="main">  
+    <div id="content">
+
+<h1>Project 3</h1>
+<p><img align="left" src="./proj3_info_files/number-3.jpg" height="200"></p>
+<p>In the this project you will semantics to the StageText language; specifically:
+<em>sub-routines</em> and <em>demons</em>.</p>
+<p><br clear="all"></p>
+<h2>Sub-routines</h2>
+<ul>
+<li>The StageText graph will divide into N sub-graphs, one called main,
+  and others called from main.</li>
+</ul>
+<p>Example: </p>
+<ul>
+<li>Suppose the nodes in <em>main</em> are "something old", "something new",
+          "something burrow", "something blue". </li>
+<li>Suppose further you have a sub-graph called <em>acquire</em>
+          that has nodes "beg", "burrow", or "steal"</li>
+<li>Then <em>main</em> could call <em>acquire</em> four times (once for each of
+          <em>old,new,burrow,blue</em> and <em>acquire</em> could prompt the user 
+          for these items using the strategies <em>beg,burrow</em> and, if all
+          else fails, <em>steal</em> (e.g. print out, "look, over there, its Halley's
+          comet" and while they are distracted, teleport their wallet out
+          from the user's jeans).</li>
+</ul>
+<h2>Demons</h2>
+<p>An <em>Env</em>(ironment) variable will be added to the StateText interpreter
+  that will carry around an updatable dictionary of values. To call a sub-graph:
+     + Copy the <em>Env</em>
+     + Push some local variables onto <em>Env</em> (to be used in the sub-graph)
+     + Pass the <em>Env</em> to the sub-graph</p>
+<p>Each StageText node will have extra slots that test or  change the working memory:</p>
+<ul>
+<li><em>add</em>  : a list of items that this StateText adds to a working memory
+            + Defaults to <code>nil</code></li>
+<li><em>delete</em> : a list of items items that this State will delete from working memory 
+            + Defaults to <code>nil</code>.</li>
+</ul>
+<h3>Node Demons</h3>
+<p>Using the above above, we will add the following
+demons to each StageText node:</p>
+<ul>
+<li><em>OnEntry</em> : code to be fired when first arriving at a node. Defaults to nil.</li>
+<li><em>OnExit</em> : code to be fired when leaving a node. Defaults to nil.</li>
+<li><em>When</em> : code to check that it is legal to enter this node.
+         +  <em>Ok</em> is an arbitrary combinations
+            of <em>ands</em>, <em>ors</em>, <em>nots</em> that query some working memory. 
+         + Defaults to <code>t</code></li>
+</ul>
+<h3>Edge Demons</h3>
+<p>Edges now alos have demons.</p>
+<ul>
+<li><em>If</em> : code to check if this edge is currently relevant.</li>
+</ul>
+<p>Note also that description text can contain arbitrary code in <code>(brackets}</code>
+allowing for customization of the description text.</p>
+<p>So a StateText node now looks like this</p>
+<pre><code>SampleNode
+:when (have ('happy}}
+:onEntry (if (' trace} (say "what is going on?"))
+I am some description text about (who) want to do (what).
+&gt; Beach :if (and (have (' time)) (not (have 'sand))) Surf's up dude?
+</code></pre></div> <div id="sidebar">
+<div id="block-1">      
+      <h2>About</h2>
+<ul>
+<li> CS310: Programming Languages
+</li><li>Spring 2013
+</li><li>LCSEE, WVU
+</li><li>Lecturer= Tim Menzies
+</li><li>Tutor= Cheyenne Parsley
+	</li></ul>     
+      </div>
+      <div id="block-2">
+      <h2>Contact </h2>
+<ul><li> Email to class:<br>cs310@googlegroups.com
+</li></ul>
+
+<h2>On Travel?</h2>
+<img align="left" src="./proj3_info_files/avatar_c1374a470f8d_64.png">
+<ul>
+<li>Registered for an authorized absence? 
+<a href="https://docs.google.com/spreadsheet/ccc?key=0AqtLfKAJzgNrdHJETlh3NGlZcGRULTlpWVZNYTk4eHc&usp=sharing">Check here</a>
+</li></ul>
+
+<br clear="all">
+<hr>
+<ul><p><a href="http://registrar.wvu.edu/current_students/finals">Offical WVU exam timetable</a></p></ul>
+</div>
+
+
+
+<center>
+<img src="./proj3_info_files/081509083351_wvu-logo2.jpg" width="150">
+</center>
+
+
+</div> 
+    <div class="clr"></div> 
+  </div><!--content-->
+  <div id="footer">
+    ©copyright 2013, <a href="http://menzies.us/">Tim Menzies</a>, share and enjoy.
+  </div>
+</div><!--wrapper-->
+
+
+ 
+<div id="haloword-lookup" class="ui-widget-content ui-draggable"><div id="haloword-title"><span id="haloword-word"></span><a herf="#" id="haloword-pron" class="haloword-button" title="&#21457;&#38899;"></a><audio id="haloword-audio"></audio><div id="haloword-control-container"><a herf="#" id="haloword-add" class="haloword-button" title="&#21152;&#20837;&#21333;&#35789;&#34920;"></a><a herf="#" id="haloword-remove" class="haloword-button" title="&#31227;&#20986;&#21333;&#35789;&#34920;"></a><a href="http://menzies.us/cs310/?proj3#" id="haloword-open" class="haloword-button" title="&#26597;&#30475;&#21333;&#35789;&#35814;&#32454;&#37322;&#20041;" target="_blank"></a><a herf="#" id="haloword-close" class="haloword-button" title="&#20851;&#38381;&#26597;&#35810;&#31383;"></a></div><br style="clear: both;"></div><div id="haloword-content"></div></div></body></html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0030)http://menzies.us/cs310/?proj2 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title> proj2 </title>
+<link rel="stylesheet" href="./proj2_info_files/style.css" type="text/css">
+<link rel="icon" href="http://www.unbox.org/open/trunk/310/13/fall/doc/img/favicon.png" type="image/png" <meta="" http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<style>#haloword-pron { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -34px; }#haloword-pron:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -34px; }#haloword-open { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -17px; }#haloword-open:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -17px; }#haloword-close { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px 0; }#haloword-close:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px 0; }#haloword-add { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -51px; }#haloword-add:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -51px; }#haloword-remove { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -94px -68px; }#haloword-remove:hover { background: url(chrome-extension://bhkcehpnnlgncpnefpanachijmhikocj/img/icon.svg) -111px -68px; }</style></head>
+<body>
+<div id="wrapper">
+  <div id="header">  <!--header-->
+		<div id="logo"><img src="./proj2_info_files/LOGO.png" alt=""></div>
+    		<h1><a href="http://menzies.us/cs310/">cs310</a></h1>
+   			<h2>A language that 
+doesn't affect the way you think about programming, 
+is not worth knowing. --Alan Perlis </h2>
+ </div>
+  <div id="menu">
+    <ul>
+        <li class="m-item"><a href="http://menzies.us/cs310/?index">Home</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?syllabus">Syllabus</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?timetable">Timetable</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?sitemap#review">Review</a></li>
+        <li class="m-item"><a href="http://menzies.us/var/310/13/fall">Sandbox</a></li>
+        <li class="m-item"><a href="http://menzies.us/cs310/?sitemap">Site map</a></li>
+    </ul>
+  </div><!--menu--> 
+  <div id="main">  
+    <div id="content">
+
+<p><strong>NOT RELEASED YET </strong></p>
+<h1>Project 2</h1>
+<p><img align="left" src="./proj2_info_files/MetroDF_Linea_2.jpg" height="200"></p>
+<p>In the <a href="http://menzies.us/cs310/?proj3">next project</a>
+In this project, you will gain experience working with and extending a
+DSL.  It is an implementation of Lisp in Python, called LISPY, that
+Peter Norvig created.  This will give you an understanding of how to
+implement a language that can perform work and a potential springboard
+upon which to build your own DSL.</p>
+<p><br clear="all"></p>
+<h2>What to hand in</h2>
+<ul>
+<li>The report from Task2a.</li>
+<li>Outputs of Task2b's trace facility in action</li>
+<li>Sample LISP code showing your test code for the Task2c stuff<ul>
+<li>Also outputs from that code executing</li>
+</ul>
+</li>
+<li>All Python source code (7pt, 2col, landscape).<ul>
+<li>Including your big StageText model from Task2d.</li>
+</ul>
+</li>
+</ul>
+<h2>Getting Started</h2>
+<p>Download the following files.  I recommend putting them all in the same
+directory.</p>
+<ul>
+<li><a href="http://menzies.us/var/310/13/fall/sept17_lispy">sept17_lispy</a>: <ul>
+<li>Peter Norvig's LISPY interpreter with some additions</li>
+</ul>
+</li>
+<li><a href="http://menzies.us/var/310/13/fall/lisp1.lisp">lisp1.lisp</a><ul>
+<li>Sample LISP code</li>
+</ul>
+</li>
+</ul>
+<p>Check that the files are running. If you type this:</p>
+<pre><code>% python sept17_lispy lisp1.lisp
+</code></pre>
+<p>Then you should see this:</p>
+<pre><code>28.274333877
+3628800
+93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
+4.1369087198e+13
+3
+tim
+</code></pre>
+<h2>Task 2a: Understand the code</h2>
+<p>What is new in <code>sept17_lispy</code>? Download the original <a href="http://norvig.com/lis.py">lis.py</a> code and run</p>
+<pre><code> diff lis.py set17_lispy | cat -n &gt; diffs.txt
+</code></pre>
+<p>Write a report walking throw diffs.txt. For each difference:</p>
+<ul>
+<li>Say what it is</li>
+<li>Say what would change if the diff was removed.</li>
+</ul>
+<h2>Task 2b: Tracing</h2>
+<p>Add <code>trace</code> and <code>untrace</code> facilities to LISPY.  You can implement these either
+as functions or macros.  The syntax and behavior of these facilities must be as
+follows:</p>
+<ul>
+<li><code>(trace function-name)</code>:<ul>
+<li>Flags the specified function to print entry and exit logs whenever it is
+  called.</li>
+<li>Does not need to return anything, but printing success/error messages
+  helps give a record of work having been done.</li>
+<li>You may find it helpful to let it raise but not catch certain Exceptions.</li>
+</ul>
+</li>
+<li><code>(untrace function-name)</code>:<ul>
+<li>Flags the specified function to NOT print entry and exit logs whenever it
+  is called.</li>
+<li>Does not need to return anything, but printing success/error messages
+  helps give a record of work having been done.</li>
+<li>You may find it helpful to let it raise but not catch certain Exceptions.</li>
+</ul>
+</li>
+</ul>
+<p>Note that is <em>no</em> <code>function-name</code> is supplied, then
+<em>all</em> vars in the current evironment must be traced.</p>
+<p>Note also that certain built-ins cannot be traced- these are the functions
+built into eval
+(<code>if</code>, <code>begin</code>, and the like
+do not have to be handled).</p>
+<p>When a traced function is called, you must print out the following information:</p>
+<ul>
+<li>The depth of the trace stack</li>
+<li>The function name and its passed arguments (after they have been evaluated)</li>
+</ul>
+<p>When a traced function is returning, you must print out the following
+information:</p>
+<ul>
+<li>The depth of the trace stack</li>
+<li>The return value.</li>
+</ul>
+<p>So, if you had a <code>factorial</code> function defined as</p>
+<pre><code>(define factorial (lambda (n) (if (&gt; n 1) (* (factorial (- n 1)) n) 1)))
+</code></pre>
+<p>You should be able to get a trace log as follows:</p>
+<pre><code>lis.py&gt; (trace factorial)
+(FACTORIAL)
+lis.py&gt; (factorial 3)
+ 0: (FACTORIAL 3)
+  1: (FACTORIAL 2)
+   2: (FACTORIAL 1)
+   2: returned 1
+  1: returned 2
+ 0: returned 6
+6
+lis.py&gt; (trace *) # This is the multiplication function!
+(*)
+lis.py&gt; (factorial 3)
+ 0: (FACTORIAL 3)
+  1: (FACTORIAL 2)
+   2: (FACTORIAL 1)
+   2: returned 1
+   2: (* 1 2)
+   2: returned 2
+  1: returned 2
+  1: (* 2 3)
+  1: returned 6
+ 0: returned 6
+6
+lis.py&gt;
+</code></pre>
+<p>Note that as the trace stack gets taller, the indentation level deepens to make
+the output readable.  Also note that functions that are not traced (such as <code>-</code>
+or <code>&lt;</code>) do not deepen the trace stack.</p>
+<p>Your output does not need to be formatted identically to this to get full credit
+so long as it contains all the salient information and is easily readable, but
+getting this exact logging style is not difficult.  Copying this output style
+will make grading your homework easier (read as "the TA will be less grumpy
+while grading your homework").</p>
+<p>Modify <code>eval</code> with a command <code>(trace x)</code> that tells LISP to trace any reference
+to <code>x</code>. Note that this reference should be local to the local environment
+(so setting globals to control tracing is forbidden).</p>
+<h3>Hints:</h3>
+<ul>
+<li>Without giving the game away, the big hints are these:<ul>
+<li>Add a dictionary to <code>Env</code>  whose keys are <code>var</code> and whose initial value is <code>False</code>.</li>
+<li>Trace is <em>local</em> to the current environment  (and its subs). So it is forbidden
+   to set some global of things you are tracing.</li>
+</ul>
+</li>
+<li>One thing that is tricky is handling the indents<ul>
+<li>Method1 (for purists): change all the calls by adding a <em>depth</em> counter, initialized to zero.</li>
+<li>Method2 (for engineerings): define that global that you inc and dec as walk around (forbidden!)</li>
+</ul>
+</li>
+<li>Somewhere in that code is a magic location where everything is computed. All you have to do is<ul>
+<li>Understand LISPY</li>
+<li>Find that core point where we are about to compute something<ul>
+<li>Then wrap it so you show something before and after the call.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Proj2c : A Better Lisp</h2>
+<p>Modify lis2.py to add the following features <em>as simply as you can</em>. </p>
+<ul>
+<li><code>(and form*)</code>:<ul>
+<li>Returns <code>True</code> if all of the passed forms evaluate to non-empty lists or
+  if no forms are passed, and <code>False</code> otherwise.    </li>
+<li><code>form*</code>: Zero or more forms to evaluate.</li>
+</ul>
+</li>
+<li><code>(or form*)</code>:<ul>
+<li>Returns <code>True</code> if at least one of the passed forms evaluate to non-empty
+  lists, and <code>False</code> otherwise.</li>
+<li><code>form*</code>: Zero or more forms to evaluate.</li>
+</ul>
+</li>
+<li><code>(dolist (variable list [result]) form)</code>:<ul>
+<li>Evaluates <code>form</code> for each item in <code>list</code>, accessing the current element
+  through <code>variable</code>.  If <code>form</code> does not evaluate a <code>(return x)</code> call, then
+  <code>result</code> is returned.  Otherwise, the <code>x</code> from the <code>(return x)</code> is
+  returned.</li>
+<li><code>variable</code>: the literal symbol you wish to use as the iterator variable</li>
+<li><code>list</code>: the list of data over which to iterate</li>
+<li><code>result</code>: (optional) the value <code>dolist</code> should return unless a <code>return</code>
+  is evaluated.  Defaults to an empty list.  DO NOT EVALUATE UNTIL THE
+  ITERATION IS COMPLETE!</li>
+<li><code>form</code>: the form to evaluate for each element in the list</li>
+</ul>
+</li>
+<li><code>(dotimes (variable maxValue [result]) form)</code>:<ul>
+<li>Evaluates <code>form</code> <code>maxValue</code> times.  For each evaluation of <code>form</code>,
+  <code>variable</code> will contain a value in the range [0, <code>maxValue</code>).  If <code>form</code>
+  does not evaluate a <code>(return x)</code> call, then <code>result</code> is returned.
+  Otherwise, the <code>x</code> from the <code>(return x)</code> is returned.</li>
+<li><code>variable</code>: the literal symbol you wish to use as the iterator variable</li>
+<li><code>list</code>: the list of data over which to iterate</li>
+<li><code>result</code>: (optional) the value <code>dolist</code> should return unless a <code>return</code>
+  is evaluated.  Defaults to <code>maxValue</code>.  DO NOT EVALUATE UNTIL THE
+  ITERATION IS COMPLETE!</li>
+<li><code>form</code>: the form to evaluate <code>maxValue</code> times</li>
+</ul>
+</li>
+<li><code>(map function list+)</code>:<ul>
+<li>Builds a new list where each element is the result of calling <code>function</code>
+  on the current tuple of elements from the passed lists.  <ul>
+<li>In other words, the first element of the each list 
+    will be used in the first call, the second element of
+    each list will be used in the second call, and so on.</li>
+<li>Note that <code>map</code> must only call <code>function</code> while ALL 
+    the argument lists still have values to supply.  </li>
+<li>Stop mapping at the end of the shortest list.</li>
+<li>Returns the list of results.</li>
+</ul>
+</li>
+<li><code>function</code>: the function to apply to the lists</li>
+<li><code>list+</code>: at least one form that evaluates to a list; <code>map</code> must be able to
+  accept as many lists as a LISPY programmer may need to call <code>function</code></li>
+</ul>
+</li>
+<li><code>(reduce function list [initialValue])</code>:<ul>
+<li>Calculates and returns some aggregate value by applying <code>function</code> to
+  every item in <code>list</code>.  For example, <code>(reduce + '(1 2 3 4))</code> returns <code>10</code>.     <br>
+  In the case of an exception, return an empty list.</li>
+<li><code>function</code>: a binary function with the following form:<ul>
+<li>arg1: the current accumulated value</li>
+<li>arg2: the current list item</li>
+<li>Returns a copy of <code>arg1</code> modified to account for <code>arg2</code></li>
+</ul>
+</li>
+<li><code>list</code>: the list of values to reduce</li>
+<li><code>initialValue</code>: (optional) Defaults to <code>None</code>.  The value to modify by
+  successive calls to <code>function</code>.  If no value is supplied, the first
+  element of <code>list</code> is used, and <code>function</code>'s first "arg2" will be the
+  second element of <code>list</code>.</li>
+</ul>
+</li>
+</ul>
+<h3>Hints</h3>
+<ul>
+<li>Read lis.py carefully.  There are lots of clues on how to implement these
+  features if you pay attention.</li>
+<li>You do not have to evaluate <code>variable</code> argument in <code>dolist</code> and <code>dotimes</code> if
+  you don't want to.  Why would anyone want conditional variable symbols,
+  anyway?</li>
+<li>Write your own tests for these features.  Make them available in the repo.</li>
+</ul>
+<h2>Proj 2d : A Big StageText Model</h2>
+<p>The appendix to this page lists the extensions you will add to StageText, using LISP.</p>
+<ul>
+<li>Read and understand those extensions.</li>
+<li>Pretend you already have a working StageText+Lisp<ul>
+<li>Write a <em>big</em> StageText model:<ul>
+<li>For each node add a comment saying (e.g.) <code>Node23</code></li>
+<li>For each sub-routine add a comment saying (e.g.) <code>Sub11</code></li>
+<li>For each demo add a comment saying (e.g._ <code>Demon41</code>.</li>
+</ul>
+</li>
+<li>Your model must have 50+ nodes, 10+ sub-routines, 50+ demons.</li>
+</ul>
+</li>
+</ul>
+<h1>APPENDIX</h1>
+<p>In project3, you will augment StageText with Lisp. Specifically, you will add
+<em>sub-routines</em> and <em>demons</em>.</p>
+<p><br clear="all"></p>
+<h2>Sub-routines</h2>
+<ul>
+<li>The StageText graph will divide into N sub-graphs, one called main,
+  and others called from main.</li>
+</ul>
+<p>Example: </p>
+<ul>
+<li>Suppose the nodes in <em>main</em> are "something old", "something new",
+          "something burrow", "something blue". </li>
+<li>Suppose further you have a sub-graph called <em>acquire</em>
+          that has nodes "beg", "burrow", or "steal"</li>
+<li>Then <em>main</em> could call <em>acquire</em> four times (once for each of
+          <em>old,new,burrow,blue</em> and <em>acquire</em> could prompt the user 
+          for these items using the strategies <em>beg,burrow</em> and, if all
+          else fails, <em>steal</em> (e.g. print out, "look, over there, its Halley's
+          comet" and while they are distracted, teleport their wallet out
+          from the user's jeans).</li>
+</ul>
+<h2>Demons</h2>
+<p>An <em>Env</em>(ironment) variable will be added to the StateText interpreter
+  that will carry around an updatable dictionary of values. To call a sub-graph:
+     + Copy the <em>Env</em>
+     + Push some local variables onto <em>Env</em> (to be used in the sub-graph)
+     + Pass the <em>Env</em> to the sub-graph</p>
+<p>Each StageText node will have extra slots that test or  change the working memory:</p>
+<ul>
+<li><em>add</em>  : a list of items that this StateText adds to a working memory
+            + Defaults to <code>nil</code></li>
+<li><em>delete</em> : a list of items items that this State will delete from working memory 
+            + Defaults to <code>nil</code>.</li>
+</ul>
+<h3>Node Demons</h3>
+<p>Using the above above, we will add the following
+demons to each StageText node:</p>
+<ul>
+<li><em>OnEntry</em> : code to be fired when first arriving at a node. Defaults to nil.</li>
+<li><em>OnExit</em> : code to be fired when leaving a node. Defaults to nil.</li>
+<li><em>When</em> : code to check that it is legal to enter this node.
+         +  <em>Ok</em> is an arbitrary combinations
+            of <em>ands</em>, <em>ors</em>, <em>nots</em> that query some working memory. 
+         + Defaults to <code>t</code></li>
+</ul>
+<h3>Edge Demons</h3>
+<p>Edges now alos have demons.</p>
+<ul>
+<li><em>If</em> : code to check if this edge is currently relevant.</li>
+</ul>
+<p>Note also that description text can contain arbitrary code in <code>(brackets}</code>
+allowing for customization of the description text.</p>
+<p>So a StateText node now looks like this</p>
+<pre><code>SampleNode
+:when (have ('happy}}
+:onEntry (if (' trace} (say "what is going on?"))
+I am some description text about (who) want to do (what).
+&gt; Beach :if (and (have (' time)) (not (have 'sand))) Surf's up dude?
+</code></pre></div> <div id="sidebar">
+<div id="block-1">      
+      <h2>About</h2>
+<ul>
+<li> CS310: Programming Languages
+</li><li>Spring 2013
+</li><li>LCSEE, WVU
+</li><li>Lecturer= Tim Menzies
+</li><li>Tutor= Cheyenne Parsley
+	</li></ul>     
+      </div>
+      <div id="block-2">
+      <h2>Contact </h2>
+<ul><li> Email to class:<br>cs310@googlegroups.com
+</li></ul>
+
+<h2>On Travel?</h2>
+<img align="left" src="./proj2_info_files/avatar_c1374a470f8d_64.png">
+<ul>
+<li>Registered for an authorized absence? 
+<a href="https://docs.google.com/spreadsheet/ccc?key=0AqtLfKAJzgNrdHJETlh3NGlZcGRULTlpWVZNYTk4eHc&usp=sharing">Check here</a>
+</li></ul>
+
+<br clear="all">
+<hr>
+<ul><p><a href="http://registrar.wvu.edu/current_students/finals">Offical WVU exam timetable</a></p></ul>
+</div>
+
+
+
+<center>
+<img src="./proj2_info_files/081509083351_wvu-logo2.jpg" width="150">
+</center>
+
+
+</div> 
+    <div class="clr"></div> 
+  </div><!--content-->
+  <div id="footer">
+    ©copyright 2013, <a href="http://menzies.us/">Tim Menzies</a>, share and enjoy.
+  </div>
+</div><!--wrapper-->
+
+
+ 
+<div id="haloword-lookup" class="ui-widget-content ui-draggable"><div id="haloword-title"><span id="haloword-word"></span><a herf="#" id="haloword-pron" class="haloword-button" title="&#21457;&#38899;"></a><audio id="haloword-audio"></audio><div id="haloword-control-container"><a herf="#" id="haloword-add" class="haloword-button" title="&#21152;&#20837;&#21333;&#35789;&#34920;"></a><a herf="#" id="haloword-remove" class="haloword-button" title="&#31227;&#20986;&#21333;&#35789;&#34920;"></a><a href="http://menzies.us/cs310/?proj2#" id="haloword-open" class="haloword-button" title="&#26597;&#30475;&#21333;&#35789;&#35814;&#32454;&#37322;&#20041;" target="_blank"></a><a herf="#" id="haloword-close" class="haloword-button" title="&#20851;&#38381;&#26597;&#35810;&#31383;"></a></div><br style="clear: both;"></div><div id="haloword-content"></div></div></body></html>
