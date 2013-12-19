@@ -1,0 +1,1125 @@
+%!PS-Adobe-3.0
+%%Title: report.txt
+%%For: xue
+%%Creator: a2ps version 4.14
+%%CreationDate: Tue Oct  1 15:07:04 2013
+%%BoundingBox: 24 24 588 768
+%%DocumentData: Clean7Bit
+%%Orientation: Landscape
+%%Pages: 3
+%%PageOrder: Ascend
+%%DocumentMedia: Letter 612 792 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-BoldOblique
+%%+ font Courier-Oblique
+%%+ font Helvetica
+%%+ font Helvetica-Bold
+%%+ font Symbol
+%%+ font Times-Bold
+%%+ font Times-Roman
+%%DocumentProcessColors: Black 
+%%DocumentSuppliedResources: procset a2ps-a2ps-hdr
+%%+ procset a2ps-black+white-Prolog
+%%+ encoding ISO-8859-1Encoding
+%%EndComments
+/a2psdict 200 dict def
+a2psdict begin
+%%BeginProlog
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+
+% EPSF import as in the Red Book
+/BeginInclude {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack 
+  userdict begin
+    0 setgray 0 setlinecap
+    1 setlinewidth 0 setlinejoin
+    10 setmiterlimit [ ] 0 setdash newpath
+    gs_languagelevel 1 ne {
+      false setstrokeadjust false setoverprint 
+    } if
+} bind def
+
+/EndInclude {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+/BeginEPSF {
+  BeginInclude
+  /showpage { } def
+} bind def
+
+/EndEPSF {
+  EndInclude
+} bind def
+
+% Page prefeed
+/page_prefeed {         % bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} bind def
+
+/deffont {
+  findfont exch scalefont def
+} bind def
+
+/reencode_font {
+  findfont reencode 2 copy definefont pop def
+} bind def
+
+% Function c-show (str => -)
+% centers text only according to x axis.
+/c-show { 
+  dup stringwidth pop
+  2 div neg 0 rmoveto
+  show
+} bind def
+
+% Function l-show (str => -)
+% prints texts so that it ends at currentpoint
+/l-show {
+  dup stringwidth pop neg 
+  0 
+  rmoveto show
+} bind def
+
+% center-fit show (str w => -)
+% show centered, and scale currentfont so that the width is less than w
+/cfshow {
+  exch dup stringwidth pop
+  % If the title is too big, try to make it smaller
+  3 2 roll 2 copy
+  gt
+  { % if, i.e. too big
+    exch div
+    currentfont exch scalefont setfont
+  } { % ifelse
+    pop pop 
+  }
+  ifelse
+  c-show			% center title
+} bind def
+
+% Return the y size of the current font
+% - => fontsize
+/currentfontsize {
+  currentfont /FontType get 0 eq {
+    currentfont /FontMatrix get 3 get
+  }{
+    currentfont /FontMatrix get 3 get 1000 mul
+  } ifelse
+} bind def
+
+% reencode the font
+% <encoding-vector> <fontdict> -> <newfontdict>
+/reencode { %def
+  dup length 5 add dict begin
+    { %forall
+      % <vector> <key> <val>
+      1 index /FID ne 
+      { def }{ pop pop } ifelse
+    } forall
+    /Encoding exch def % -
+
+    % Use the font's bounding box to determine the ascent, descent,
+    % and overall height; don't forget that these values have to be
+    % transformed using the font's matrix.
+    % We use `load' because sometimes BBox is executable, sometimes not.
+    % Since we need 4 numbers an not an array avoid BBox from being executed
+    /FontBBox load aload pop
+    FontMatrix transform /Ascent exch def pop
+    FontMatrix transform /Descent exch def pop
+    /FontHeight Ascent Descent sub def
+
+    % Get the underline position and thickness if they're defined.
+    % Use 1 if they are not defined.
+    currentdict /FontInfo 2 copy known
+    { get
+      /UnderlinePosition 2 copy % <FontInfo> /UP <FontInfo> /UP
+      2 copy known
+      { get }{ pop pop 1 } ifelse
+      0 exch FontMatrix transform exch pop
+      def % <FontInfo>
+
+      /UnderlineThickness 2 copy % <FontInfo> /UT <FontInfo> /UT
+      2 copy known
+      { get }{ pop pop 1 } ifelse
+      0 exch FontMatrix transform exch pop
+      def % <FontInfo>
+      pop % -
+    }{ pop pop
+    } ifelse
+
+    currentdict
+  end 
+} bind def
+
+% composite fonts for ASCII-EUC mixed strings
+% Version 1.2 1/31/1990
+% Original Ken'ichi HANDA (handa@etl.go.jp)
+% Modified Norio Katayama (katayama@rd.nacsis.ac.jp),1998
+% Extend & Fix Koji Nakamaru (maru@on.cs.keio.ac.jp), 1999
+% Anyone can freely copy, modify, distribute this program.
+
+/copyfont {	% font-dic extra-entry-count  copyfont  font-dic
+	1 index maxlength add dict begin
+	{	1 index /FID ne 2 index /UniqueID ne and
+		{def} {pop pop} ifelse
+	} forall
+	currentdict
+	end
+} bind def
+
+/compositefont { % ASCIIFontName EUCFontName RomanScale RomanOffset Rot(T/F) compositefont font
+    /RomanRotation exch def
+    /RomanOffset exch def
+    /RomanScale exch def
+    userdict /fixeucfont_dict known not {
+	userdict begin
+	    /fixeucfont_dict 2 dict begin
+		/UpperByteEncoding [
+		    16#00 1 16#20 { pop 0 } for
+		    16#21 1 16#28 { 16#20 sub } for
+		    16#29 1 16#2F { pop 0 } for
+		    16#30 1 16#74 { 16#27 sub } for
+		    16#75 1 16#FF { pop 0 } for
+		] def
+	        /LowerByteEncoding [
+		    16#00 1 16#A0 { pop /.notdef } for
+		    16#A1 1 16#FE { 16#80 sub 16 2 string cvrs
+				    (cXX) dup 1 4 -1 roll
+				    putinterval cvn } for
+		    /.notdef
+		] def
+		currentdict
+	    end def
+	end
+    } if
+    findfont dup /FontType get 0 eq {
+	14 dict begin
+	    %
+	    % 7+8 bit EUC font
+	    %
+	    12 dict begin
+		/EUCFont exch def
+		/FontInfo (7+8 bit EUC font) readonly def
+		/PaintType 0 def
+		/FontType 0 def
+		/FontMatrix matrix def
+		% /FontName
+		/Encoding fixeucfont_dict /UpperByteEncoding get def
+		/FMapType 2 def
+		EUCFont /WMode known
+		{ EUCFont /WMode get /WMode exch def }
+		{ /WMode 0 def } ifelse
+		/FDepVector [
+		    EUCFont /FDepVector get 0 get
+		    [ 16#21 1 16#28 {} for 16#30 1 16#74 {} for ]
+		    {
+			13 dict begin
+			    /EUCFont EUCFont def
+			    /UpperByte exch 16#80 add def	
+			    % /FontName
+			    /FontInfo (EUC lower byte font) readonly def
+			    /PaintType 0 def
+			    /FontType 3 def
+			    /FontMatrix matrix def
+			    /FontBBox {0 0 0 0} def
+			    /Encoding
+				fixeucfont_dict /LowerByteEncoding get def
+			    % /UniqueID
+			    % /WMode
+			    /BuildChar {
+				gsave
+				exch dup /EUCFont get setfont
+				/UpperByte get
+				2 string
+				dup 0 4 -1 roll put
+				dup 1 4 -1 roll put
+				dup stringwidth setcharwidth
+				0 0 moveto show
+				grestore
+			    } bind def
+			    currentdict
+			end
+			/lowerbytefont exch definefont
+		    } forall
+		] def
+		currentdict
+	    end
+	    /eucfont exch definefont
+	    exch
+	    findfont 1 copyfont dup begin
+		RomanRotation {
+			/FontMatrix FontMatrix
+			[ 0 RomanScale neg RomanScale 0 RomanOffset neg 0 ]
+			matrix concatmatrix def
+		}{
+			/FontMatrix FontMatrix
+			[ RomanScale 0 0 RomanScale 0 RomanOffset ] matrix concatmatrix
+			def
+			/CDevProc
+			    {pop pop pop pop 0 exch -1000 exch 2 div 880} def
+		} ifelse
+	    end
+	    /asciifont exch definefont
+	    exch
+	    /FDepVector [ 4 2 roll ] def
+	    /FontType 0 def
+	    /WMode 0 def
+	    /FMapType 4 def
+	    /FontMatrix matrix def
+	    /Encoding [0 1] def
+	    /FontBBox {0 0 0 0} def
+%	    /FontHeight 1.0 def % XXXX
+	    /FontHeight RomanScale 1.0 ge { RomanScale }{ 1.0 } ifelse def
+	    /Descent -0.3 def   % XXXX
+	    currentdict
+	end
+	/tmpfont exch definefont
+	pop
+	/tmpfont findfont
+    }{
+	pop findfont 0 copyfont
+    } ifelse
+} def	
+
+/slantfont {	% FontName slant-degree  slantfont  font'
+    exch findfont 1 copyfont begin
+    [ 1 0 4 -1 roll 1 0 0 ] FontMatrix exch matrix concatmatrix
+    /FontMatrix exch def
+    currentdict
+    end
+} def
+
+% Function print line number (<string> # -)
+/# {
+  gsave
+    sx cw mul neg 2 div 0 rmoveto
+    f# setfont
+    c-show
+  grestore
+} bind def
+
+% -------- Some routines to enlight plain b/w printings ---------
+
+% Underline
+% width --
+/dounderline {
+  currentpoint
+  gsave
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    0 rlineto
+    stroke
+  grestore
+} bind def
+
+% Underline a string
+% string --
+/dounderlinestring {
+  stringwidth pop
+  dounderline
+} bind def
+
+/UL {
+  /ul exch store
+} bind def
+
+% Draw a box of WIDTH wrt current font
+% width --
+/dobox {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    stroke
+  grestore
+} bind def
+
+/BX {
+  /bx exch store
+} bind def
+
+% Box a string
+% string --
+/doboxstring {
+  stringwidth pop
+  dobox
+} bind def
+
+%
+% ------------- Color routines ---------------
+%
+/FG /setrgbcolor load def
+
+% Draw the background
+% width --
+/dobackground {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    bgcolor aload pop setrgbcolor
+    fill
+  grestore
+} bind def
+
+% Draw bg for a string
+% string --
+/dobackgroundstring {
+  stringwidth pop
+  dobackground
+} bind def
+
+
+/BG {
+  dup /bg exch store
+  { mark 4 1 roll ] /bgcolor exch store } if
+} bind def
+
+
+/Show {
+  bg { dup dobackgroundstring } if
+  ul { dup dounderlinestring } if
+  bx { dup doboxstring } if
+  show
+} bind def
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T {
+  cw mul x0 add
+  bg { dup currentpoint pop sub dobackground } if
+  ul { dup currentpoint pop sub dounderline } if
+  bx { dup currentpoint pop sub dobox } if
+  y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n {
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+/S {
+  Show
+} bind def
+
+%%BeginResource: procset a2ps-a2ps-hdr 2.0 2
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Function title: prints page header.
+% <ct> <rt> <lt> are passed as argument
+/title { 
+  % 1. Draw the background
+  x v get y v get moveto
+  gsave
+    0 th 2 div neg rmoveto 
+    th setlinewidth
+    0.95 setgray
+    pw 0 rlineto stroke
+  grestore
+  % 2. Border it
+  gsave
+    0.7 setlinewidth
+    pw 0 rlineto
+    0 th neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+  % stk: ct rt lt
+  x v get y v get th sub 1 add moveto
+%%IncludeResource: font Helvetica
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  % 3. The left title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    fnfs 0.8 mul hm rmoveto
+    show			% left title
+  grestore
+  exch
+  % stk: ct ltw rt
+  % 4. the right title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    dup
+    pw exch stringwidth pop fnfs 0.8 mul add sub
+    hm
+    rmoveto
+    show			% right title
+  grestore
+  % stk: ct ltw rtw
+  % 5. the center title
+  gsave
+    pw 3 1 roll
+    % stk: ct pw ltw rtw
+    3 copy 
+    % Move to the center of the left room
+    sub add 2 div hm rmoveto
+    % What is the available space in here?
+    add sub fnfs 0.8 mul sub fnfs 0.8 mul sub
+    % stk: ct space_left
+%%IncludeResource: font Helvetica-Bold
+  fHelvetica-Bold fnfs scalefont setfont
+    cfshow
+  grestore
+} bind def
+
+% Function border: prints virtual page border
+/border { %def
+  gsave				% print four sides
+    0 setgray
+    x v get y v get moveto
+    0.7 setlinewidth		% of the square
+    pw 0 rlineto
+    0 ph neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+} bind def
+
+% Function water: prints a water mark in background
+/water { %def
+  gsave
+    scx scy moveto rotate
+%%IncludeResource: font Times-Bold
+  fTimes-Bold 100 scalefont setfont
+    .97 setgray
+    dup stringwidth pop 2 div neg -50 rmoveto
+    show
+  grestore
+} bind def
+
+% Function rhead: prints the right header
+/rhead {  %def
+  lx ly moveto
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  l-show
+} bind def
+
+% Function footer (cf rf lf -> -)
+/footer {
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  dx dy moveto
+  show
+
+  snx sny moveto
+  l-show
+  
+  fnx fny moveto
+  c-show
+} bind def
+%%EndResource
+%%BeginResource: procset a2ps-black+white-Prolog 2.0 1
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T { 
+  cw mul x0 add y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n { %def
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+}  bind def
+
+/S {
+  Show
+} bind def
+
+/p {
+  false UL
+  false BX
+  fCourier bfs scalefont setfont
+  Show
+} bind def
+
+/sy {
+  false UL
+  false BX
+  fSymbol bfs scalefont setfont
+  Show
+} bind def
+
+/k {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/K {
+  false UL
+  false BX
+  fCourier-Bold bfs scalefont setfont
+  Show
+} bind def
+
+/c {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/C {
+  false UL
+  false BX
+  fCourier-BoldOblique bfs scalefont setfont
+  Show 
+} bind def
+
+/l {
+  false UL
+  false BX
+  fHelvetica bfs scalefont setfont
+  Show
+} bind def
+
+/L {
+  false UL
+  false BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show 
+} bind def
+
+/str{
+  false UL
+  false BX
+  fTimes-Roman bfs scalefont setfont
+  Show
+} bind def
+
+/e{
+  false UL
+  true BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show
+} bind def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier
+%%IncludeResource: font Courier-Oblique
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Times-Roman
+%%IncludeResource: font Symbol
+%%IncludeResource: font Courier-BoldOblique
+%%BeginResource: encoding ISO-8859-1Encoding
+/ISO-8859-1Encoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright 
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash 
+/zero /one /two /three /four /five /six /seven 
+/eight /nine /colon /semicolon /less /equal /greater /question 
+/at /A /B /C /D /E /F /G 
+/H /I /J /K /L /M /N /O 
+/P /Q /R /S /T /U /V /W 
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore 
+/quoteleft /a /b /c /d /e /f /g 
+/h /i /j /k /l /m /n /o 
+/p /q /r /s /t /u /v /w 
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section 
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron 
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /bullet 
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown 
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla 
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis 
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply 
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls 
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla 
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis 
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide 
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis 
+] def
+%%EndResource
+% Initialize page description variables.
+/sh 612 def
+/sw 792 def
+/llx 24 def
+/urx 768 def
+/ury 588 def
+/lly 24 def
+/#copies 1 def
+/th 15.000000 def
+/fnfs 11 def
+/bfs 7.060185 def
+/cw 4.236111 def
+
+% Dictionary for ISO-8859-1 support
+/iso1dict 8 dict begin
+  /fCourier ISO-8859-1Encoding /Courier reencode_font
+  /fCourier-Bold ISO-8859-1Encoding /Courier-Bold reencode_font
+  /fCourier-BoldOblique ISO-8859-1Encoding /Courier-BoldOblique reencode_font
+  /fCourier-Oblique ISO-8859-1Encoding /Courier-Oblique reencode_font
+  /fHelvetica ISO-8859-1Encoding /Helvetica reencode_font
+  /fHelvetica-Bold ISO-8859-1Encoding /Helvetica-Bold reencode_font
+  /fTimes-Bold ISO-8859-1Encoding /Times-Bold reencode_font
+  /fTimes-Roman ISO-8859-1Encoding /Times-Roman reencode_font
+currentdict end def
+/bgcolor [ 0 0 0 ] def
+/bg false def
+/ul false def
+/bx false def
+% The font for line numbering
+/f# /Helvetica findfont bfs .6 mul scalefont def
+/fSymbol /Symbol findfont def
+/hm fnfs 0.25 mul def
+/pw
+   cw 86.400000 mul
+def
+/ph
+   520.335631 th add
+def
+/pmw urx llx sub pw 2 mul sub 1 div def
+/pmh 0 def
+/v 0 def
+/x [
+  0
+  dup pmw add pw add
+] def
+/y [
+  pmh ph add 0 mul ph add
+  dup
+] def
+/scx sw 2 div def
+/scy sh 2 div def
+/snx urx def
+/sny lly 2 add def
+/dx llx def
+/dy sny def
+/fnx scx def
+/fny dy def
+/lx snx def
+/ly ury fnfs 0.8 mul sub def
+/sx 5 def
+/tab 8 def
+/x0 0 def
+/y0 0 def
+%%EndSetup
+
+%%Page: (1-2) 1
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+0 T (1. PROGRAM OUTPUT) p n
+0 T (- Tests are on the square root of 1000 random numbers 0..1 and the square of 100) N
+0 T (0 random numbers 0..1.) S 24 T () N
+0 T (* Results:) N
+0 T () N
+(5) # (     square,      >,---       *         |------------       ,< ,0.01 ,0.10 ,0.26) N
+0 T ( ,0.51 ,0.84, |, 0.26, 0.52 ,1.00) N
+0 T (     squareRoot,  >,            --------|      *     ----   ,< ,0.30 ,0.53 ,0.69) N
+0 T ( ,0.83 ,0.95, |, 0.69, 0.36 ,1.00) N
+0 T () N
+0 T (- read test data for the sample files sk[abcde] and run Scott-Knott on that samp) N
+0 T (le data.) N
+0 T (* Results:) N
+(10) # () N
+0 T (----| data/ska.txt |---------------------) N
+0 T (one :mu 0.5 :rank 1) N
+0 T (two :mu 0.8 :rank 2) N
+0 T () N
+(15) # (----| data/skb.txt |---------------------) N
+0 T (rx4 :mu 0.3125 :rank 1) N
+0 T (rx1 :mu 0.535 :rank 2) N
+0 T (rx3 :mu 0.75 :rank 3) N
+0 T (rx2 :mu 0.8 :rank 3) N
+(20) # () N
+0 T (----| data/skp.txt |---------------------) N
+0 T (rx1 :mu 0.2 :rank 1) N
+0 T (rx2 :mu 0.2 :rank 1) N
+0 T (rx3 :mu 0.75 :rank 2) N
+(25) # () N
+0 T (----| data/skc.txt |---------------------) N
+0 T (rx1 :mu 100.0 :rank 1) N
+0 T (rx3 :mu 100.0 :rank 1) N
+0 T (rx5 :mu 100.0 :rank 1) N
+(30) # (rx2 :mu 100.2 :rank 1) N
+0 T (rx4 :mu 100.2 :rank 1) N
+0 T (rx6 :mu 100.2 :rank 1) N
+0 T () N
+0 T (----| data/skd.txt |---------------------) N
+(35) # (rx1 :mu 100.0 :rank 1) N
+0 T (rx2 :mu 120.2 :rank 1) N
+0 T (rx3 :mu 140.0 :rank 2) N
+0 T (rx6 :mu 402.2 :rank 3) N
+0 T (rx4 :mu 420.2 :rank 3) N
+(40) # (rx5 :mu 440.0 :rank 3) N
+0 T () N
+0 T (----| data/ske.txt |---------------------) N
+0 T (rx1 :mu 1.0 :rank 1) N
+0 T (rx2 :mu 2.0 :rank 1) N
+(45) # (rx3 :mu 3.0 :rank 1) N
+0 T (rx4 :mu 1000.0 :rank 2) N
+0 T () N
+0 T (2. SOURCE CODES) N
+0 T (***************************************************************) N
+(50) # (<ptile.py>) N
+0 T (def ptile\(lst, chops, width, form, lo, hi\):) N
+0 T (    lo = 0 if lo == '' else lo) N
+0 T (    hi = 100 if hi == '' else hi) N
+0 T (    form = '%3.0f' if form == '' else form) N
+(55) # (    width = 50 if width == '' else width) N
+0 T (    bar = '|') N
+0 T (    out = []) N
+0 T (    for i in range\(width\):) N
+0 T (        out += [' ']) N
+(60) # (    nlst = sorted\(lst\) if type\(lst\) == list else sorted\(lst.values\(\)\)) N
+0 T (    n = len\(lst\)) N
+0 T (    who = {}) N
+0 T (    where0 = {}) N
+0 T (    for p in chops.keys\(\):) N
+(65) # (        who[p] = float\(nlst[int\(float\(p\)*n\)]\)) N
+0 T (        where = int\(width*\(float\(who[p]\) - lo\)/\(hi - lo\)\)) N
+0 T (        tmp = {}) N
+0 T (        tmp['x'] = where) N
+0 T (        tmp['*'] = chops[p]) N
+(CS573:Proj1f:Comparing Performance_XUE YANG) (Page 1/5) (Sep 30, 13 12:35) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(70) # (        where0[p] = tmp) p n
+0 T (    w = len\(where0.keys\(\)\)) N
+0 T (    wheres = {}) N
+0 T (    for i in range\(w\): wheres[i] = where0[sorted\(where0.keys\(\)\)[i]]) N
+0 T (    for i in range\(w\):) N
+(75) # (        start = wheres[i]['x']) N
+0 T (        stop = width if i == w-1 else wheres[i+1]['x']) N
+0 T (        for j in range\(start, stop\):out[j] = wheres[i]['*']) N
+0 T (    out[int\(width/2\)] = bar) N
+0 T (    median = float\(nlst[int\(0.5*n\)]\)) N
+(80) # (    spread = float\(nlst[int\(0.75*n\)]\) - float\(nlst[int\(0.25*n\)]\)) N
+0 T (    maxv = float\(nlst[n-1]\)) N
+0 T (    where = int\(width*\(median - lo\)/\(hi - lo\)\)) N
+0 T (    out[where] = '*') N
+0 T (    out = ' >,'+''.join\(out\)[:]+',< ,'+' ,'.join\([form%who[s] for s in sorted\(wh) N
+0 T (o.keys\(\)\)]\)\\) N
+(85) # (    +', |, '+form%\(float\(median\)\) +', '+form%\(spread\)+' ,'+ form%\(maxv\)) N
+0 T (    return out) N
+0 T (***************************************************************      ) N
+0 T (<rank.py>) N
+0 T (import math) N
+(90) # (import lib) N
+0 T (class Num:) N
+0 T (    def __init__\(i\):) N
+0 T (        i.mu = {}) N
+0 T (        i.sum = {}) N
+(95) # (        i.m2 = {}) N
+0 T (        i.var = {}) N
+0 T (        i.n = {}) N
+0 T (        i.x = {}) N
+0 T (        i.label = {}) N
+(100) # (        i.name = []) N
+0 T (    ) N
+0 T (class Div:) N
+0 T (    def __init__\(i\):) N
+0 T (        i.total = []) N
+(105) # (        i.cohen = []) N
+0 T (        i.mittas = []) N
+0 T (        i.a12 = []) N
+0 T (        i.order = {}) N
+0 T (        i.level = 0) N
+(110) # (        ) N
+0 T (def ranks\(filename, a\):) N
+0 T (    print "\\n----|", filename,"|---------------------") N
+0 T (    f = open\(filename\)) N
+0 T (    _Nums = Num\(\)) N
+(115) # (    _Div = Div\(\)) N
+0 T (    obs\(f,0,_Nums,_Div\)) N
+0 T (    rank\(0,_Nums,_Div,a\)) N
+0 T (    maxv = len\(_Div.order.keys\(\)\)) N
+0 T (    for i in range\(maxv\): ) N
+(120) # (        i = i+ 1) N
+0 T (        k = _Div.order[i]['=']) N
+0 T (        print k, ':mu', _Nums.mu[k], ':rank', _Nums.label[k]) N
+0 T (     ) N
+0 T (def obs\(f, all, _Nums, _Div\):) N
+(125) # (    now = all) N
+0 T (    line = f.readline\(\)) N
+0 T (    while line:) N
+0 T (        line = line.split\(\)) N
+0 T (        for i in line:) N
+(130) # (            if i[0].isdigit\(\): ) N
+0 T (                v = float\(i\)) N
+0 T (                inc\(v, now, _Nums\)) N
+0 T (                inc\(v, all, _Nums\)) N
+0 T (            else: now = i) N
+(135) # (        line = f.readline\(\)) N
+0 T (    f.close\(\)) N
+0 T () N
+0 T (    for i in _Nums.name:) N
+0 T (        if i != all:) N
+(140) # (            temp={}) N
+0 T (            temp['='] = i) N
+(CS573:Proj1f:Comparing Performance_XUE YANG) (Page 2/5) (Sep 30, 13 12:35) title
+border
+grestore
+(Printed by xue) rhead
+(report.txt) (1/3) (Tuesday October 01, 2013) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (3-4) 2
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+0 T (            temp['x'] = _Nums.mu[i]) p n
+0 T (            _Div.order[i] = temp) N
+0 T (    s = 0) N
+(145) # (    norder = {}) N
+0 T (    while s < len\(_Nums.name\)-1:) N
+0 T (        tmp = 10**17) N
+0 T (        ind = 0) N
+0 T (        s = s+1) N
+(150) # (        norder[s] = {}) N
+0 T (        for i in _Div.order.keys\(\):) N
+0 T (            if tmp > _Div.order[i]['x']: ) N
+0 T (                tmp = _Div.order[i]['x']) N
+0 T (                ind = i) N
+(155) # (        norder[s]['='] = _Div.order[ind]['=']) N
+0 T (        norder[s]['x'] = _Div.order[ind]['x']) N
+0 T (        del _Div.order[ind]        ) N
+0 T (    _Div.order = norder              ) N
+0 T (def inc\(v, k, nums\):   ) N
+(160) # (    nums.label[k] = 0) N
+0 T (    if k not in nums.name:) N
+0 T (        nums.name += [k]) N
+0 T (        nums.n[k] = 0) N
+0 T (        all = nums.n[k] = nums.n[k] + 1) N
+(165) # (        nums.x[k] = []) N
+0 T (        nums.sum[k] = v) N
+0 T (        delta = float\(v\)) N
+0 T (        nums.mu[k] = float\(delta/all\)) N
+0 T (        nums.m2[k] = 0) N
+(170) # (        nums.var[k] = 0) N
+0 T (    else:) N
+0 T (        all = nums.n[k] = nums.n[k] + 1) N
+0 T (        nums.sum[k] = nums.sum[k] + v) N
+0 T (        delta = v - nums.mu[k]) N
+(175) # (        nums.mu[k] = nums.mu[k] + delta/all) N
+0 T (        nums.m2[k] = nums.m2[k] + float\(delta*\(v-nums.mu[k]\)\)) N
+0 T (        nums.var[k] = float\(nums.m2[k]\)/float\(all - 1 + lib.PINCH\) ) N
+0 T (    nums.x[k] += [v]   ) N
+0 T (    ) N
+(180) # (def rank\(all,nums,div,a\):) N
+0 T (     div.cohen  = float\(a["-cohen"]\)*math.sqrt\(nums.var[all]\)) N
+0 T (     div.mittas = a["--mittas"]) N
+0 T (     div.a12    = a["-a12"]) N
+0 T (     div.level  = 0) N
+(185) # (     div.total  = nums.n[all]) N
+0 T (     rdiv\(1,len\(div.order.keys\(\)\),1,nums, div\)) N
+0 T () N
+0 T () N
+0 T (def rdiv\(lo, hi, c, nums, div\):) N
+(190) # (    cut = divm\(lo, hi, nums, div\)) N
+0 T (    if cut:) N
+0 T (        div.level = div.level + 1) N
+0 T (        c = rdiv\(lo, cut-1, c, nums, div\) + 1) N
+0 T (        c = rdiv\(cut, hi, c, nums, div\)) N
+(195) # (    else:) N
+0 T (        for i in range\(lo, hi+1\): nums.label[div.order[i]['=']] = c) N
+0 T (    return c) N
+0 T () N
+0 T (def divInits\(lo,hi,nums,div,num0,num1\):) N
+(200) # (    b= div.order[lo]["="]; ) N
+0 T (    num0.n[lo]= nums.n[b]; ) N
+0 T (    num0.sum[lo]= nums.sum[b]) N
+0 T (    b= div.order[hi]["="]; ) N
+0 T (    num1.n[hi]= nums.n[b]; ) N
+(205) # (    num1.sum[hi]= nums.sum[b]) N
+0 T (    for i in range\(hi-1, lo-1, -1\):) N
+0 T (        b = div.order[i]['=']) N
+0 T (        num1.n[i] = num1.n[i+1] + nums.n[b]) N
+0 T (        num1.sum[i] = num1.sum[i+1] + nums.sum[b]) N
+(210) # (    return num1.sum[lo]/num1.n[lo]) N
+0 T () N
+0 T (def divm\(lo, hi, nums, div\):) N
+0 T (   num0 = Num\(\)) N
+0 T (   num1 = Num\(\)) N
+(CS573:Proj1f:Comparing Performance_XUE YANG) (Page 3/5) (Sep 30, 13 12:35) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(215) # (   muAll = divInits\(lo,hi,nums, div, num0, num1\)) p n
+0 T (   maxv   = -1) N
+0 T (   cut = None) N
+0 T (   for i in range\(lo+1, hi+1\):) N
+0 T (       b = div.order[i]['=']) N
+(220) # (       num0.n[i] = num0.n[i-1] + nums.n[b]) N
+0 T (       num0.sum[i] = num0.sum[i-1] + nums.sum[b]) N
+0 T (       left = num0.n[i]) N
+0 T (       muLeft = num0.sum[i]/left) N
+0 T (       right = num1.n[i]) N
+(225) # (       muRight = num1.sum[i]/right) N
+0 T (       e = errDiff\(muAll, left, muLeft, right, muRight\)) N
+0 T (       if div.cohen:) N
+0 T (           if abs\(muLeft - muRight\) <= float\(div.cohen\): continue) N
+0 T (       if div.mittas:) N
+(230) # (           if e < maxv:continue) N
+0 T (       if div.a12:) N
+0 T (           if bigger\(lo, i, hi, nums, div\) < float\(div.a12\):continue) N
+0 T (       maxv = e) N
+0 T (       cut = i   ) N
+(235) # (   return cut ) N
+0 T () N
+0 T (def errDiff\(mu, n0, mu0, n1, mu1\):) N
+0 T (    return n0*\(mu - mu0\)**2.0 + n1*\(mu - mu1\)**2.0) N
+0 T (    ) N
+(240) # (def bigger\(lo, mid, hi, nums, div\):) N
+0 T (    below = values\(lo, mid-1, nums, div\)) N
+0 T (    above = values\(mid, hi, nums, div\)) N
+0 T (    return a12statistic\(below, above\)) N
+0 T (    ) N
+(245) # (def values\(i, j, nums, div\):) N
+0 T (    out = []) N
+0 T (    for k in range\(i, j+1\):) N
+0 T (        b = div.order[k]['=']) N
+0 T (        out += nums.x[b]) N
+(250) # (    return out) N
+0 T () N
+0 T (def a12statistic\(below, above\):) N
+0 T (    comparisons = more = same = 0  ) N
+0 T (    for j in range\(len\(above\)\):) N
+(255) # (        for i in range\(len\(below\)\):) N
+0 T (            comparisons = comparisons + 1) N
+0 T (            more = more + 1 if above[j] > below[i] else more) N
+0 T (            same = same + 1 if above[j] == below[i] else more) N
+0 T (    return \(more + 0.5*same\)/comparisons) N
+(260) # (***************************************************************) N
+0 T (<main.py>) N
+0 T (import rank) N
+0 T (import lib) N
+0 T (if __name__ == "__main__":    ) N
+(265) # (    a = lib.pairs\("-cohen,0.3,--mittas,1,-a12,0.6"\)) N
+0 T (    rank.ranks\('data/ska.txt', a\)) N
+0 T (    rank.ranks\('data/skb.txt', a\)) N
+0 T (    rank.ranks\('data/skp.txt', a\)    ) N
+0 T (    rank.ranks\('data/skc.txt', a\)) N
+(270) # (    rank.ranks\('data/skd.txt', a\)) N
+0 T (    rank.ranks\('data/ske.txt', a\)    ) N
+0 T (""") N
+0 T (import lib) N
+0 T (import ptile) N
+(275) # (import random) N
+0 T () N
+0 T (if __name__ == "__main__":      ) N
+0 T (    lst = []) N
+0 T (    lst4 = []) N
+(280) # (    f = '%3.2f') N
+0 T (    for i in range\(1000\): lst += [random.random\(\)**2]    ) N
+0 T (    for i in range\(1000\): lst4 += [random.random\(\)**0.5]) N
+0 T (    chops1 = lib.pairs\('0.1,-,0.3, ,0.5, ,0.7,-,0.9, '\)) N
+0 T (    chops2 = lib.pairs\('0.25,-,0.5,-,0.75, '\)) N
+(285) # (    out1 = ptile.ptile\(lst, chops1, 40, f, 0, 1\)) N
+0 T (    out4 = ptile.ptile\(lst4, chops1, 40, f, 0, 1\)) N
+0 T (    print "square,    ", out1) N
+(CS573:Proj1f:Comparing Performance_XUE YANG) (Page 4/5) (Sep 30, 13 12:35) title
+border
+grestore
+(Printed by xue) rhead
+(report.txt) (2/3) (Tuesday October 01, 2013) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (5) 3
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+0 T (    print "squareRoot,", out4) p n
+0 T (    lst2 = lib.pairs\('1,0.51,2,0.49,3,0.48,4,0.52,5,0.25,6,0.48,7,0.49,8,0.51,9,) N
+0 T (0.52,10,0.48'\)) N
+(290) # (    lst3 = lib.pairs\('1,0.81,2,0.82,3,0.80,4,0.79,5,0.78,6,0.8,7,0.81,8,0.82,9,0) N
+0 T (.79,10,0.78'\)) N
+0 T (    out2 = ptile.ptile\(lst2, chops2, 40, f, 0.45,0.85\)    ) N
+0 T (    out3 = ptile.ptile\(lst3, chops2, 40, f, 0.45,0.85\)   ) N
+0 T (    print "rx4, ", out2) N
+0 T (    print "rx5, ", out3) N
+(295) # (""") N
+(CS573:Proj1f:Comparing Performance_XUE YANG) (Page 5/5) (Sep 30, 13 12:35) title
+border
+grestore
+(Printed by xue) rhead
+(report.txt) (3/3) (Tuesday October 01, 2013) footer
+end % of iso1dict
+pagesave restore
+showpage
+
+%%Trailer
+end
+%%EOF

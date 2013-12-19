@@ -1,0 +1,1241 @@
+%!PS-Adobe-3.0
+%%Title: report3.txt
+%%For: xue
+%%Creator: a2ps version 4.14
+%%CreationDate: Mon Sep 16 23:10:57 2013
+%%BoundingBox: 24 24 588 768
+%%DocumentData: Clean7Bit
+%%Orientation: Landscape
+%%Pages: 3
+%%PageOrder: Ascend
+%%DocumentMedia: Letter 612 792 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-BoldOblique
+%%+ font Courier-Oblique
+%%+ font Helvetica
+%%+ font Helvetica-Bold
+%%+ font Symbol
+%%+ font Times-Bold
+%%+ font Times-Roman
+%%DocumentProcessColors: Black 
+%%DocumentSuppliedResources: procset a2ps-a2ps-hdr
+%%+ procset a2ps-black+white-Prolog
+%%+ encoding ISO-8859-1Encoding
+%%EndComments
+/a2psdict 200 dict def
+a2psdict begin
+%%BeginProlog
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+
+% EPSF import as in the Red Book
+/BeginInclude {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack 
+  userdict begin
+    0 setgray 0 setlinecap
+    1 setlinewidth 0 setlinejoin
+    10 setmiterlimit [ ] 0 setdash newpath
+    gs_languagelevel 1 ne {
+      false setstrokeadjust false setoverprint 
+    } if
+} bind def
+
+/EndInclude {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+/BeginEPSF {
+  BeginInclude
+  /showpage { } def
+} bind def
+
+/EndEPSF {
+  EndInclude
+} bind def
+
+% Page prefeed
+/page_prefeed {         % bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} bind def
+
+/deffont {
+  findfont exch scalefont def
+} bind def
+
+/reencode_font {
+  findfont reencode 2 copy definefont pop def
+} bind def
+
+% Function c-show (str => -)
+% centers text only according to x axis.
+/c-show { 
+  dup stringwidth pop
+  2 div neg 0 rmoveto
+  show
+} bind def
+
+% Function l-show (str => -)
+% prints texts so that it ends at currentpoint
+/l-show {
+  dup stringwidth pop neg 
+  0 
+  rmoveto show
+} bind def
+
+% center-fit show (str w => -)
+% show centered, and scale currentfont so that the width is less than w
+/cfshow {
+  exch dup stringwidth pop
+  % If the title is too big, try to make it smaller
+  3 2 roll 2 copy
+  gt
+  { % if, i.e. too big
+    exch div
+    currentfont exch scalefont setfont
+  } { % ifelse
+    pop pop 
+  }
+  ifelse
+  c-show			% center title
+} bind def
+
+% Return the y size of the current font
+% - => fontsize
+/currentfontsize {
+  currentfont /FontType get 0 eq {
+    currentfont /FontMatrix get 3 get
+  }{
+    currentfont /FontMatrix get 3 get 1000 mul
+  } ifelse
+} bind def
+
+% reencode the font
+% <encoding-vector> <fontdict> -> <newfontdict>
+/reencode { %def
+  dup length 5 add dict begin
+    { %forall
+      % <vector> <key> <val>
+      1 index /FID ne 
+      { def }{ pop pop } ifelse
+    } forall
+    /Encoding exch def % -
+
+    % Use the font's bounding box to determine the ascent, descent,
+    % and overall height; don't forget that these values have to be
+    % transformed using the font's matrix.
+    % We use `load' because sometimes BBox is executable, sometimes not.
+    % Since we need 4 numbers an not an array avoid BBox from being executed
+    /FontBBox load aload pop
+    FontMatrix transform /Ascent exch def pop
+    FontMatrix transform /Descent exch def pop
+    /FontHeight Ascent Descent sub def
+
+    % Get the underline position and thickness if they're defined.
+    % Use 1 if they are not defined.
+    currentdict /FontInfo 2 copy known
+    { get
+      /UnderlinePosition 2 copy % <FontInfo> /UP <FontInfo> /UP
+      2 copy known
+      { get }{ pop pop 1 } ifelse
+      0 exch FontMatrix transform exch pop
+      def % <FontInfo>
+
+      /UnderlineThickness 2 copy % <FontInfo> /UT <FontInfo> /UT
+      2 copy known
+      { get }{ pop pop 1 } ifelse
+      0 exch FontMatrix transform exch pop
+      def % <FontInfo>
+      pop % -
+    }{ pop pop
+    } ifelse
+
+    currentdict
+  end 
+} bind def
+
+% composite fonts for ASCII-EUC mixed strings
+% Version 1.2 1/31/1990
+% Original Ken'ichi HANDA (handa@etl.go.jp)
+% Modified Norio Katayama (katayama@rd.nacsis.ac.jp),1998
+% Extend & Fix Koji Nakamaru (maru@on.cs.keio.ac.jp), 1999
+% Anyone can freely copy, modify, distribute this program.
+
+/copyfont {	% font-dic extra-entry-count  copyfont  font-dic
+	1 index maxlength add dict begin
+	{	1 index /FID ne 2 index /UniqueID ne and
+		{def} {pop pop} ifelse
+	} forall
+	currentdict
+	end
+} bind def
+
+/compositefont { % ASCIIFontName EUCFontName RomanScale RomanOffset Rot(T/F) compositefont font
+    /RomanRotation exch def
+    /RomanOffset exch def
+    /RomanScale exch def
+    userdict /fixeucfont_dict known not {
+	userdict begin
+	    /fixeucfont_dict 2 dict begin
+		/UpperByteEncoding [
+		    16#00 1 16#20 { pop 0 } for
+		    16#21 1 16#28 { 16#20 sub } for
+		    16#29 1 16#2F { pop 0 } for
+		    16#30 1 16#74 { 16#27 sub } for
+		    16#75 1 16#FF { pop 0 } for
+		] def
+	        /LowerByteEncoding [
+		    16#00 1 16#A0 { pop /.notdef } for
+		    16#A1 1 16#FE { 16#80 sub 16 2 string cvrs
+				    (cXX) dup 1 4 -1 roll
+				    putinterval cvn } for
+		    /.notdef
+		] def
+		currentdict
+	    end def
+	end
+    } if
+    findfont dup /FontType get 0 eq {
+	14 dict begin
+	    %
+	    % 7+8 bit EUC font
+	    %
+	    12 dict begin
+		/EUCFont exch def
+		/FontInfo (7+8 bit EUC font) readonly def
+		/PaintType 0 def
+		/FontType 0 def
+		/FontMatrix matrix def
+		% /FontName
+		/Encoding fixeucfont_dict /UpperByteEncoding get def
+		/FMapType 2 def
+		EUCFont /WMode known
+		{ EUCFont /WMode get /WMode exch def }
+		{ /WMode 0 def } ifelse
+		/FDepVector [
+		    EUCFont /FDepVector get 0 get
+		    [ 16#21 1 16#28 {} for 16#30 1 16#74 {} for ]
+		    {
+			13 dict begin
+			    /EUCFont EUCFont def
+			    /UpperByte exch 16#80 add def	
+			    % /FontName
+			    /FontInfo (EUC lower byte font) readonly def
+			    /PaintType 0 def
+			    /FontType 3 def
+			    /FontMatrix matrix def
+			    /FontBBox {0 0 0 0} def
+			    /Encoding
+				fixeucfont_dict /LowerByteEncoding get def
+			    % /UniqueID
+			    % /WMode
+			    /BuildChar {
+				gsave
+				exch dup /EUCFont get setfont
+				/UpperByte get
+				2 string
+				dup 0 4 -1 roll put
+				dup 1 4 -1 roll put
+				dup stringwidth setcharwidth
+				0 0 moveto show
+				grestore
+			    } bind def
+			    currentdict
+			end
+			/lowerbytefont exch definefont
+		    } forall
+		] def
+		currentdict
+	    end
+	    /eucfont exch definefont
+	    exch
+	    findfont 1 copyfont dup begin
+		RomanRotation {
+			/FontMatrix FontMatrix
+			[ 0 RomanScale neg RomanScale 0 RomanOffset neg 0 ]
+			matrix concatmatrix def
+		}{
+			/FontMatrix FontMatrix
+			[ RomanScale 0 0 RomanScale 0 RomanOffset ] matrix concatmatrix
+			def
+			/CDevProc
+			    {pop pop pop pop 0 exch -1000 exch 2 div 880} def
+		} ifelse
+	    end
+	    /asciifont exch definefont
+	    exch
+	    /FDepVector [ 4 2 roll ] def
+	    /FontType 0 def
+	    /WMode 0 def
+	    /FMapType 4 def
+	    /FontMatrix matrix def
+	    /Encoding [0 1] def
+	    /FontBBox {0 0 0 0} def
+%	    /FontHeight 1.0 def % XXXX
+	    /FontHeight RomanScale 1.0 ge { RomanScale }{ 1.0 } ifelse def
+	    /Descent -0.3 def   % XXXX
+	    currentdict
+	end
+	/tmpfont exch definefont
+	pop
+	/tmpfont findfont
+    }{
+	pop findfont 0 copyfont
+    } ifelse
+} def	
+
+/slantfont {	% FontName slant-degree  slantfont  font'
+    exch findfont 1 copyfont begin
+    [ 1 0 4 -1 roll 1 0 0 ] FontMatrix exch matrix concatmatrix
+    /FontMatrix exch def
+    currentdict
+    end
+} def
+
+% Function print line number (<string> # -)
+/# {
+  gsave
+    sx cw mul neg 2 div 0 rmoveto
+    f# setfont
+    c-show
+  grestore
+} bind def
+
+% -------- Some routines to enlight plain b/w printings ---------
+
+% Underline
+% width --
+/dounderline {
+  currentpoint
+  gsave
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    0 rlineto
+    stroke
+  grestore
+} bind def
+
+% Underline a string
+% string --
+/dounderlinestring {
+  stringwidth pop
+  dounderline
+} bind def
+
+/UL {
+  /ul exch store
+} bind def
+
+% Draw a box of WIDTH wrt current font
+% width --
+/dobox {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    stroke
+  grestore
+} bind def
+
+/BX {
+  /bx exch store
+} bind def
+
+% Box a string
+% string --
+/doboxstring {
+  stringwidth pop
+  dobox
+} bind def
+
+%
+% ------------- Color routines ---------------
+%
+/FG /setrgbcolor load def
+
+% Draw the background
+% width --
+/dobackground {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    bgcolor aload pop setrgbcolor
+    fill
+  grestore
+} bind def
+
+% Draw bg for a string
+% string --
+/dobackgroundstring {
+  stringwidth pop
+  dobackground
+} bind def
+
+
+/BG {
+  dup /bg exch store
+  { mark 4 1 roll ] /bgcolor exch store } if
+} bind def
+
+
+/Show {
+  bg { dup dobackgroundstring } if
+  ul { dup dounderlinestring } if
+  bx { dup doboxstring } if
+  show
+} bind def
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T {
+  cw mul x0 add
+  bg { dup currentpoint pop sub dobackground } if
+  ul { dup currentpoint pop sub dounderline } if
+  bx { dup currentpoint pop sub dobox } if
+  y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n {
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+/S {
+  Show
+} bind def
+
+%%BeginResource: procset a2ps-a2ps-hdr 2.0 2
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Function title: prints page header.
+% <ct> <rt> <lt> are passed as argument
+/title { 
+  % 1. Draw the background
+  x v get y v get moveto
+  gsave
+    0 th 2 div neg rmoveto 
+    th setlinewidth
+    0.95 setgray
+    pw 0 rlineto stroke
+  grestore
+  % 2. Border it
+  gsave
+    0.7 setlinewidth
+    pw 0 rlineto
+    0 th neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+  % stk: ct rt lt
+  x v get y v get th sub 1 add moveto
+%%IncludeResource: font Helvetica
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  % 3. The left title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    fnfs 0.8 mul hm rmoveto
+    show			% left title
+  grestore
+  exch
+  % stk: ct ltw rt
+  % 4. the right title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    dup
+    pw exch stringwidth pop fnfs 0.8 mul add sub
+    hm
+    rmoveto
+    show			% right title
+  grestore
+  % stk: ct ltw rtw
+  % 5. the center title
+  gsave
+    pw 3 1 roll
+    % stk: ct pw ltw rtw
+    3 copy 
+    % Move to the center of the left room
+    sub add 2 div hm rmoveto
+    % What is the available space in here?
+    add sub fnfs 0.8 mul sub fnfs 0.8 mul sub
+    % stk: ct space_left
+%%IncludeResource: font Helvetica-Bold
+  fHelvetica-Bold fnfs scalefont setfont
+    cfshow
+  grestore
+} bind def
+
+% Function border: prints virtual page border
+/border { %def
+  gsave				% print four sides
+    0 setgray
+    x v get y v get moveto
+    0.7 setlinewidth		% of the square
+    pw 0 rlineto
+    0 ph neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+} bind def
+
+% Function water: prints a water mark in background
+/water { %def
+  gsave
+    scx scy moveto rotate
+%%IncludeResource: font Times-Bold
+  fTimes-Bold 100 scalefont setfont
+    .97 setgray
+    dup stringwidth pop 2 div neg -50 rmoveto
+    show
+  grestore
+} bind def
+
+% Function rhead: prints the right header
+/rhead {  %def
+  lx ly moveto
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  l-show
+} bind def
+
+% Function footer (cf rf lf -> -)
+/footer {
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  dx dy moveto
+  show
+
+  snx sny moveto
+  l-show
+  
+  fnx fny moveto
+  c-show
+} bind def
+%%EndResource
+%%BeginResource: procset a2ps-black+white-Prolog 2.0 1
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T { 
+  cw mul x0 add y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n { %def
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+}  bind def
+
+/S {
+  Show
+} bind def
+
+/p {
+  false UL
+  false BX
+  fCourier bfs scalefont setfont
+  Show
+} bind def
+
+/sy {
+  false UL
+  false BX
+  fSymbol bfs scalefont setfont
+  Show
+} bind def
+
+/k {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/K {
+  false UL
+  false BX
+  fCourier-Bold bfs scalefont setfont
+  Show
+} bind def
+
+/c {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/C {
+  false UL
+  false BX
+  fCourier-BoldOblique bfs scalefont setfont
+  Show 
+} bind def
+
+/l {
+  false UL
+  false BX
+  fHelvetica bfs scalefont setfont
+  Show
+} bind def
+
+/L {
+  false UL
+  false BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show 
+} bind def
+
+/str{
+  false UL
+  false BX
+  fTimes-Roman bfs scalefont setfont
+  Show
+} bind def
+
+/e{
+  false UL
+  true BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show
+} bind def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier
+%%IncludeResource: font Courier-Oblique
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Times-Roman
+%%IncludeResource: font Symbol
+%%IncludeResource: font Courier-BoldOblique
+%%BeginResource: encoding ISO-8859-1Encoding
+/ISO-8859-1Encoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright 
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash 
+/zero /one /two /three /four /five /six /seven 
+/eight /nine /colon /semicolon /less /equal /greater /question 
+/at /A /B /C /D /E /F /G 
+/H /I /J /K /L /M /N /O 
+/P /Q /R /S /T /U /V /W 
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore 
+/quoteleft /a /b /c /d /e /f /g 
+/h /i /j /k /l /m /n /o 
+/p /q /r /s /t /u /v /w 
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section 
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron 
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /bullet 
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown 
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla 
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis 
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply 
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls 
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla 
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis 
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide 
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis 
+] def
+%%EndResource
+% Initialize page description variables.
+/sh 612 def
+/sw 792 def
+/llx 24 def
+/urx 768 def
+/ury 588 def
+/lly 24 def
+/#copies 1 def
+/th 15.000000 def
+/fnfs 11 def
+/bfs 7.060185 def
+/cw 4.236111 def
+
+% Dictionary for ISO-8859-1 support
+/iso1dict 8 dict begin
+  /fCourier ISO-8859-1Encoding /Courier reencode_font
+  /fCourier-Bold ISO-8859-1Encoding /Courier-Bold reencode_font
+  /fCourier-BoldOblique ISO-8859-1Encoding /Courier-BoldOblique reencode_font
+  /fCourier-Oblique ISO-8859-1Encoding /Courier-Oblique reencode_font
+  /fHelvetica ISO-8859-1Encoding /Helvetica reencode_font
+  /fHelvetica-Bold ISO-8859-1Encoding /Helvetica-Bold reencode_font
+  /fTimes-Bold ISO-8859-1Encoding /Times-Bold reencode_font
+  /fTimes-Roman ISO-8859-1Encoding /Times-Roman reencode_font
+currentdict end def
+/bgcolor [ 0 0 0 ] def
+/bg false def
+/ul false def
+/bx false def
+% The font for line numbering
+/f# /Helvetica findfont bfs .6 mul scalefont def
+/fSymbol /Symbol findfont def
+/hm fnfs 0.25 mul def
+/pw
+   cw 86.400000 mul
+def
+/ph
+   520.335631 th add
+def
+/pmw urx llx sub pw 2 mul sub 1 div def
+/pmh 0 def
+/v 0 def
+/x [
+  0
+  dup pmw add pw add
+] def
+/y [
+  pmh ph add 0 mul ph add
+  dup
+] def
+/scx sw 2 div def
+/scy sh 2 div def
+/snx urx def
+/sny lly 2 add def
+/dx llx def
+/dy sny def
+/fnx scx def
+/fny dy def
+/lx snx def
+/ly ury fnfs 0.8 mul sub def
+/sx 5 def
+/tab 8 def
+/x0 0 def
+/y0 0 def
+%%EndSetup
+
+%%Page: (1-2) 1
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+0 T (1. Code Output) p n
+0 T (- Implement a Naive Bayes classifier and use a 5*5 cross-validation) N
+0 T (- Run Naive Bayes and ZeroR algorithms on the following 5 datasets) N
+0 T (- The accuracy results are as following:) N
+(5) # () N
+0 T (a. "diabetes.csv" data set) N
+0 T (- ZeroR: ) N
+0 T (['62.75', '64.05', '66.01', '68.63', '64.05', '63.40', '64.71', '66.67', '64.05') N
+0 T (, '67.32', '64.05', '64.71', '68.63', '67.97', '60.13', '62.75', '68.63', '69.93) N
+0 T (', '60.13', '64.71', '59.48', '70.59', '66.67', '69.28', '60.78']) N
+0 T () N
+(10) # (- NB:) N
+0 T (['75.82', '72.55', '79.74', '68.63', '78.43', '68.63', '77.12', '75.82', '77.78') N
+0 T (, '77.12', '77.78', '75.16', '73.86', '77.12', '73.20', '75.82', '81.05', '75.16) N
+0 T (', '71.90', '75.16', '80.39', '64.71', '81.70', '74.51', '73.20']) N
+0 T () N
+0 T (b. "Soybean.csv" data set) N
+0 T (- ZeroR: ) N
+(15) # (['7.35', '10.29', '11.76', '7.35', '10.29', '11.76', '10.29', '11.76', '7.35', ') N
+0 T (11.76', '11.03', '9.56', '11.03', '12.50', '8.09', '11.03', '8.09', '11.03', '11) N
+0 T (.03', '10.29', '9.56', '12.50', '11.76', '7.35', '7.35']) N
+0 T () N
+0 T (- NB: ) N
+0 T (['91.18', '92.65', '92.65', '91.91', '89.71', '93.38', '94.85', '93.38', '87.50') N
+0 T (, '84.56', '87.50', '88.24', '89.71', '92.65', '93.38', '91.18', '90.44', '88.24) N
+0 T (', '88.24', '91.18', '88.97', '91.91', '92.65', '91.91', '86.76']) N
+0 T () N
+(20) # (c. "iris.csv" data set) N
+0 T (- ZeroR:) N
+0 T (['16.67', '30.00', '26.67', '23.33', '20.00', '20.00', '33.33', '26.67', '26.67') N
+0 T (, '30.00', '26.67', '26.67', '33.33', '30.00', '26.67', '30.00', '26.67', '20.00) N
+0 T (', '20.00', '16.67', '26.67', '26.67', '30.00', '26.67', '33.33']) N
+0 T () N
+0 T (- NB:) N
+(25) # (['93.33', '96.67', '93.33', '100.00', '96.67', '96.67', '86.67', '96.67', '96.67) N
+0 T (', '100.00', '96.67', '90.00', '96.67', '100.00', '93.33', '100.00', '93.33', '9) N
+0 T (6.67', '96.67', '90.00', '96.67', '93.33', '93.33', '96.67', '96.67']) N
+0 T () N
+0 T (2. Source Codes) N
+0 T (=============================================================================) N
+0 T (File <lib.py>) N
+(30) # () N
+0 T (import math) N
+0 T (inf = 10^17) N
+0 T (NINF = -1 * inf) N
+0 T (PINCH = 1 / inf) N
+(35) # (PI = 3.1415926535) N
+0 T (EE = 2.7182818284) N
+0 T () N
+0 T (def indexes\(data\):) N
+0 T (    rows = []   #get the indexes for the data) N
+(40) # (    for i in range\(len\(data\)\):) N
+0 T (        rows.append\(i\)) N
+0 T (    return rows) N
+0 T () N
+0 T (def rowprint\(a\):) N
+(45) # (    max = len\(a\)) N
+0 T (    line = '') N
+0 T (    for j in range\(max\):) N
+0 T (        line += \(a[j] + ','\).rjust\(15\)) N
+0 T (    return line) N
+(50) # (    ) N
+0 T (def maybeInt\(x\):) N
+0 T (    return int\(x\) if x % 1 == 0.0 else float\(x\)) N
+0 T (    ) N
+0 T (def norm\(x, m, s\):) N
+(55) # (    s += PINCH) N
+0 T (    return 1/math.sqrt\(2*PI*s**2\)*EE**\(-1*\(x-m\)**2/\(2*s**2\)\)) N
+0 T () N
+0 T (=============================================================================) N
+0 T (File <nb.py>) N
+(60) # () N
+0 T (import lib) N
+(CS573:Proj1d:Naive Bayes_XUE YANG) (Page 1/6) (Sep 16, 13 23:06) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+0 T (def nb\(testT, trainT, hypotheses, k, m\):) p n
+0 T (    ck = testT['0'].klass[0] #locate the index for class col) N
+0 T (    total = acc = 0.0    ) N
+(65) # (    total += len\(trainT['0'].data[ck]\)) N
+0 T (    for t in range\(len\(testT['0'].data[ck]\)\):) N
+0 T (        want = testT['0'].data[ck][t]) N
+0 T (        row = []) N
+0 T (        for i in range\(len\(testT['0'].data\)\):) N
+(70) # (            row += [testT['0'].data[i][t]]) N
+0 T (        got = likelihood\(row, trainT, total, hypotheses, k, m\)) N
+0 T (        acc += want == got) N
+0 T (    return 100 * acc/len\(testT['0'].data[ck]\)) N
+0 T (    ) N
+(75) # (def likelihood\(row, trainT, total, hypotheses, k, m\):) N
+0 T (    like = lib.NINF) N
+0 T (    total += k * len\(hypotheses\)) N
+0 T (    best = '') N
+0 T (    for h in hypotheses:) N
+(80) # (        nh = len\(trainT[h].data[trainT['0'].klass[0]]\)) N
+0 T (        prior = float\(nh + k\)/total) N
+0 T (        tmp = prior) N
+0 T (        for c in trainT[h].nump:) N
+0 T (            i = trainT[h].nump.index\(c\)) N
+(85) # (            x = row[c]) N
+0 T (            if x == "?": continue) N
+0 T (            y = lib.norm\(float\(x\), float\(trainT[h].mu[i]\), float\(trainT[h].sd[i]) N
+0 T (\)\)) N
+0 T (            tmp *= y) N
+0 T (        for c in trainT[h].term:) N
+(90) # (            x = row[c]) N
+0 T (            if x == "?": continue) N
+0 T (            y = 0.0) N
+0 T (            for i in range\(len\(trainT[h].data[c]\)\):) N
+0 T (                if trainT[h].data[c][i] == x: y+= 1) N
+(95) # (            tmp *= \(y + m*prior\) / \(nh +m\)) N
+0 T (        if tmp >= like: ) N
+0 T (            like = tmp) N
+0 T (            best = h) N
+0 T (    return best) N
+(100) # (=============================================================================) N
+0 T (File <tablestr.py>) N
+0 T () N
+0 T (import lib ) N
+0 T (class Table:) N
+(105) # (    def __init__\(self\):) N
+0 T (        self.data = []     #data[[col1,...],[col2,...]]) N
+0 T (        self.name = []     #name of i-th column) N
+0 T (        self.order = []    #order of the col) N
+0 T (        self.nump = []     #is i-th column numeric?) N
+(110) # (        self.wordp = []    #is i-th column non-numeric?) N
+0 T (        self.indep = []    #list of indep columns) N
+0 T (        self.dep = []      #list of dep columns) N
+0 T (        self.less = []     #numeric goal to be minimized) N
+0 T (        self.more = []     #numeric goal to be maximized) N
+(115) # (        self.klass = []    #non-numeric goal) N
+0 T (        self.term = []     #non-numeric non-goal) N
+0 T (        self.num = []      #numeric non-goal) N
+0 T (        # for all cols) N
+0 T (        self.n = []        #count of things in this col) N
+(120) # (        # for wordp columns:) N
+0 T (        self.count = []    #count of each word) N
+0 T (        self.mode = []     #most common word) N
+0 T (        self.most = []     #count of most common word) N
+0 T (        # for nump columns:) N
+(125) # (        self.hi = []       #upper bound) N
+0 T (        self.lo = []       #lower bound) N
+0 T (        self.mu = []       #mean) N
+0 T (        self.m2 = []       #sum of all nums) N
+0 T (        self.sd = []       #standard deviation# -*- coding: utf-8 -*-) N
+(130) # (        # table printing format) N
+0 T (        self.CONVFMT = '%06d') N
+0 T (     ) N
+0 T (def centroid\(table\):) N
+(CS573:Proj1d:Naive Bayes_XUE YANG) (Page 2/6) (Sep 16, 13 23:06) title
+border
+grestore
+(Printed by xue) rhead
+(report3.txt) (1/3) (Monday September 16, 2013) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (3-4) 2
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+0 T (    "update the mode and most values for wordp type cols or update the mean and ) p n
+0 T (sd values for nump cols") N
+(135) # (    rows = [[],[]]) N
+0 T (    for c in range\(len\(table.name\)\):) N
+0 T (        s = table.mode[table.wordp.index\(c\)] if c in table.wordp else table.CONV) N
+0 T (FMT%table.mu[table.nump.index\(c\)]) N
+0 T (        rows[0].append\(str\(s\)\)) N
+0 T (        if table.n[c] == '0':) N
+(140) # (            s = 0.0) N
+0 T (        else:) N
+0 T (            s = float\(table.most[table.wordp.index\(c\)]\)/table.n[c] if c in table) N
+0 T (.wordp else table.sd[table.nump.index\(c\)]) N
+0 T (        rows[1].append\(str\(table.CONVFMT%s\)\)) N
+0 T (    return rows) N
+(145) # (        ) N
+0 T (def tableprint\(table, stats=''\):) N
+0 T (    "print table on the console") N
+0 T (    print ' ') N
+0 T (    if stats != '': table.CONVFMT = stats ) N
+(150) # (    print\(' ' + lib.rowprint\(table.name\)+ '  # notes'.ljust\(10\)\)) N
+0 T (    print\('#' + lib.rowprint\(centroid\(table\)[0]\) + '  # expected'.ljust\(10\)\)) N
+0 T (    print\('#' + lib.rowprint\(centroid\(table\)[1]\) + '  # certainty'.ljust\(10\)\)   ) N
+0 T ( ) N
+0 T (    for j in range\(len\(table.data[0]\)\):) N
+0 T (        line = []) N
+(155) # (        for i in range\(len\(table.data\)\):) N
+0 T (            line.append\(table.data[i][j]\)) N
+0 T (        print\(' ' + lib.rowprint\(line\)+ '  #'.ljust\(10\)\)) N
+0 T (=============================================================================) N
+0 T (File <reader.py>) N
+(160) # () N
+0 T (import re) N
+0 T (import tablestr) N
+0 T (def readcsv\(filename, table\):) N
+0 T (    "read in data from csv and create a table") N
+(165) # (    FS = ','                     #define field separator) N
+0 T (    f = open\(filename\)) N
+0 T (    seen  = 0) N
+0 T (    while True:) N
+0 T (        str = line\(f\)) N
+(170) # (        if str == -1:) N
+0 T (            if seen == 0: print\("WARNING: empty or missing file"\)) N
+0 T (            return -1) N
+0 T (        a = str.split\(FS\)        #compute the number of attributes in table) N
+0 T (        if len\(a\) > 1:) N
+(175) # (            if seen: addRow\(a, table\)) N
+0 T (            else: makeTable\(a, table\)) N
+0 T (            seen += 1) N
+0 T (    ) N
+0 T (def line\(f\):) N
+(180) # (    "get one line data \(without comments and whitespace\)") N
+0 T (    str = f.readline\(\)) N
+0 T (    if not str: return -1             #readline finds nothing, output error) N
+0 T (    else:) N
+0 T (        str = "".join\(str.split\(\)\)    #kill whitespace) N
+(185) # (        str = re.sub\(r'#.*','',str\)   #kill comments    ) N
+0 T (        if len\(str\) >= 1 and str[-1] == ',': return str + line\(f\)) N
+0 T (        else: return str) N
+0 T (            ) N
+0 T (def makeTable\(a, table\):) N
+(190) # (    "read table titles and set all corresponding parameters") N
+0 T (    c = 0) N
+0 T (    for ite in range\(len\(a\)\):) N
+0 T (        if a[ite][0] == '?': continue  #the col with '?' is ignored    ) N
+0 T (        table.order.append\(ite\)) N
+(195) # (        x = a[ite]) N
+0 T (        table.name.append\(x\)) N
+0 T (        isNum = 1) N
+0 T (        if x.find\('='\) != -1:) N
+0 T (            table.dep.append\(c\)) N
+(200) # (            table.klass.append\(c\)) N
+0 T (            isNum = 0) N
+0 T (        elif x.find\('+'\) != -1:           ) N
+(CS573:Proj1d:Naive Bayes_XUE YANG) (Page 3/6) (Sep 16, 13 23:06) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+0 T (            table.dep.append\(c\)) p n
+0 T (            table.more.append\(c\)) N
+(205) # (        elif x.find\('-'\) != -1:           ) N
+0 T (            table.dep.append\(c\)) N
+0 T (            table.less.append\(c\)) N
+0 T (        elif x.find\('$'\) != -1:           ) N
+0 T (            table.indep.append\(c\)) N
+(210) # (            table.num.append\(c\)) N
+0 T (        else:) N
+0 T (            table.indep.append\(c\)) N
+0 T (            table.term.append\(c\)) N
+0 T (            isNum = 0) N
+(215) # (        table.n.append\('0'\)) N
+0 T (        if isNum:) N
+0 T (            table.nump.append\(c\)) N
+0 T (            table.hi.append\(-1*10**32\)) N
+0 T (            table.lo.append\(10**32\)) N
+(220) # (            table.mu.append\(0\)) N
+0 T (            table.m2.append\(0\)) N
+0 T (            table.sd.append\(0\)) N
+0 T (        else:) N
+0 T (            table.wordp.append\(c\)) N
+(225) # (            table.most.append\(0\)) N
+0 T (            table.count.append\({}\)) N
+0 T (            table.mode.append\(''\)   ) N
+0 T (        c += 1 ) N
+0 T (    for i in range\(c\): table.data.append\([]\)     ) N
+(230) # (    ) N
+0 T (def addRow\(a, table\):) N
+0 T (    "add a row of data to the table") N
+0 T (    for c in range\(len\(table.name\)\):) N
+0 T (        f = table.order[c]) N
+(235) # (        x = a[f]) N
+0 T (        table.data[c].append\(x\)) N
+0 T (        if x.find\('?'\) == -1:) N
+0 T (            table.n[c] = int\(table.n[c]\) + 1) N
+0 T (            if c in table.wordp:) N
+(240) # (                k = table.wordp.index\(c\)) N
+0 T (                if table.count[k].has_key\(x\): table.count[k][x] += 1) N
+0 T (                else: table.count[k][x] = 1) N
+0 T (                new = table.count[k][x] ) N
+0 T (                if new > table.most[k]:) N
+(245) # (                    table.mode[k] = x) N
+0 T (                    table.most[k] = new) N
+0 T (            else:) N
+0 T (                k = table.nump.index\(c\)) N
+0 T (                if float\(x\) > float\(table.hi[k]\): table.hi[k] = x) N
+(250) # (                if float\(x\) < float\(table.lo[k]\): table.lo[k] = x) N
+0 T (                delta = float\(x\) - table.mu[k]) N
+0 T (                table.mu[k] += delta/table.n[c]) N
+0 T (                table.m2[k] += delta*\(float\(x\) - table.mu[k]\)) N
+0 T (                if table.n[c] > 1:) N
+(255) # (                    table.sd[k] = \(table.m2[k]/\(table.n[c] - 1\)\)**0.5) N
+0 T (            c += 1 ) N
+0 T (            ) N
+0 T (def klasses\(table\):) N
+0 T (    "generate a set of tables based on different classes") N
+(260) # (    if len\(table.klass\) == 0:) N
+0 T (        print "No labeled classes in the given data set") N
+0 T (        return -1) N
+0 T (    # assume there is only one class feature in the data set) N
+0 T (    data = table.data[table.klass[0]]) N
+(265) # (    classnames = []) N
+0 T (    for s in data:) N
+0 T (        if s not in classnames:) N
+0 T (            classnames.append\(s\)) N
+0 T (    tables = klass1\(table, classnames, data\)) N
+(270) # (    tables['0'] = table) N
+0 T (    tables['names'] = classnames) N
+0 T (    return tables) N
+0 T (    ) N
+0 T (def klass1\(table, classnames, data\):) N
+(275) # (    tables = {}) N
+(CS573:Proj1d:Naive Bayes_XUE YANG) (Page 4/6) (Sep 16, 13 23:06) title
+border
+grestore
+(Printed by xue) rhead
+(report3.txt) (2/3) (Monday September 16, 2013) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (5-6) 3
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+0 T (    for s in classnames:) p n
+0 T (        tables[s] = tablestr.Table\(\)) N
+0 T (        makeTable\(table.name, tables[s]\)) N
+0 T (        for i in range\(len\(data\)\):) N
+(280) # (            if s == data[i]:) N
+0 T (                a = []) N
+0 T (                for j in range\(len\(table.order\)\):) N
+0 T (                    a.append\(table.data[j][i]\)) N
+0 T (                addRow\(a, tables[s]\)) N
+(285) # (    return tables) N
+0 T (=============================================================================   ) N
+0 T (            ) N
+0 T (File <xval.py>) N
+0 T () N
+0 T (import lib ) N
+(290) # (import tablestr ) N
+0 T (import reader ) N
+0 T (import random) N
+0 T () N
+0 T (def xvals\(tables, x, b\):) N
+(295) # (    k = tables['0'].order.index\(tables['0'].klass[0]\) ) N
+0 T (    rows = lib.indexes\(tables['0'].data[k]\)) N
+0 T (    s = int\(len\(rows\)/b\)) N
+0 T (    xvaltables = {}) N
+0 T (    for i in range\(x\):      # x times) N
+(300) # (        random.shuffle\(rows\)) N
+0 T (        for b1 in range\(b\): # b bins) N
+0 T (            obj = xval\(b1*s, \(b1+1\)*s, rows, tables\)) N
+0 T (            xvaltables[i*x+b1+1] = obj) N
+0 T (    return xvaltables) N
+(305) # (     ) N
+0 T (       ) N
+0 T (def xval\(start, stop, rows, tables\):) N
+0 T (    testT = tablestr.Table\(\)) N
+0 T (    trainT = tablestr.Table\(\)) N
+(310) # (    reader.makeTable\(tables['0'].name, testT\)) N
+0 T (    reader.makeTable\(tables['0'].name, trainT\)) N
+0 T (    for r in range\(len\(rows\)\):) N
+0 T (        d = rows[r]) N
+0 T (        a = []) N
+(315) # (        for j in range\(len\(tables['0'].order\)\):) N
+0 T (            a.append\(tables['0'].data[j][d]\)        ) N
+0 T (        if r >= start and r < stop: #belonging to testing data set) N
+0 T (            reader.addRow\(a, testT\)) N
+0 T (        else:) N
+(320) # (            reader.addRow\(a, trainT\)) N
+0 T (    testT = reader.klasses\(testT\)) N
+0 T (    trainT = reader.klasses\(trainT\)) N
+0 T (    tables = {}) N
+0 T (    tables['train'] = trainT) N
+(325) # (    tables['test'] = testT) N
+0 T (    return tables) N
+0 T (============================================================================= ) N
+0 T (File <zeror.py>) N
+0 T () N
+(330) # (def zeror\(testT, trainT, hypotheses\):) N
+0 T (    k = testT['0'].klass[0]) N
+0 T (    most = 0) N
+0 T (    for h in hypotheses:) N
+0 T (        these = len\(trainT[h].data[k]\) if h in trainT['names'] else 0) N
+(335) # (        if these > most:) N
+0 T (            most = these) N
+0 T (            got = h) N
+0 T (    #print "#got", got) N
+0 T (    acc = len\(testT[got].data[k]\) if got in testT['names'] else 0) N
+(340) # (    num = 0) N
+0 T (    for h in hypotheses: num += len\(testT[h].data[k]\) if h in testT['names'] els) N
+0 T (e 0) N
+0 T (    return got,100*float\(acc\)/num) N
+0 T (=============================================================================) N
+0 T (File <main.py>) N
+(345) # () N
+0 T (import reader) N
+(CS573:Proj1d:Naive Bayes_XUE YANG) (Page 5/6) (Sep 16, 13 23:06) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+0 T (import tablestr) p n
+0 T (import zeror) N
+0 T (import xval ) N
+(350) # (import nb) N
+0 T (if __name__ == "__main__":      ) N
+0 T (    filename = 'data/iris.csv'   ) N
+0 T (    table = tablestr.Table\(\)             #create raw data structure) N
+0 T (    reader.readcsv\(filename,table \)      #read the .csv data set) N
+(355) # (    f = '%4.2f'                          #set the formatting for the output) N
+0 T (    tables = reader.klasses\(table\)) N
+0 T (    b = x = 5                            #set cross-validation parameters) N
+0 T (    k = 1) N
+0 T (    m = 2) N
+(360) # (    xvaltables = xval.xvals\(tables, x, b\) #generate the cross validation tables) N
+0 T (    re_zeror = []) N
+0 T (    re_nb = [] ) N
+0 T (    for s in range\(x*b\):) N
+0 T (       s += 1) N
+(365) # (       got, acc_zeror = zeror.zeror\(xvaltables[s]['test'], xvaltables[s]['train') N
+0 T (], tables['names']\)) N
+0 T (       acc_nb = nb.nb\(xvaltables[s]['test'], xvaltables[s]['train'], tables['nam) N
+0 T (es'], k, m\)) N
+0 T (       re_zeror += [str\(f%acc_zeror\)]) N
+0 T (       re_nb += [str\(f%acc_nb\)]) N
+0 T (    print re_zeror) N
+(370) # (    print re_nb) N
+0 T (=============================================================================) N
+0 T () N
+0 T (3. Illustration) N
+0 T (- xvaltables is a nested dictionary structure that stores all the results from c) N
+0 T (ross-validation process) N
+(375) # (- xvaltables = {'i':{'train':{'0':table0, 'klassname1':table1, 'klassname2':tabl) N
+0 T (e2,...,'names':list of classnames in table0}, ) N
+0 T () S 8 T () S 16 T (     'test' :{'0':table0, 'klassname1':table1, 'klassname2':tabl) N
+0 T (e2,...,'names':list of classnames in table0}},) N
+0 T () S 8 T () S 16 T (...) N
+0 T () S 8 T () S 16 T (}) N
+0 T () S 8 T (* most outlier key i: value from 1 to x*b are the separated groups of tr) N
+0 T (aining and testing dataset) N
+(380) # () S 8 T (* second outlier key: 'train' or 'test' indicate the datasets under the ) N
+0 T (same group i are used for training or testing ) N
+0 T () S 8 T (* '0':table1 contain all the data designed to group i's training or test) N
+0 T (ing dataset ) S 16 T () N
+0 T () S 8 T (* 'klassnamei':tablei contain all the data in table0 with class value eq) N
+0 T (uals to klassnamei) N
+0 T () S 8 T (* 'names': a list that include all the classnames in table0) N
+0 T (            ) N
+(CS573:Proj1d:Naive Bayes_XUE YANG) (Page 6/6) (Sep 16, 13 23:06) title
+border
+grestore
+(Printed by xue) rhead
+(report3.txt) (3/3) (Monday September 16, 2013) footer
+end % of iso1dict
+pagesave restore
+showpage
+
+%%Trailer
+end
+%%EOF
