@@ -1,0 +1,165 @@
+1. Code Output
+- Raw Table <weather1.csv>
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         sunny,         81.83,         FALSE,           yes,  # expected
+#          0.36,         10.01,          0.57,          0.64,  # certainty
+          sunny,            90,         FALSE,            no,  #       
+          sunny,            90,          TRUE,            no,  #       
+       overcast,            86,         FALSE,           yes,  #       
+          rainy,            96,         FALSE,           yes,  #       
+          rainy,            80,         FALSE,           yes,  #       
+          rainy,             ?,          TRUE,            no,  #       
+       overcast,            65,          TRUE,           yes,  #       
+          sunny,             ?,         FALSE,            no,  #       
+          sunny,            70,         FALSE,           yes,  #       
+          rainy,            80,         FALSE,           yes,  #       
+          sunny,            70,          TRUE,           yes,  #       
+       overcast,            90,          TRUE,           yes,  #       
+       overcast,            75,         FALSE,           yes,  #       
+          rainy,            90,          TRUE,            no,  #       
+
+- Cross-Validation and ZeroR (training set for group 1 is the testing set for group 2)
+================================================================================
+Group:1
+Training Set 
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         sunny,         90.00,          TRUE,            no,  # expected
+#          0.67,          0.00,          0.67,          1.00,  # certainty
+          rainy,             ?,          TRUE,            no,  #       
+          sunny,            90,          TRUE,            no,  #       
+          sunny,             ?,         FALSE,            no,  #       
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#      overcast,         81.50,         FALSE,           yes,  # expected
+#          0.50,          8.70,          0.75,          1.00,  # certainty
+       overcast,            90,          TRUE,           yes,  #       
+          sunny,            70,         FALSE,           yes,  #       
+       overcast,            86,         FALSE,           yes,  #       
+          rainy,            80,         FALSE,           yes,  #       
+Testing Set 
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         rainy,         90.00,          TRUE,            no,  # expected
+#          0.50,          0.00,          0.50,          1.00,  # certainty
+          rainy,            90,          TRUE,            no,  #       
+          sunny,            90,         FALSE,            no,  #       
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#      overcast,         77.20,         FALSE,           yes,  # expected
+#          0.40,         11.90,          0.60,          1.00,  # certainty
+       overcast,            75,         FALSE,           yes,  #       
+          sunny,            70,          TRUE,           yes,  #       
+          rainy,            80,         FALSE,           yes,  #       
+       overcast,            65,          TRUE,           yes,  #       
+          rainy,            96,         FALSE,           yes,  #       
+#Got: yes
+#Accuracy: 71.43
+================================================================================
+Group:2
+Training Set 
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         rainy,         90.00,          TRUE,            no,  # expected
+#          0.50,          0.00,          0.50,          1.00,  # certainty
+          rainy,            90,          TRUE,            no,  #       
+          sunny,            90,         FALSE,            no,  #       
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#      overcast,         77.20,         FALSE,           yes,  # expected
+#          0.40,         11.90,          0.60,          1.00,  # certainty
+       overcast,            75,         FALSE,           yes,  #       
+          sunny,            70,          TRUE,           yes,  #       
+          rainy,            80,         FALSE,           yes,  #       
+       overcast,            65,          TRUE,           yes,  #       
+          rainy,            96,         FALSE,           yes,  #       
+Testing Set 
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         sunny,         90.00,          TRUE,            no,  # expected
+#          0.67,          0.00,          0.67,          1.00,  # certainty
+          rainy,             ?,          TRUE,            no,  #       
+          sunny,            90,          TRUE,            no,  #       
+          sunny,             ?,         FALSE,            no,  #       
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#      overcast,         81.50,         FALSE,           yes,  # expected
+#          0.50,          8.70,          0.75,          1.00,  # certainty
+       overcast,            90,          TRUE,           yes,  #       
+          sunny,            70,         FALSE,           yes,  #       
+       overcast,            86,         FALSE,           yes,  #       
+          rainy,            80,         FALSE,           yes,  #       
+#Got: yes
+#Accuracy: 57.14
+================================================================================
+Group:3
+Training Set 
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         sunny,         75.20,         FALSE,           yes,  # expected
+#          0.40,         12.15,          0.60,          1.00,  # certainty
+          sunny,            70,         FALSE,           yes,  #       
+          rainy,            96,         FALSE,           yes,  #       
+       overcast,            75,         FALSE,           yes,  #       
+          sunny,            70,          TRUE,           yes,  #       
+       overcast,            65,          TRUE,           yes,  #       
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         rainy,         90.00,          TRUE,            no,  # expected
+#          1.00,          0.00,          1.00,          1.00,  # certainty
+          rainy,            90,          TRUE,            no,  #       
+          rainy,             ?,          TRUE,            no,  #       
+Testing Set 
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         sunny,         90.00,         FALSE,            no,  # expected
+#          1.00,          0.00,          0.67,          1.00,  # certainty
+          sunny,            90,          TRUE,            no,  #       
+          sunny,             ?,         FALSE,            no,  #       
+          sunny,            90,         FALSE,            no,  #       
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         rainy,         84.00,         FALSE,           yes,  # expected
+#          0.50,          4.90,          0.75,          1.00,  # certainty
+       overcast,            86,         FALSE,           yes,  #       
+          rainy,            80,         FALSE,           yes,  #       
+          rainy,            80,         FALSE,           yes,  #       
+       overcast,            90,          TRUE,           yes,  #       
+#Got: yes
+#Accuracy: 57.14
+================================================================================
+Group:4
+Training Set 
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         sunny,         90.00,         FALSE,            no,  # expected
+#          1.00,          0.00,          0.67,          1.00,  # certainty
+          sunny,            90,          TRUE,            no,  #       
+          sunny,             ?,         FALSE,            no,  #       
+          sunny,            90,         FALSE,            no,  #       
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         rainy,         84.00,         FALSE,           yes,  # expected
+#          0.50,          4.90,          0.75,          1.00,  # certainty
+       overcast,            86,         FALSE,           yes,  #       
+          rainy,            80,         FALSE,           yes,  #       
+          rainy,            80,         FALSE,           yes,  #       
+       overcast,            90,          TRUE,           yes,  #       
+Testing Set 
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         sunny,         75.20,         FALSE,           yes,  # expected
+#          0.40,         12.15,          0.60,          1.00,  # certainty
+          sunny,            70,         FALSE,           yes,  #       
+          rainy,            96,         FALSE,           yes,  #       
+       overcast,            75,         FALSE,           yes,  #       
+          sunny,            70,          TRUE,           yes,  #       
+       overcast,            65,          TRUE,           yes,  #       
+
+        outlook,    -$humidity,         windy,         =play,  # notes 
+#         rainy,         90.00,          TRUE,            no,  # expected
+#          1.00,          0.00,          1.00,          1.00,  # certainty
+          rainy,            90,          TRUE,            no,  #       
+          rainy,             ?,          TRUE,            no,  #       
+#Got: yes
+#Accuracy: 71.43
