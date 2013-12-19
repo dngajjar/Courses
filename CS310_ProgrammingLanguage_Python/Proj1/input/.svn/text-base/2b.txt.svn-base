@@ -1,0 +1,60 @@
+
+#stage text
+#The Littlest Blood Cell
+
+Begin
+You have made it to the heart
+> RightA Enter the right atrium
+> Ba Go back
+
+Start
+Where to?
+> N No where
+
+RightAtrium
+You have entered the right atrium
+> R Enter the right ventricle
+> Ba Go back
+
+RightVentricle
+You have entered the right ventricle
+> Va Go through the pulmonary valve
+> Ba Go back
+
+Valve
+You have passed through the pulmonary valve
+> Ar Go through the pulmonary artery
+> Ba Go back
+
+Artery
+You have gone through the pulmonary artery
+> Lu Enter the lungs
+> Ba Go back
+
+Lungs
+You have entered the lungs
+> LeftA Go through the left atrium
+> Ba Go back
+
+LeftAtrium
+You have gone through the left atrium
+> Bo Go through the body
+> Ba Go back
+	
+LeftVentricle
+You have gone through the left ventricle
+> A Go through the aortic valve***
+	
+Aortic
+You have gone through the aortic valve
+	
+Body
+You have gone through the body. Go blood cell!
+> Q Quit
+
+Back
+You went back. RIP
+> Lu go to the Lungs
+
+Quit
+Quit the game

@@ -1,0 +1,77 @@
+# 
+# Stage Text
+# Cooking
+# stage text
+#
+
+
+WakeUp
+You wake up, and are starving.:
+> Start Make some breakfast
+
+Start
+You are ready to make breakfast. Pick an ingredient:
+> Eg Eggs
+> Bac Bacon
+> Pa Pancakes
+ 
+
+Eggs
+You pick up a white egg.
+> Cr Crack the egg
+> F Fry the egg
+> Ea Eat your breakfast
+~ contents 'White Egg'
+
+Bacon
+You pick up a few raw strips of bacon.
+> F Fry the Bacon
+> Ea Eat your breakfast
+~ contents 'Raw Bacon'
+
+Pancakes
+You pick up some dry pancake mix.
+> M Mix with other ingredients
+> Bat cook
+> Pour Add Syrup
+> Ea Eat your breakfast
+~ contents 'Dry Pancake Mix'
+
+CrackTheEgg
+You crack the egg open, and pour the yolk into a bowl.
+> Fr Fry the egg
+> Ea Eay your breakfast
+~ contents 'Egg Yolk'
+* preq 'White Egg'
+
+FryTheFood
+You fry the food until it is done.
+> Ea Eat your breakfast
+> Sta Cook more food
+* preq 'Egg Yolk','Raw Bacon','White Egg'
+
+Mix
+You mix the dry pancake mix with the wet ingredients, creating pancake batter.
+> Bat Cook the batter
+> Ea Eat your breakfast
+~ contents 'Wet Pancake Batter'
+* preq 'Dry Pancake Mix'
+
+Batter
+You pour the pancake batter into a skillet and cook until you have golden pancakes.
+> Ea Eat your breakfast
+> Sta Cook more food
+~ contents 'Dry Pancake Mix','Wet Pancake Batter'
+
+
+PourTheSyrup
+You pour syrup over the added food. Now what?
+> Sta Make more food
+> Ea Eat what is on your plate
+~ contents 'Syrup'
+
+Eat
+You eat what is on your plate
+> Eat I hope you enjoyed your plate of '+str(character['inventory'])+'!
+
+

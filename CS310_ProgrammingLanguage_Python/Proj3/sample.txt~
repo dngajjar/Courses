@@ -1,0 +1,22 @@
+#Node7
+FirelinkShrine
+:OnEntry (define checkpoint ('(FirelinkShrine))) #Demon 22
+#Description contains Demons 2,3,4,5
+You arrive at the Firelink Shrine. (if (have ('(Gravelord))) (say " The Gravelord's Soul chills you to the core, as if dragging you to an everlasting death.")) (if (have ('(FourKings))) (say " The bequeathed kings' Soul has an omnipotent presence. It feels as if it is whispering promises of unlimited power in your ear.")) (if (have ('(Seath))) (say " Seath's crystallized soul feels noticeably heavy, as if weighed down by vast amounts of arcane knowledge and power.")) (if (have ('(Witch))) (say " The Witch's Soul burns fiercely. Perhaps her attempt at an everlasting fire was not in vain."))
+> Bonfire Rest at the bonfire. :OnExit (define checkpoint ('(FirelinkShrine))) #Demon 17
+> Approach Talk to the strange warrior by the fire.
+> TheGraveyard Explore the Graveyard :if (not(have('(Gravelord)))) #Demon 23
+> Elevator Explore the Elevator :if (not(have('(FourKings)))) #Demon 24
+> Temple Explore the Temple :if (not(have('(Seath)))) #Demon 25
+> Cave Explore the Cave :if (not(have('(Witch)))) #Demon 26
+> Node57 Examine the Wall :if (and (have('(Gravelord))) (have('(FourKings))) (have('(Seath))) (have('(Witch)))) #Demon 43
+
+
+#Node 9
+StrangeWarrior
+The warrior notices the confused look on your face and asks you where you are headed. 
+> SayGraveyard You want to go to the graveyard
+> SayElevator You heard the levator takes you to New Longo
+> SayTemple Check the temple 
+> SayCave Check Cave
+> SayWall you ask what is behind the waller

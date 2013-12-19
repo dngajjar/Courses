@@ -1,0 +1,54 @@
+     1	0a1,2
+     2	> #!/usr/bin/python
+     3	> 
+     4	25c27,28
+     5	<      {'+':op.add, '-':op.sub, '*':op.mul, '/':op.div, 'not':op.not_,
+     6	---
+     7	>      {'say': lambda x: say(x), 'quit' : goodbye,
+     8	>       '+':op.add, '-':op.sub, '*':op.mul, '/':op.div, 'not':op.not_,
+     9	32a36,38
+    10	> def say(x): print x
+    11	> def goodbye(): print ";; Bye."; quit()
+    12	> 
+    13	45c51,54
+    14	<     elif x[0] == 'quote':          # (quote exp)
+    15	---
+    16	>     elif x[0] == 'load':
+    17	>       tmp=eval(x[1],env)
+    18	>       return eload(tmp)
+    19	>     elif  x[0] == 'quote' or  x[0] == "'":
+    20	110a120
+    21	>     print ";; LITHP ITH LITHTENING ...(v0.1)"
+    22	113a124,155
+    23	> 
+    24	> import string
+    25	> def sexp(s) :
+    26	>   level,keep = 0,""
+    27	>   while s:
+    28	>     if s[0] == ";":
+    29	>       while s and s[0] != "\n": s=s[1:]
+    30	>       if not s: break
+    31	>     if s[0] == "(": level += 1
+    32	>     if level > 0  : keep += s[0]
+    33	>     if s[0] == ")":  
+    34	>       level -= 1
+    35	>       if level==0:
+    36	>         yield keep
+    37	>         keep=""
+    38	>     s = s[1:]
+    39	>   if keep:
+    40	>     yield keep
+    41	> 
+    42	> 
+    43	> def eload(f) :
+    44	>   with open(f) as contents:
+    45	>     code = contents.read()
+    46	>   for part in  sexp(code):
+    47	>     eval(parse(part))
+    48	> 
+    49	> import sys
+    50	> if len(sys.argv) > 1:
+    51	>   eload(sys.argv[1])
+    52	> else:
+    53	>   repl()
+    54	>   quit()

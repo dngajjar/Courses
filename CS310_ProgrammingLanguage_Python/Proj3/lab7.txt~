@@ -1,0 +1,410 @@
+1. Sample Stage Text File
+#Node1
+Gravelord
+:OnEntry (define Gravelord ('(True)))
+You have become the Gravelord. (if (have ('(Kindom))) (say " I have the Kindom.")) 
+> Node5 Rest at the bonfire. 
+> Node8 Talk to the strange warrior by the fire.
+> Node15 Explore the Graveyard :if (not(have('(Gravelord)))) #Demon 23
+> Node33 Explore the Elevator :if (not(have('(FourKings)))) #Demon 24
+> Node43 Explore the Temple :if (not(have('(Seath)))) #Demon 25
+> Node51 Explore the Cave :if (not(have('(Witch)))) #Demon 26
+> Node57 Examin the Wall :if (and (and (and have('(Gravelord)) have('(FourKings))) have('(Seath))) have('(Witch))) 
+
+
+#Node7
+Firelink Shrine
+:OnEntry (define checkpoint ('(Node7))) #Demon 22
+#Description contains Demons 2,3,4,5
+You arrive at the Firlink Shrine. (if (have ('(Gravelord))) (say " The Gravelord's Soul chills you to the core, as if dragging you to an everlasting death.")) (if (have ('(FourKings))) (say " The bequthed kings' Soul has an omnipotent presence. It feels as if it is whispering promises of unlimited power in your ear.")) (if (have ('(Seath))) (say " Seath's crystalized soul feels noticeably heavy, as if weighed down by vast amounts of arcane knowledge and power.")) (if (have ('(Witch))) (say " The Witch's Soul burns fiercly. Perhaps her attempt at an everlasting fire was not in vain."))
+> Node5 Rest at the bonfire. 
+> Node8 Talk to the strange warrior by the fire.
+> Node15 Explore the Graveyard :if (not(have('(Gravelord)))) #Demon 23
+> Node33 Explore the Elevator :if (not(have('(FourKings)))) #Demon 24
+> Node43 Explore the Temple :if (not(have('(Seath)))) #Demon 25
+> Node51 Explore the Cave :if (not(have('(Witch)))) #Demon 26
+> Node57 Examin the Wall :if (and (and (and have('(Gravelord)) have('(FourKings))) have('(Seath))) have('(Witch))) 
+#Demon 43
+
+2. Walker Output
+- Nodes and Edges Information
+***********************************
+Nodes
+***********************************
+[N( :id 0
+   :name Gravelord
+   :about 'You have become the Gravelord. 
+What will you do next?'
+   :out [E(Gravelord > Node5>about: Rest at the bonfire), E(Gravelord > Node8>about: Talk to the strange warrior by the fire), E(Gravelord > Node15>about: Explore the Graveyard ), E(Gravelord > Node33>about: Explore the Elevator ), E(Gravelord > Node43>about: Explore the Temple ), E(Gravelord > Node51>about: Explore the Cave ), E(Gravelord > Node57>about: Examin the Wall )]) , N( :id 1
+   :name Firelink Shrine
+   :about 'You arrive at the Firlink Shrine. The Gravelord's Soul chills you to the core, as if dragging you to an everlasting death.'
+   :out [E(Firelink Shrine > Node5>about: Rest at the bonfire), E(Firelink Shrine > Node8>about: Talk to the strange warrior by the fire), E(Firelink Shrine > Node15>about: Explore the Graveyard ), E(Firelink Shrine > Node33>about: Explore the Elevator ), E(Firelink Shrine > Node43>about: Explore the Temple ), E(Firelink Shrine > Node51>about: Explore the Cave ), E(Firelink Shrine > Node57>about: Examin the Wall )]) , N( :id 2
+   :name Node5
+   :about ''
+   :out []) , N( :id 3
+   :name Node8
+   :about ''
+   :out []) , N( :id 4
+   :name Node15
+   :about ''
+   :out []) , N( :id 5
+   :name Node33
+   :about ''
+   :out []) , N( :id 6
+   :name Node43
+   :about ''
+   :out []) , N( :id 7
+   :name Node51
+   :about ''
+   :out []) , N( :id 8
+   :name Node57
+   :about ''
+   :out []) ]
+***********************************
+Edgess
+***********************************
+{'Gravelord': [E(Gravelord > Node5>about: Rest at the bonfire), E(Gravelord > Node8>about: Talk to the strange warrior by the fire), E(Gravelord > Node15>about: Explore the Graveyard ), E(Gravelord > Node33>about: Explore the Elevator ), E(Gravelord > Node43>about: Explore the Temple ), E(Gravelord > Node51>about: Explore the Cave ), E(Gravelord > Node57>about: Examin the Wall )], 'Firelink Shrine': [E(Firelink Shrine > Node5>about: Rest at the bonfire), E(Firelink Shrine > Node8>about: Talk to the strange warrior by the fire), E(Firelink Shrine > Node15>about: Explore the Graveyard ), E(Firelink Shrine > Node33>about: Explore the Elevator ), E(Firelink Shrine > Node43>about: Explore the Temple ), E(Firelink Shrine > Node51>about: Explore the Cave ), E(Firelink Shrine > Node57>about: Examin the Wall )]}
+
+3. Source Codes
+< structure.py>
+from lisp2 import *
+
+# Define Edge Structure
+class Edge:
+    def __init__(self,here,there,txt):
+      self.description = txt     # why am i making this jump? 
+      self.here        = here    # where do i start (node object)
+      self.there       = there   # where to i end (node object)
+      self.here.out   += [self]  # btw, tell here that they can go there (here node linked edges)
+      self.ifval       = Code()
+      
+    def __repr__(self):
+      return "E(" + self.here.name + " > " + self.there.name + ">about: " + self.description+")"
+      
+# Define Node Structure
+class Node:
+  end   = "."
+  start = "!"
+
+  def __init__(self,g,id,name,stop=False,start=False):
+      self.id = id            # order of created node
+      self.graph = g          # where do i live?
+      self.name = name        # what is my name?
+      self.description = ""   # tell me about myself
+      self.stop = stop        # am i a stop node?
+      self.start = start      # am i a start node?
+      self.out = []           # where do i connect to (edge)
+      self.onEntry = Code()
+      self.onExit = Code()
+      self.when = Code()
+      
+  def also(self,txt):
+      "adds text to description"
+      sep = "\n" if self.description else ""
+      self.description += sep + txt
+
+  def __repr__(self):
+      return "N( :id " + str(self.id) + \
+             "\n   :name " + self.name + \
+             "\n   :about '" + self.description + "'" + \
+             "\n   :out " + str(self.out) + ") "
+
+# Define Graph Strcuture
+class Graph:
+    def __init__(self):
+      self.nodes = []    # nodes, stored in creation order
+      self.keys  = {}    # nodes indexed by name
+      self.m = None      # adjacency matrix
+      self.mPrime = None # transitive closure matrix
+
+    def node(self,name):
+      "returns a old node from cache or a new node"
+      if not name in self.keys:
+        self.keys[name] = self.newNode(name)
+      return self.keys[name]
+
+    def newNode(self,name):
+      " create a new node"
+      id = len(self.nodes) 
+      tmp = Node(self,id,name)
+      tmp.start = Node.start in name
+      tmp.end   = Node.end   in name
+      self.nodes += [tmp]
+      return tmp
+
+class Code:
+    def __init__(self, txt = None, env = global_env):
+        self.env = env
+        self.action = lambda env: self.noop(env, txt)
+    def perform(self):
+        self.action(self.env)
+    def noop(self, env, txt):
+        print txt
+        return True 
+
+class Lisp:
+    def __init__(self, env = global_env):
+        self.env = env
+    def perform(self, action = ''):
+        return eval(parse(action), self.env)
+
+< reader.py>
+from structure import *
+import re
+import copy
+mySyms=list("0123456789abcdefghojklmnopqrstuvwzyz=?+*-@$:;ABCDEFGHIJKLMNOPQRSTUVWYZ")
+
+def graph(f, o):
+    g,e = Graph(),{}
+    lisp = Lisp()
+    # first read-in all the paragraphs and create all the listed nodes
+    for para in paras(f):        
+        lines = para.split('\n')
+        here = g.node(lines[0])
+        if len(g.nodes) == 1: here.start = True; start = here.name
+        for s in lines[1:]:
+            if re.search('^[ \t]*:', s) != None:
+                if s.find('OnEntry'):  here.onEntry = Code(lisp.perform(s[s.find('OnEntry')+7:]))
+                elif s.find('OnExit'): here.onExit = Code(lisp.perform(s[s.find('OnExit')+6:]))
+                elif s.find('When'):   here.when = Code(lisp.perform(s[s.find('When')+4:]))
+            elif s.find('>') == -1: 
+                if s.find('(') != -1:
+                    tmp = lisp.perform(s[s.find('('):s.rfind(')')+1])
+                    if tmp == None: tmp = ''
+                    s = s[:s.find('(')]+tmp+s[s.rfind(')')+1:] 
+                here.also(s+'\nWhat will you do next?')
+                    
+    here.stop = True; stop = here.name
+    i = here.description.find('\nWhat will you do next?')
+    here.description = here.description[:i]
+    # relocate to the start of the file and build all the edges
+    f.seek(0) 
+    for para in paras(f): 
+        lines = para.split('\n')
+        for s in lines[1:]:
+            if s.find('>') != -1:
+                words = s.split()
+                des = words[1]
+                #print words
+                txt = s[s.find(words[2]):]                 
+                name = partialmatch2(g.keys.keys(), des, s)
+                if name == -1: name = des
+                there = g.node(name) 
+                ind = txt.find(':')                  
+                edge = Edge(g.keys[lines[0]], there, txt[:ind])   
+                if ind != -1:
+                    tmp = txt[txt.find('('):txt.rfind(')')+1]
+                    if txt[ind+1] == 'if':
+                        edge.ifval = Code(lisp.perform(tmp))
+                if lines[0] not in e.keys(): e[lines[0]] = []  
+                e[lines[0]] += [edge]
+    """
+    g.m = adjacencymatrix(g, e, start, stop)     # generate adjacency matrix    
+    tmpm = copy.deepcopy(g.m)
+    g.mPrime = transitiveclosure(tmpm, g, start, stop) # generate transitive closure matrix
+    tmpM = copy.deepcopy(g.mPrime)  
+    Flag, mIsland = checkmatrix(tmpm, tmpM,g)   
+    
+    o.write("Adjacency Matrix\n")    
+    printmatrix_txt(g.m, o)
+    o.write("Transitive Closure\n")
+    printmatrix_txt(g.mPrime, o)    
+    o.write("Island Matrix\n")
+    printmatrix_txt(mIsland, o)   
+
+    o.close()
+    f.close()
+    """
+    Flag = True
+    return g, e, Flag
+
+    
+
+def paras(f):
+    para = "";
+    for line in f: #loop through file
+        curLine = re.sub('#+.*', "", line); #replaces # and anything past it with nothing
+        if para != '' and line == '\n':        
+            yield para.strip()
+            para = "";   #reset para
+        if curLine.strip() != '':
+            para += curLine.strip() +"\n"   # add line to para      
+
+            
+     
+def partialmatch(lst, name):
+    while True:    
+        pattern = name[:] + '[a-z]+'   # define the regular expression maching rule
+        k = [re.match(pattern, s, re.IGNORECASE).group(0) for s in lst if re.match(pattern, s, re.IGNORECASE)]
+        if len(k) == 1: break
+        elif len(k) > 1: 
+            print 'WARNING: Found multiple matches', k
+            name = raw_input('Please enter your selection again with more letters > ')
+            continue
+        else: 
+            print "WARNING: There are no matches to your selection"
+            name = raw_input('Please enter your selection again > ')
+            continue
+    return k[0]              
+
+    
+def partialmatch2(lst, name, line):
+    while True:
+        pattern = name[:] + '[a-z]+'   # define the regular expression maching rule
+        k = [re.match(pattern, s).group(0) for s in lst if re.match(pattern, s)]
+        if len(k) == 1: break
+        elif len(k) > 1: 
+            print 'WARNING: Found multiple matches\n'
+            print 'Edge Dsecription:  "'+line[:-1] + '"  cannot decide which node '+'"'+name+'"' +' represents.'
+            print "Please enter the more specific selection", k
+            name = raw_input()
+            print "Your input is:" + name +'\n'
+            continue
+        else: return -1
+    return k[0]              
+
+def adjacencymatrix(graph, edges, start, stop):
+    max = len(graph.nodes)     # the number of nodes in the graph
+    m = {}
+    for i in range(max):
+        if i == graph.keys[start].id: ind = '!'+mySym(i)
+        elif i == graph.keys[stop].id: ind = '.'+mySym(i)
+        else: ind = mySym(i)
+        m[ind] = []
+        for j in range(max):
+            m[ind] += ['']     
+    for num in range(max):         # iterate through all nodes
+        node1 = graph.nodes[num]   # graph.nodes are stored in creation order      
+        p1 = mySym(node1.id)       
+        if node1.name == start: p1 = '!'+ p1
+        if node1.name == stop: p1 = '.' + p1
+        if len(node1.out) != 0:
+            for s in range(len(node1.out)):
+                node2 = node1.out[s].there
+                if node2 == node1 and node2.name == stop: continue
+                m[p1][node2.id] = 1
+    return m
+    
+def transitiveclosure(M, graph, start, stop):
+    n = len(M)
+    for k in range(n):
+        node1 = graph.nodes[k]
+        pk = mySym(node1.id)
+        if node1.name == start: pk = '!'+ pk
+        if node1.name == stop: pk = '.' + pk
+        for i in M.keys():
+            for j in range(n):
+                M[i][j] = M[i][j] or (M[i][k] and M[pk][j])   
+    return M
+    
+def mySym(n) :
+    return mySyms[n% len(mySyms)]
+
+def idtoname(i, graph):
+    for s in graph.keys.keys():
+        node = graph.keys[s]
+        if i == node.id: return node.name
+    
+def checkmatrix(m, M,g):
+    label = True
+    n = len(m)
+    #printmatrix(m)
+    # checking the number of start nodes and end nodes
+    stop = start = 0
+    stoplst = []
+    startlst = []
+    for i in m.keys():
+        if 1 not in m[i]: stop += 1; stoplst += [i]  
+    for j in range(n):
+        flag = True
+        for i in m.keys():
+            if m[i][j] == 1: flag = False; break  
+        if flag:   
+            for s in m.keys():
+                if s[-1] == mySym(j): k = s
+            start += 1; startlst += [k]
+    if stop == 0: print 'WARNING: There is no stop node\n'; label = False
+    elif stop > 1: print 'WARNING: There is more than one stop node\n'; label = False
+    if start == 0: print 'WARNING: There is no start node\n'; label = False
+    elif start > 1: print 'WARNING: There is more than one start node\n'; label = False
+    
+    # checking whether all nodes connect downstream to the stop node
+    for i in M.keys():
+        num = 0
+        for s in stoplst:
+            k = mySyms.index(s[-1])
+            if M[i][k] == 1: continue
+            elif M[i][k] == '' and s !=  i: num += 1
+        if num == len(stoplst): 
+            print 'WARNING: Not all nodes connect downstream to the stop node\n'; label = False
+            k =  mySyms.index(s[-1])          
+            print 'The node id is: ', idtoname(k, g)
+            
+    # checking whether the start node connect to all other nodes        
+    for s in startlst:
+        k = mySyms.index(s[-1])
+        zeron = 0
+        for i in range(n):
+            if M[s][i] == '': zeron += 1
+        if zeron > 1 and M[s][k] == '': 
+            print 'WARNING: The start node "'+ idtoname(k,g)+ "\" dosen't connect to all other nodes\n"
+            label = False
+    
+    # checking the number of islands exists in the graph
+    mIsland = m    
+    if start > 1 and stop > 1:
+        for s in stoplst:
+            island = True
+            k = mySyms.index(s[-1])
+            for i in M.keys():
+                if m[i][k] == 1:
+                    for s2 in stoplst:
+                        if s == s2: continue
+                        k2 = mySyms.index(s2[-1])
+                        if M[i][k2] == 1: island = False; break
+                if ~island: break
+        if island: 
+            print 'WARNING: There exists more than one island\n'
+            label = False
+            mIsland = islandmatrix(m, M, stoplst)
+    return label, mIsland
+
+def islandmatrix(m, M, stoplst):
+    label = 2
+    for s in stoplst:
+        island = True
+        if s[0] == '.': continue
+        k = mySyms.index(s[-1])
+        for i in M.keys():
+            if m[i][k] == 1:
+                for s2 in stoplst:
+                    if s == s2: continue
+                    k2 = mySyms.index(s2[-1])
+                    if M[i][k2] == 1: island = False; break
+                if island == False: break
+                for l in range(len(m)):
+                    if m[i][l] == 1: m[i][l] = label
+        if island: label += 1
+    printmatrix(m)
+    return m
+        
+def printmatrix_txt(m, out):
+    for s in range(len(m.keys())):
+        out.write(mySym(s))
+    out.write("\n")
+    for s in m.keys():
+        row = []
+        for k in m[s]:
+            if k == '': out.write(".")
+            else: out.write(str(k))
+        out.write(" "+s+"\n")
+
+def printmatrix(m):
+    for s in m.keys():
+        row = []
+        for k in m[s]:
+            if k == '': row +=[ 0]
+            else: row += [ k]
+        if len(s) == 1: print '('+s+' ) ',row
+        else: print '('+s+') ',row 
+

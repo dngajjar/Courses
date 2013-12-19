@@ -1,0 +1,85 @@
+# 
+# Stage Text
+# LIFE: THE GAME
+# stage text
+#
+
+Birth
+You have entered the world
+> Hom Go home with a family
+> Hos Flee the hospital to live with cats
+
+Home
+You have chosen to go live with your family
+> J Get a job
+> S Go to school
+> W Go live in the woods
+
+Hospital
+You have crawled into an alley behind the hospital, filled with cats. They embrace you as their own
+> S Go to school
+> W Go live in the woods
+> P Become cat president
+
+Job
+You have decided to go get a minimum-wage job
+> F Start a family
+> N Work toward a better job
+
+NASA
+You decide to become an Astronaut
+> Mo Moon
+> Ma Mars
+
+Moon
+You take a space shuttle to the moon... or do you?
+> Ma Mars
+
+Mars
+You decide to go colonize mars.
+> Nas Nasa
+
+School
+You have chosen to go to shcool. You thoroughly enjoy spending the best years of your life studying
+> F Start a family
+> N Get a hot new job
+
+Woods
+You have taken a page from Thoreau and and go live in the woods
+> T Terrorize children at summer camp
+> A Become an acorn peddlar
+
+President
+After a long campaign of handing out catnip and petting kittens, you have been elected the president of cats
+> F Become somewhat normal and start a family
+> R Retire to Cat-topia
+
+Family
+You have met someone, and create little someones
+> D And......
+
+New Job
+You have taken an exciting job at Technology Man Co.
+> M Slip into insanity
+> D Handle your money reasonably
+
+Terrorize
+You have decided to dress up as evil dwarf and terrorize summer camp goers
+> D And......
+
+Acorns
+You are the only human in the woods, adn squirrels are fairly good at finding acorns on their own
+> D And......
+
+Retire
+You have decided to retire to Cat-topia. Cat food is shaped into your image, and birds are sacrificed to your daily
+> D And......
+
+Millionare
+You have become a deranged millionare. Your days are spent in tribal garb, and working on your "Moustaches of the Apocalypse" diorama
+> D And......
+
+Dead
+Congratulations, your are dead!
+> D RIP in pieace
+
