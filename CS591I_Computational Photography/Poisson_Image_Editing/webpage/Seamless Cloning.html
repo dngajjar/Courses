@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Begrimed  
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20090830
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>CS591I Computational Photography - Final Project</title>
+<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #534616;
+	font-weight: bold;
+}
+.STYLE2 {font-weight: bold}
+.STYLE4 {font-size: 18px}
+.STYLE5 {	font-size: 12px;
+	color: #666666;
+}
+-->
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+	  <div id="logo">
+			<h1><a href="#"><strong>CS591I COMPUTATIONAL PHOTOGRAPHY -- Project: Poisson Image Editing </strong></a></h1>
+			<p class="STYLE1">Xue Yang 2012-11-7 </p>
+	  </div>
+      <p class="STYLE1">&nbsp;</p>
+  </div>
+	<!-- end #header -->
+	<div id="menu">
+		<ul>
+			<li class="current_page_item"><a href="index.html">Home</a></li>
+			<li></li>
+			<li></li>
+			<li><a href="http://www.csee.wvu.edu/~gidoretto/courses/2012-fall-cp/">Course Link</a></li>
+			<li><a href="mailto: yangxue0823@gmail.com">Contact Me</a></li>
+		</ul>
+	</div>
+	<!-- end #menu -->
+	<div id="page">
+	<div id="page-bgtop">
+	<div id="page-bgbtm">
+		<div id="content">
+			<div class="post">
+				<h2 class="title"><a href="#">Seamless Cloning </a></h2>
+				<div class="entry">
+					<p>Simply cutting and pasting method always results in some noticeable seams around the cutting boundaries. Introducing the seamless cloning technique, we can achieve the compliance of source and destination borders. This tool can conceal undesirable image features or to insert new elements in an destination image in a flexibility and convenient way.</p>
+					<p>In Seamless Cloning algorithm, the guidance field is defined by the following equation, which is wholly dependent on the gradients of the source image. </p>
+					<p><img src="project images/img4.png" alt="" width="398" height="41" /></p>
+					<p>Employing the guidance field in the solution functions for each points on the selected area and solving the function set, we can get the new pixels values. </p>
+					<p>In this algorithm, I generated two approaches for users to define the target area on the source image as following:</p>
+					<table width="660" height="58" border="1" bordercolor="#FFFFFF">
+                      <tr>
+                        <td height="52" bgcolor="#C9E9CA" class="STYLE4">1. Square Label </td>
+                      </tr>
+                    </table>
+					<p>In this method, users can define the editing area by labeling four points on the source image than can be consisted as a square and contain the target object, and also indicate the location of pasting the selected area on the destination image.</p>
+					<p align="center"><img src="project images/img5.png" alt="" width="674" height="307" /></p>
+					<table width="660" border="1" bordercolor="#FFFFFF">
+                      <tr>
+                        <td height="48" bgcolor="#C9E9CA" class="STYLE4"><p>2. Mask Label</p>
+                        </td>
+                      </tr>
+                    </table>
+					<p>Also, in order to precisely extract the object on the source image, I manually created the mask. Users can select the corresponding pair of points on the source image and the destination image to determine the pasting location.</p>
+					<p align="center"><img src="project images/img6.png" alt="" width="582" height="468" /> </p>
+					<p>Comparing to the simply cutting and pasting approach, we can easily see that the seams become less noticable and the editing region ahieved a sort of uniform appearance.</p>
+					<table width="660" height="58" border="1" bordercolor="#FFFFFF">
+                      <tr>
+                        <td height="52" bgcolor="#C9E9CA" class="STYLE4">3. Bad Results </td>
+                      </tr>
+                    </table>
+					<p>However, there are several limitations about this algorithm. The first one is that the algorithm assumes that the color of  the source image is close to that of the destination image. And this tool can ahieve the function of tweaking the color on the source image to that of the destination image. Here is a bad result about this disadvantage. We cut and paste a white bear to a blue background image, then we get a blue bear. </p>
+					<p><img src="project images/img7.png" alt="" width="668" height="317" />Another drawback is that under some specific situation, it may require precise alignment of the selected region and the destination image.</p>
+					<p align="right"><span class="STYLE5">All the images used in the project are from google images. </span> </p>
+				</div>
+			</div>
+	     </div>
+		<!-- end #content -->
+		<div id="sidebar">
+			<ul>
+			  <li>
+					<h2>Categories</h2>
+					<ul class="STYLE2">
+						<li><a href="index.html">Introduction</a></li>
+						<li><a href="GUI Design.html">GUI Design </a></li>
+						<li><a href="Seamless Cloning.html">Seamless Cloning</a></li>
+					    <li><a href="Mixing Gradients.html">Mixing Gradients</a></li>
+					    <li><a href="Selection Editing.html">Selection Editing</a></li>
+					    <li><a href="Conclusion.html">Conclusion</a></li>
+					</ul>
+			  </li>
+		  </ul>
+		</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	</div>
+	</div>
+	<!-- end #page -->
+</div>
+<!-- end #footer -->
+</body>
+</html>
+<span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span>

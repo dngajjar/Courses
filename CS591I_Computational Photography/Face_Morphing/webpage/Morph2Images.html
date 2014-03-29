@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Assignment3--Face Morphing</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.STYLE3 {font-size: smaller}
+.STYLE5 {
+	font-size: large;
+	font-weight: bold;
+}
+.STYLE9 {font-size: 24px}
+.STYLE14 {
+	font-weight: bold;
+	font-size: 18px;
+}
+.STYLE16 {margin: 0}
+.STYLE17 {margin-top: 0}
+.STYLE21 {
+	font-weight: bold;
+	border-bottom-color: #FFFFFF;
+	border-bottom: 20;
+	font-size: 18px;
+}
+.STYLE22 {font-size: 18px; font-weight: bold; color: #4369D1; }
+.STYLE24 {font-weight: bold; font-size: 16pt; }
+.STYLE25 {font-weight: bold; font-size: 18px; }
+.STYLE29 {font-size: 18px}
+-->
+</style>
+</head>
+<body>
+<div id="header">
+	<h1 align="right"><a href="#" class="heading STYLE3"> Computational PhotographY <span class="STYLE9">--Assignment 3: Face Morphing</span> </a></h1>
+	<h2 align="right">&nbsp;</h2>
+	<h2 align="right">&nbsp;</h2>
+	<h2 align="right"><span class="STYLE5"><a href="http://www.freecsstemplates.org/">--xue yang (10/28/2012) </a></span></h2>
+</div>
+<div id="content">
+	<div class="STYLE14" id="posts">
+	  <div class="post">
+			<h2 class="STYLE16">&nbsp;</h2>
+			<h2 class="STYLE16">Morphing Two images </h2>
+			<h3 class="STYLE17">&nbsp;</h3>
+	        <p><span class="STYLE29">In the first part to this project, I achieved the function of </span>generating several frames that represents the process of morphing from one image to another. The calculation process can be expressed as following:</p>
+	        <p>1. Pick 43 pairs of corresponding points from two images, and compute the mean points. </p>
+	        <p>2.   Define the triangulation on the mean points.</p>
+	        <p>3. For each frame with different wrap_frac and dissolve_frac that changes with time: </p>
+	        <p> a). Compute the average shape based on the wrap_frac;</p>
+	        <p>b). For each triangle in the average shape:</p>
+	        <p>- Get the affine matrix projection to the corresponding triangles in each images to the average shape;</p>
+	        <p>- For each pixel in the generated images (for both input images) with the average shape, find the corresponding points in each input images and set value to average.</p>
+	        <p>c). Combine these two generated images with the average shape based on the dissolve_frac.</p>
+	        <div class="STYLE25" id="layer">
+              <div class="post">
+                <h2 class="STYLE16">&nbsp;</h2>
+                <h2 class="STYLE16">Results</h2>
+                <h3 class="STYLE17">&nbsp;</h3>
+              </div>
+	        </div>
+	        <p>Label the 43 pairs of points on two input images, and compute the corresponding triangulations based on the mean points; </p>
+	        <table width="1126" border="3" align="center">
+              <tr>
+                <td width="263"><div align="center">Image A (Lable Points) </div></td>
+                <td width="263"><div align="center">Image A (Lable Triangle) </div></td>
+                <td width="284"><div align="center">Image B (Label Triangle) </div></td>
+                <td width="284"><div align="center">Image B (Label Points) </div></td>
+              </tr>
+              <tr>
+                <td><img src="results/group1/im1_label.jpg" alt="" width="300" height="400" /></td>
+                <td><img src="results/group1/im1_triangulation.jpg" alt="" width="300" height="400" /></td>
+                <td><img src="results/group1/im2_triangulation.jpg" alt="" width="300" height="400" /></td>
+                <td><img src="results/group1/im2_label.jpg" alt="" width="300" height="400" /></td>
+              </tr>
+              <tr>
+                <td colspan="4"><div align="center">Resulting Morphing Process (.gif) </div>                  <div align="center"></div>                  <div align="center"></div></td>
+              </tr>
+              <tr>
+                <td colspan="4"> <div align="center"><img src="results/group1/2image.gif" alt="" width="300" height="400" /></div>                  
+                <div align="center"></div></td>
+              </tr>
+            </table>
+	        <p>&nbsp; </p>
+	        <p>&nbsp;</p>
+	  </div>
+  </div>
+	<div id="archives" class="boxed">
+		<h2 class="heading STYLE14">CATALOG</h2>
+		<div class="content">
+			<ul>
+				
+				<li class="STYLE24">
+                  <div align="left" class="STYLE25"><a href="index.html"> Introduction			    </a></div>
+			  </li>
+				<li class="STYLE24">
+				  <div align="left" class="STYLE25"><a href="Morph2Images.html">Morphing Two Images</a>			    </div>
+			  </li>
+				<li class="STYLE21">
+				  <div align="left"><a href="MeanFace.html"><strong>Mean Face </strong></a></div>
+			  </li>
+				<li class="STYLE21">
+                  <h3>Bells &amp; Whistles </h3>
+			  </li>
+				<li class="STYLE21">
+                  <div align="left" class="STYLE22"><a href="funthings.html">Fun Things</a></div>
+			  </li>
+				<li>
+				  <div align="left" class="STYLE22"><a href="PCA.html">PCA</a></div>
+				</li>
+				<li></li>
+			</ul>
+	  </div>
+  </div>
+	<div id="search" class="boxed">
+		<h2 class="heading">&nbsp;</h2>
+		</div>
+</div>
+</body>
+</html>
+<span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span>

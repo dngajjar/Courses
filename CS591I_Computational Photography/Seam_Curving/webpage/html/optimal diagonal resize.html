@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Title      : Vertical
+Version    : 1.0
+Released   : 20080915
+Description: A two-column, fixed-width and lightweight template ideal for 1024x768 resolutions. Suitable for blogs and small websites.
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Computational Photography -- Assignment 2</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.STYLE3 {color: #669966}
+.STYLE5 {font-size: 16px; font-family: Geneva, Arial, Helvetica, sans-serif; font-weight: bold; }
+.STYLE8 {font-family: Geneva, Arial, Helvetica, sans-serif; color: #28737B; font-weight: bold; font-size: 16px; }
+.STYLE9 {
+	color: #28737B;
+	font-weight: bold;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 18;
+	margin-top: -20px;
+	line-height: 25px;
+}
+.STYLE15 {color: #6633FF; font-weight: bold; }
+.STYLE16 {color: #6633FF}
+.STYLE17 {font-weight: bold}
+.STYLE19 {font-weight: bold}
+.STYLE21 {font-weight: bold}
+.STYLE23 {color: #0000FF; font-weight: bold; }
+.STYLE26 {font-weight: bold}
+.STYLE27 {font-weight: bold}
+.STYLE28 {font-weight: bold}
+.STYLE29 {font-weight: bold}
+.STYLE30 {font-weight: bold}
+-->
+</style>
+</head>
+<body>
+<div id="wrapper">
+<!-- start header -->
+<div id="header">
+	<div id="logo">
+		<h1>COMPUTATIONAL PHOTOGRAPHY</h1>
+		<h2>&nbsp;</h2>
+		<h2>&nbsp;</h2>
+		<h2><span class="STYLE5">Project 2<span class="STYLE3">- <a href="http://www.win.tue.nl/~wstahw/2IV05/seamcarving.pdf"><u>Seam Carving for Content-Aware Image Resizing</u></a></span></span></h2>
+		<h2>&nbsp;</h2>
+		<h2><span class="STYLE8">Student Name: Xue Yang </span></h2>
+		<h2>&nbsp;</h2>
+	</div>
+	<p>&nbsp;</p>
+	<div id="menu">
+		<ul>
+			<li class="active"><a href="http://www.csee.wvu.edu/~gidoretto/courses/2012-fall-cp/"><strong>Homepage</strong></a></li>
+			<li><a href="mailto:xuyang@mix.wvu.edu"><strong>Contact Me </strong></a></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</div>
+<!-- end header -->
+<!-- start page -->
+<div id="page">
+	<!-- start content -->
+	<div id="content">
+		<div class="post">
+			<h1 align="left" class="title"> Optimal Diagonal Resize </h1>
+		    <div class="entry">
+			  <p align="left" class="STYLE9">&nbsp;</p>
+			  <p align="left" class="STYLE9">If we want to conduct several horizontal seams carving and vertical seams carving on an image, the optimal order of choosing these seams is the most important factor for creating a perfect image. And the method of looking for the total lowest energy of ordering these seams can be expressed as following: </p>
+			  <p><strong></strong><strong></strong><img width="301" height="73" src="formula/003.png" /></p>
+			  <p align="left" class="STYLE9">where <em>m*n </em>is the original size of image and <em>m'*n'</em> is the resized image, and <em>r = m-m', c=n-n', k=r+c. </em><img width="21" height="29" src="formula/005.png" />can have the value of 1 or 0, which means at the order of i-th conduct this seam carving or not. </p>
+			  <p align="left" class="STYLE9">Using dynamic programming, accumulate the calculation from the beginning point (0, 0), then conduct the computation as the following formula till the final target (i, j).</p>
+			  <p align="left" class="STYLE9"><img width="576" height="63" src="formula/004.png" /> </p>
+			  <p align="left" class="STYLE9">where T(r, c) stores the minimal cost needed to obtain an image of size (n-r)*(m-c), and the E(...) function links to the energy of carving corresponding seams in the image.</p>
+			  <p align="left" class="STYLE9">In order to record the order to conducting horizontal and vertical seam carving, I used a binary map of size (r+10)*(c+10) to label the path of carving (making the map bigger than r and c is to make the path more visible especially on the edges of the map). On the map, choosing the top neighbor corresponds to a horizontal seam removal, while choosing a left neighbor corresponds to a vertical seam removal. </p>
+			  <p align="left" class="STYLE9">&nbsp; </p>
+		    </div>
+	  </div>
+	</div>
+	<!-- end content -->
+	<!-- start sidebar -->
+	<div id="sidebar">
+		<ul>
+
+		  <li>
+		    <h2 align="center"><strong>Introduction </strong></h2>
+		    <ul>
+              <li class="STYLE19">
+                <div align="center"><a href="index.html">Project Introduction </a></div>
+              </li>
+	        </ul>
+	      </li>
+	      <li>
+            <div align="center">
+              <ul>
+                <li>
+                  <h2 align="center"><strong>Seam Carving </strong></h2>
+                  <ul>
+                    <li class="STYLE21">
+                      <div align="center"><a href="horizontalcarving.html">Horizontal Carving </a></div>
+                    </li>
+                    <li>
+                      <div align="center"><span class="STYLE23"><a href="verticalcarving.html">Vertical Carving </a></span></div>
+                    </li>
+                    <li></li>
+                  </ul>
+                </li>
+                <li>
+                  <ul>
+                    <li>
+                      <h2 align="center"><strong>Bells &amp; whistle</strong></h2>
+                    </li>
+                    <li>
+                      <div align="center"><a href="optimal diagonal resize.html">Optimal Diagonal Resize</a></div>
+                    </li>
+                    <li class="STYLE27">
+                      <div align="center"><a href="seam insertion.html">Seam Insertion</a></div>
+                    </li>
+                    <li class="STYLE28">
+                      <div align="center"><a href="object removal.html">Object Removal</a></div>
+                    </li>
+                    <li class="STYLE29">
+                      <div align="center"><a href="my masterpieces.html">My Masterpieces</a></div>
+                    </li>
+                    <li class="STYLE29">
+                      <div align="center"><strong><a href="different energy function.html">Different Energy Function</a></strong></div>
+                    </li>
+                    <li>
+                      <div align="center"><strong><a href="bad result.html">Bad Results </a></strong></div>
+                    </li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </li>
+	  </ul>
+	</div>
+	<!-- end sidebar -->
+	<div style="clear: both;">&nbsp;
+	  <div class="post">
+		<h1 align="left" class="title"> Examples </h1>
+		<p>&nbsp;</p>
+		<p><span class="STYLE9">In the optimal diagonal resizing experiment, I tested several images o, and the output images are shown below.</span></p>
+	  </div>
+	  <table width="1225" border="3" bordercolor="#66CCFF">
+        <tr>
+          <td><div align="center"><strong><span class="STYLE16">Original Image Labeled with </span>Removal Region (500* 351) </strong></div></td>
+          <td><div align="center" class="STYLE30"><span class="STYLE16">Image Labled with the Seam </span>(4000 * 251) </div></td>
+          <td><div align="center"><strong>Optimal Seam-order Map </strong></div></td>
+        </tr>
+        <tr>
+          <td height="395"><img src="images/group19/original.jpg" alt="" width="500" height="351" /></td>
+          <td><div align="center"><img src="images/group19/retarget.jpg" alt="" width="400" height="251" /></div></td>
+          <td><img src="images/group19/map.jpg" alt="" width="128" height="128" /></td>
+        </tr>
+        <tr>
+          <td><div align="center" class="STYLE15">Original Image Labeled with Removal Region (500 * 500)</div></td>
+          <td><div align="center" class="STYLE15">Image Labled with the Seam (400 * 400) </div></td>
+          <td><div align="center"><strong>Optimal Seam-order Map </strong></div></td>
+        </tr>
+        <tr>
+          <td height="534"><div align="center"><img src="images/group18/original.jpg" alt="" width="500" height="500" /></div></td>
+
+          <td><div align="center"><img src="images/group18/retarget.jpg" alt="" width="400" height="400" border="3" /></div></td>
+          <td><img src="images/group18/map.jpg" alt="" width="128" height="128" /></td>
+        </tr>
+        <tr>
+          <td width="528"><div align="center" class="STYLE16"><strong>Original Image </strong>(500 * 319) </div></td>
+          <td width="528"><div align="center"><span class="STYLE15">Resized Image (350 * 219) </span></div></td>
+          <td width="143"><div align="center"><strong>Optimal Seam-order Map </strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><img src="images/group21/original.jpg" alt="" width="500" height="319" /></div></td>
+          <td><div align="center"><img src="images/group21/retarget.jpg" alt="" width="350" height="219" /></div></td>
+          <td><img src="images/group21/map.jpg" alt="" width="128" height="160" /></td>
+        </tr>
+        <tr>
+          <td><div align="center"><span class="STYLE15">Original Image(500 * 307)</span></div></td>
+          <td><div align="center" class="STYLE17"><span class="STYLE16 STYLE16">Resize Image </span><span class="STYLE16">(400 * 277)</span></div></td>
+          <td><div align="center"><strong>Optimal Seam-order Map </strong></div></td>
+        </tr>
+        <tr>
+          <td><img src="images/group20/original.jpg" alt="" width="500" height="307" /></td>
+          <td><div align="center"><img src="images/group20/target.jpg" alt="" width="400" height="277" /></div></td>
+          <td><div align="center"><img src="images/group20/map.jpg" alt="" width="128" height="128" /></div></td>
+        </tr>
+      </table>
+    </div>
+</div>
+<!-- end page -->
+<!-- start footer -->
+
+</div>
+<!-- end footer -->
+</body>
+</html>

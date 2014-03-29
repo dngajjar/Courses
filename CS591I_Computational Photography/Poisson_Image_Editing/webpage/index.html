@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Begrimed  
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20090830
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>CS591I Computational Photography - Final Project</title>
+<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #534616;
+	font-weight: bold;
+}
+.STYLE2 {font-weight: bold}
+.STYLE4 {
+	font-size: 12px;
+	color: #666666;
+}
+-->
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+	  <div id="logo">
+			<h1><a href="#"><strong>CS591I COMPUTATIONAL PHOTOGRAPHY -- Project: Poisson Image Editing </strong></a></h1>
+			<p class="STYLE1">Xue Yang 2012-11-7 </p>
+	  </div>
+      <p class="STYLE1">&nbsp;</p>
+  </div>
+	<!-- end #header -->
+	<div id="menu">
+		<ul>
+			<li class="current_page_item"><a href="index.html">Home</a></li>
+			<li></li>
+			<li></li>
+			<li><a href="http://www.csee.wvu.edu/~gidoretto/courses/2012-fall-cp/">Course Link</a></li>
+			<li><a href="mailto: yangxue0823@gmail.com">Contact Me</a></li>
+		</ul>
+	</div>
+	<!-- end #menu -->
+	<div id="page">
+	<div id="page-bgtop">
+	<div id="page-bgbtm">
+		<div id="content">
+			<div class="post">
+				<h2 class="title"><a href="#">Introduction</a></h2>
+				<div class="entry">
+					<p>Image editing tasks are related to either global changes (color/intensity, corrections, filters, deformations) or local changes confined to a selection. Poisson image editing technique mainly focuese on achieving local changes that users can manually select a target region and manipulate different modifications in a seamless and effortless way. In this project, I implemented the Poisson image editing techniques introducted in this <a href="http://cs.engr.uky.edu/~jacobs/classes/2010_photo/readings/PoissonImageEditing.pdf">paper</a> by P. Pérez, M. Gangnet, A and Blake and achieved several interesting tools about local image edting, such as replacing or mixing the target region from the source image with the indicated location on the destination image, or altering the illumination or the texture of the given image. </p>
+					<p>In this project, I implemented the three algorithms described in the paper including Seamless Cloning Algorithm, Mixing Gradients Algorithm and Selection Editing Algorithm. And I also accomplished the GUI design that provides users a convenient and direct way to employ thses useful image editing tools. </p>
+					<p>The whole problem of local image edting is to solve the new pixel values in the selected target region on the destination image (the omiga region in the figure below). </p>
+					<p><img src="project images/img1.png" alt="" width="607" height="210" />In mathematical way, the mainly task is to optimize the following function::</p>
+					<p><img src="project images/img2.png" alt="" width="558" height="57" />And the solution to this problem is to solve the function set for each pixel value in the targe area (omiga):</p>
+					<p><img src="project images/img3.png" alt="" width="478" height="48" />where p represents each pixel in the omiga area on the destination image, q stands for p's neighbors (four direction: top, left, bottom ahd right) and v is the defined as the guidance field. Actually, the entire project is based on the guidance field that by giving the new definition we are capable of achieving diverse functions of local image editing. </p>
+					<p align="right" class="STYLE4">All the images used in the project are from google images. </p>
+				</div>
+			</div>
+		   </div>
+		<!-- end #content -->
+		<div id="sidebar">
+			<ul>
+			  <li>
+					<h2>Categories</h2>
+					<ul class="STYLE2">
+						<li><a href="index.html">Introduction</a></li>
+						<li><a href="GUI Design.html">GUI Design </a></li>
+						<li><a href="Seamless Cloning.html">Seamless Cloning</a></li>
+					    <li><a href="Mixing Gradients.html">Mixing Gradients</a></li>
+					    <li><a href="Selection Editing.html">Selection Editing</a></li>
+					    <li><a href="Conclusion.html">Conclusion</a></li>
+					</ul>
+			  </li>
+		  </ul>
+		</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	</div>
+	</div>
+	<!-- end #page -->
+</div>
+<!-- end #footer -->
+</body>
+</html>
+<span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span>

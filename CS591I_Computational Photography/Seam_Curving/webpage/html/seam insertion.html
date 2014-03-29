@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Title      : Vertical
+Version    : 1.0
+Released   : 20080915
+Description: A two-column, fixed-width and lightweight template ideal for 1024x768 resolutions. Suitable for blogs and small websites.
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Computational Photography -- Assignment 2</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.STYLE3 {color: #669966}
+.STYLE5 {font-size: 16px; font-family: Geneva, Arial, Helvetica, sans-serif; font-weight: bold; }
+.STYLE8 {font-family: Geneva, Arial, Helvetica, sans-serif; color: #28737B; font-weight: bold; font-size: 16px; }
+.STYLE11 {	color: #28737B;
+	font-weight: bold;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 18;
+	margin-top: -20px;
+	line-height: 25px;
+}
+.STYLE15 {color: #6633FF; font-weight: bold; }
+.STYLE16 {color: #6633FF}
+.STYLE28 {font-weight: bold}
+.STYLE29 {font-weight: bold}
+.STYLE30 {font-weight: bold}
+.STYLE31 {font-weight: bold}
+.STYLE32 {font-weight: bold}
+.STYLE34 {font-weight: bold}
+.STYLE36 {color: #0000FF; font-weight: bold; }
+.STYLE37 {font-weight: bold}
+.STYLE38 {color: #6633FF; font-weight: bold; font-size: 24px; }
+-->
+</style>
+</head>
+<body>
+<div id="wrapper">
+<!-- start header -->
+<div id="header">
+	<div id="logo">
+		<h1>COMPUTATIONAL PHOTOGRAPHY</h1>
+		<h2>&nbsp;</h2>
+		<h2>&nbsp;</h2>
+		<h2><span class="STYLE5">Project 2<span class="STYLE3">- <a href="http://www.win.tue.nl/~wstahw/2IV05/seamcarving.pdf"><u>Seam Carving for Content-Aware Image Resizing</u></a></span></span></h2>
+		<h2>&nbsp;</h2>
+		<h2><span class="STYLE8">Student Name: Xue Yang </span></h2>
+		<h2>&nbsp;</h2>
+	</div>
+	<p>&nbsp;</p>
+	<div id="menu">
+		<ul>
+			<li class="active"><a href="http://www.csee.wvu.edu/~gidoretto/courses/2012-fall-cp/"><strong>Homepage</strong></a></li>
+			<li><a href="mailto:xuyang@mix.wvu.edu"><strong>Contact Me </strong></a></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</div>
+<!-- end header -->
+<!-- start page -->
+<div id="page">
+	<!-- start content -->
+	<div id="content">
+		<div class="post">
+			<h1 align="left" class="title"> Seam Insertion </h1>
+			<div class="entry">
+				<p align="left" class="STYLE11">&nbsp;</p>
+				<p align="left" class="STYLE11">Seam insertion is a way of enlarging example without changing the size of the major content in the image. It can be seen as a inversion of seam carving operator. Since we try to find the optimal seams in the predetermined directions (horizontal or vertical) and insert pixels with low energy.</p>
+				<p align="left" class="STYLE11">In order to balance the original image content and the artificially inserted parts, if we plan to enlarge an image by k, we first find the first k seams for removal, duplicate them and insert these pixels just next to the pixels of the optimal seams. </p>
+				<p align="left" class="STYLE11">And if we want to keep the property of content-aware of the algorithm, we cannot push things too far. We need to break the process into several steps. Each step does not enlarge the size of the image in more than a fraction of its size from the previous step in order to maintain the major content of the images. </p>
+				<p align="left" class="STYLE11">The algorithm can work for both the color images and the gray-level images. </p>
+			</div>
+	  </div>
+	</div>
+	<!-- end content -->
+	<!-- start sidebar -->
+	<div id="sidebar">
+		<ul>
+
+		  <li>
+            <h2 align="center"><strong>Introduction </strong></h2>
+		    <ul>
+              <li class="STYLE37">
+                <div align="center"><a href="index.html">Project Introduction </a></div>
+              </li>
+	        </ul>
+	      </li>
+		  <li><ul><li>
+				  <h2 align="center"><strong>Seam Carving </strong></h2>
+				  <ul>
+				    <li class="STYLE34">
+				      <div align="center"><a href="horizontalcarving.html">Horizontal Carving </a></div>
+				    </li>
+				    <li>
+				      <div align="center"><span class="STYLE36"><a href="verticalcarving.html">Vertical Carving </a></span></div>
+				    </li>
+			        <li></li>
+			    </ul>
+			      </li>
+			    <li>
+			      <ul>
+			        <li>
+			          <h2 align="center"><strong>Bells &amp; whistle</strong></h2>
+	                </li>
+		            <li>
+		              <div align="center"><a href="optimal diagonal resize.html">Optimal Diagonal Resize</a></div>
+		            </li>
+		            <li class="STYLE30">
+		              <div align="center"><a href="seam insertion.html">Seam Insertion</a></div>
+		            </li>
+		            <li class="STYLE31">
+		              <div align="center"><a href="object removal.html">Object Removal</a></div>
+		            </li>
+		            <li class="STYLE32">
+		              <div align="center"><a href="my masterpieces.html">My Masterpieces</a></div>
+		            </li>
+		            <li class="STYLE32">
+		              <div align="center"><span class="STYLE37"><a href="different energy function.html">Different Energy Function</a></span></div>
+		            </li>
+		            <li>
+		              <div align="center"><strong><a href="bad result.html">Bad Results </a></strong></div>
+		            </li>
+		            <li></li>
+		            <li></li>
+		          </ul>
+		        </li>
+			  </ul>
+		  </li>
+	  </ul>
+  </div>
+	<!-- end sidebar -->
+		<div style="clear: both;">&nbsp;
+	  <div class="post">
+	  <h1 align="left" class="title"> Examples </h1>
+	  <p>&nbsp;</p>
+	  <p><span class="STYLE11">In the seam insertion experiment, I tried different several images in both horizontal and vertical directions, and the output images are shown below.</span></p>
+	  <table width="1286" border="3" align="center" bordercolor="#66CCFF">
+        <tr>
+          <td colspan="3"><div align="center" class="STYLE38">Horizontal Image Enlarging </div></td>
+        </tr>
+        <tr>
+          <td width="473"><div align="center"><span class="STYLE15">Original Image </span><span class="STYLE16">(400 * 319)</span></div></td>
+          <td width="554"><div align="center"><span class="STYLE15">Resized Image </span><span class="STYLE16">(450 * 319) </span></div></td>
+          <td width="233"><div align="center"><strong><span class="STYLE16"># of Horizontal Seams Carving </span></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><img src="images/group10/original.jpg" alt="" width="400" height="319" /></div></td>
+          <td><div align="center"><img src="images/group10/vertical50.jpg" alt="" width="450" height="319" /></div></td>
+          <td><div align="center"><strong>50<span class="STYLE16"></span></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><span class="STYLE15">Original Image (400 * 276) </span></div></td>
+          <td><div align="center"><span class="STYLE15">Resized Image (450 * 276)</span></div></td>
+          <td><div align="center"><strong><span class="STYLE16"># of Horizontal Seams Carving </span></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><img src="images/group11/untitled.jpg" alt="" width="400" height="276" /></div></td>
+          <td><div align="center"><img src="images/group11/vertical50.jpg" alt="" width="450" height="276" /></div></td>
+          <td><div align="center" class="STYLE15">50</div></td>
+        </tr>
+        <tr>
+          <td colspan="3"><div align="center"><span class="STYLE38">Vertical Image Enlarging </span></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><span class="STYLE15">Original Image (500 * 375) </span></div></td>
+          <td><div align="center"><span class="STYLE15">Resized Image (500 * 405)</span></div></td>
+          <td><div align="center"><strong><span class="STYLE16"># of Horizontal Seams Carving </span></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><img src="images/group12/wall2.jpg" alt="" width="500" height="375" /></div></td>
+          <td><div align="center"><img src="images/group12/horizontal30.jpg" alt="" width="500" height="405" /></div></td>
+          <td><div align="center" class="STYLE15">50</div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><span class="STYLE15">Original Image (400 * 400) </span></div></td>
+          <td><div align="center">
+            <div align="center"><span class="STYLE15">Resized Image (400 * 450)</span></div>
+          </div></td>
+          <td><div align="center"><strong><span class="STYLE16"># of Horizontal Seams Carving </span></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><img src="images/group13/original.jpg" alt="" width="400" height="400" /></div></td>
+          <td><div align="center"><img src="images/group13/horizontal50.jpg" alt="" width="400" height="450" /></div></td>
+          <td><div align="center" class="STYLE15">50</div></td>
+        </tr>
+      </table>
+	</div>
+</div>
+<!-- end page -->
+<!-- start footer -->
+
+</div>
+<!-- end footer -->
+</body>
+</html>

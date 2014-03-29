@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Assignment3--Face Morphing</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.STYLE3 {font-size: smaller}
+.STYLE5 {
+	font-size: large;
+	font-weight: bold;
+}
+.STYLE9 {font-size: 24px}
+.STYLE14 {
+	font-weight: bold;
+	font-size: 18px;
+}
+.STYLE16 {margin: 0}
+.STYLE17 {margin-top: 0}
+.STYLE21 {
+	font-weight: bold;
+	border-bottom-color: #FFFFFF;
+	border-bottom: 20;
+	font-size: 18px;
+}
+.STYLE22 {font-size: 18px; font-weight: bold; color: #4369D1; }
+.STYLE24 {font-weight: bold; font-size: 16pt; }
+.STYLE25 {font-weight: bold; font-size: 18px; }
+.STYLE29 {font-size: 18px}
+-->
+</style>
+</head>
+<body>
+<div id="header">
+	<h1 align="right"><a href="#" class="heading STYLE3"> Computational PhotographY <span class="STYLE9">--Assignment 3: Face Morphing</span> </a></h1>
+	<h2 align="right">&nbsp;</h2>
+	<h2 align="right">&nbsp;</h2>
+	<h2 align="right"><span class="STYLE5"><a href="http://www.freecsstemplates.org/">--xue yang (10/28/2012) </a></span></h2>
+</div>
+<div id="content">
+	<div class="STYLE14" id="posts">
+	  <div class="post">
+			<h2 class="STYLE16">&nbsp;</h2>
+			<h2>Principal Component Analysis (PCA) </h2>
+			<p>Principal Component Analysis is a process that a data set expressed in M-dimensional space is reduced to a K dimensional space, where the K dimensions computed represent the K-axis subspace of the original data set which accounts for as much of the variation in the data set as possible.</p>
+			<p>PCA is necessary to be used in face morphing porcess because an image of a face with pixel dimensions (W x H) has W*H degrees of freedom (every pixel can vary its color independent of every other). Thus without PCA, for the 1200*1200 images we used in this project (after I re-aligned and cropped the input images, the size is 1200 by 1200), calculations in 1440,000 dimensional space would be required. </p>
+			<p> By using PCA, this 1440,000 dimensional space can be reduced to an arbitrarily small (and therefore much easy to computet) coordinate space, with each of the resulting axes expressing the most important aspects of face-ness (thus the term <em>principal</em> component analysis).</p>
+			<div class="STYLE25" id="layer">
+              <div class="post">
+                <h2 class="STYLE16">&nbsp;</h2>
+                <h2 class="STYLE16">Results</h2>
+                <h3 class="STYLE17">&nbsp;</h3>
+              </div>
+	        </div>
+	        <p>1.   Before computing the PCA, the major problem with the data set was the variation in face location and size between images. This variation could be cased by camera position or camera zoom. The differences can be seen as following:</p>
+	        <table width="794" border="3" align="center">
+              <tr>
+                <td width="435"><div align="center">Examples of Image Variation</div></td>
+                <td width="339"><div align="center">Analysis</div></td>
+              </tr>
+              <tr>
+                <td> <div align="center"><img src="results/group3/d2.jpg" alt="" width="400" height="500" /></div></td>
+                <td><p align="center">1. Different Face Location</p>
+                <p align="center">2. Different Face Size  </p></td>
+              </tr>
+            </table>
+	        <p> This causes the computed face space (PCA) to become messed with false facial differences, which should be the differnces between each input image and the average image, instead of only computing true face variance. The overall result of this turned out to be a barrel distortion effect on the images, and the first eigenvalue returned from these images was the degree of the barrel distortion.  </p>
+	        <p>2. My solution was to correct the input images before computing PCA    by attempting to apply a rough re-aligning heuristic. My algorithm was based on the 43 correspondence pairs of points provided by the '.txt' files and computed the mean points. Then I employed the correspondence points of each source image againts the average points to generate a homographies matrix for each input image using Leat Squates Method as measurement. The homographies controls the 2D translation, rotation, and/or scaling transformation. Finally, I applied this transformation to the control points of the image for the purposes of PCA calculations and interpolation. </p>
+	        <p>The results of the corrected images can be seen below:</p>
+	        <table width="1082" border="3">
+              <tr>
+                <td width="300"><div align="center">Corrected Image A </div></td>
+                <td width="225"><div align="center">Original Image A </div></td>
+                <td width="300"><div align="center">Corrected Image B </div></td>
+                <td width="225"><div align="center">Original Image B </div></td>
+              </tr>
+              <tr>
+                <td><img src="results/group3/A (4).jpg" alt="" width="300" height="300" /></td>
+                <td><img src="results/group3/B (1).jpg" alt="" width="225" height="300" /></td>
+                <td><img src="results/group3/A (3).jpg" alt="" width="300" height="300" /></td>
+                <td><img src="results/group3/B (4).jpg" alt="" width="225" height="300" /></td>
+              </tr>
+              <tr>
+                <td><div align="center">Corrected Image C </div></td>
+                <td><div align="center">Original Image C </div></td>
+                <td><div align="center">Corrected Image D </div></td>
+                <td><div align="center">Original Image D </div></td>
+              </tr>
+              <tr>
+                <td><img src="results/group3/A (2).jpg" alt="" width="300" height="300" /></td>
+                <td><img src="results/group3/B (3).jpg" alt="" width="225" height="300" /></td>
+                <td><img src="results/group3/A (1).jpg" alt="" width="300" height="300" /></td>
+                <td><img src="results/group3/B (2).jpg" alt="" width="225" height="300" /></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+	        <p>3.   Below are the top 15 appearance eigenvalues for our 17 face pool.  </p>
+	        <table width="1288" border="3">
+              <tr>
+                <td width="250"><img src="results/group3/1_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td width="250"><img src="results/group3/2_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td width="250"><img src="results/group3/3_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td width="250"><img src="results/group3/4_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td width="250"><img src="results/group3/5_eigen.jpg" alt="" width="250" height="250" /></td>
+              </tr>
+              <tr>
+                <td><img src="results/group3/6_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td><img src="results/group3/7_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td><img src="results/group3/8_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td><img src="results/group3/9_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td><img src="results/group3/10_eigen.jpg" alt="" width="250" height="250" /></td>
+              </tr>
+              <tr>
+                <td><img src="results/group3/11_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td><img src="results/group3/12_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td><img src="results/group3/13_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td><img src="results/group3/14_eigen.jpg" alt="" width="250" height="250" /></td>
+                <td><img src="results/group3/15_eigen.jpg" alt="" width="250" height="250" /></td>
+              </tr>
+            </table>
+	        <p>&nbsp;</p>
+	        <p>&nbsp; </p>
+	        <p>&nbsp;</p>
+	  </div>
+  </div>
+	<div id="archives" class="boxed">
+		<h2 class="heading STYLE14">CATALOG</h2>
+		<div class="content">
+			<ul>
+				
+				<li class="STYLE24">
+                  <div align="left" class="STYLE25"><a href="index.html"> Introduction			    </a></div>
+			  </li>
+				<li class="STYLE24">
+				  <div align="left" class="STYLE25"><a href="Morph2Images.html">Morphing Two Images</a>			    </div>
+			  </li>
+				<li class="STYLE21">
+				  <div align="left"><a href="MeanFace.html"><strong>Mean Face </strong></a></div>
+			  </li>
+				<li class="STYLE21">
+                  <h3>Bells &amp; Whistles </h3>
+			  </li>
+				<li class="STYLE21">
+                  <div align="left" class="STYLE22"><a href="funthings.html">Fun Things </a></div>
+			  </li>
+				<li>
+				  <div align="left" class="STYLE22"><a href="PCA.html">PCA</a></div>
+				</li>
+				<li></li>
+			</ul>
+	  </div>
+  </div>
+	<div id="search" class="boxed">
+		<h2 class="heading">&nbsp;</h2>
+  </div>
+</div>
+</body>
+</html>
+<span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span>

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Begrimed  
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20090830
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>CS591I Computational Photography - Final Project</title>
+<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #534616;
+	font-weight: bold;
+}
+.STYLE2 {font-weight: bold}
+.STYLE4 {font-size: 18px}
+.STYLE5 {	font-size: 12px;
+	color: #666666;
+}
+-->
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+	  <div id="logo">
+			<h1><a href="#"><strong>CS591I COMPUTATIONAL PHOTOGRAPHY -- Project: Poisson Image Editing </strong></a></h1>
+			<p class="STYLE1">Xue Yang 2012-11-7 </p>
+	  </div>
+      <p class="STYLE1">&nbsp;</p>
+  </div>
+	<!-- end #header -->
+	<div id="menu">
+		<ul>
+			<li class="current_page_item"><a href="index.html">Home</a></li>
+			<li></li>
+			<li></li>
+			<li><a href="http://www.csee.wvu.edu/~gidoretto/courses/2012-fall-cp/">Course Link</a></li>
+			<li><a href="mailto: yangxue0823@gmail.com">Contact Me</a></li>
+		</ul>
+	</div>
+	<!-- end #menu -->
+	<div id="page">
+	<div id="page-bgtop">
+	<div id="page-bgbtm">
+		<div id="content">
+			<div class="post">
+				<h2 class="title"><a href="#">Mixing Gradients </a></h2>
+				<div class="entry">
+					<p>From the previous discussion we can see that the guidance field of Seamless Cloning algorithm is entirely based on the gradients of the source image. However, under some circumstances, we may need a mixing properties of gradients from both the source image and the destination image. Here we define the guidance field in the Mixing Gradients as the follwing function:</p>
+					<p><img src="project images/img9.png" alt="" width="487" height="61" /> </p>
+					<p>We can see that the algorithm preserve the larger part of the gradients on the selected editing region. The Mixing Gradients algorithm works well when we are trying to pasting the transparent boject or the object with holes.</p>
+					<table width="660" height="58" border="1" bordercolor="#FFFFFF">
+                      <tr>
+                        <td height="52" bgcolor="#C9E9CA" class="STYLE4">1. Pasting Transparent Object </td>
+                      </tr>
+                    </table>
+					<p>Mixing Gradients Algorithm achieves the transformation of partly transparent objects, such as the rainbow in the following example. The guidance field of this method picks out the parts of the source image or the destination image that are the more significant and obvious at each location. </p>
+					<p align="center"><img src="project images/img10.png" alt="" width="496" height="375" /></p>
+					<p>&nbsp;</p>
+					<table width="660" border="1" bordercolor="#FFFFFF">
+                      <tr>
+                        <td height="48" bgcolor="#C9E9CA" class="STYLE4"><p>2.Pasting Object with Holes </p>
+                        </td>
+                      </tr>
+                    </table>
+					<p>When we are goint to peel off a text layer from the source image and apply it to the destination image, several operations can be choose. In the follwing example, I compared these possible method and I can easily figure out that the Mixing Gradients Algorithm is the best. And using the Seamless cloning method, it seems to wash out the texture of the destination image which is not as our expection.</p>
+					<p align="center"><img src="project images/img11.png" alt="" width="618" height="394" /></p>
+			  </div>
+			</div>
+	     
+	    <div align="right"><span class="STYLE5">All the images used in the project are from google images. </span></div>
+		</div>
+		<!-- end #content -->
+		<div id="sidebar">
+			<ul>
+			  <li>
+					<h2>Categories</h2>
+					<ul class="STYLE2">
+						<li><a href="index.html">Introduction</a></li>
+						<li><a href="GUI Design.html">GUI Design </a></li>
+						<li><a href="Seamless Cloning.html">Seamless Cloning</a></li>
+					    <li><a href="Mixing Gradients.html">Mixing Gradients</a></li>
+					    <li><a href="Selection Editing.html">Selection Editing</a></li>
+					    <li><a href="Conclusion.html">Conclusion</a></li>
+					</ul>
+			  </li>
+		  </ul>
+		</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	</div>
+	</div>
+	<!-- end #page -->
+</div>
+<!-- end #footer -->
+</body>
+</html>
+<span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span>

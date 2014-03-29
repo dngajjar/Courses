@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>Project1: Hybrid Image</title>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script src="slider.js"></script>
+<style type="text/css">
+
+    #slider {
+	width: 450px;
+	position:relative;
+    left::20px; top::0px;
+;
+	left: 20px;
+}
+	#imagecontainer {
+	width: 500px;
+	height: 528px;
+	border:5px;}
+	#sliderHint {
+	color: black; position:relative; left:10px; top:0px;
+
+}
+
+<!--
+.STYLE1 {font-family: Verdana, Arial, Helvetica, sans-serif}
+.STYLE3 {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+}
+.STYLE4 {font-family: Arial, Helvetica, sans-serif}
+.STYLE7 {font-family: Geneva, Arial, Helvetica, sans-serif}
+.STYLE9 {
+	font-family: Verdana, Arial, sans-serif;
+	color: #0000FF;
+	font-weight: bold;
+}
+.STYLE12 {color: #660099}
+.STYLE22 {font-size: 16px; font-family: Arial, Helvetica, sans-serif; color: #993300; font-weight: bold; }
+.STYLE28 {font-size: 16px; font-family: Arial, Helvetica, sans-serif; color: #993300; }
+.STYLE34 {color: #000000}
+.STYLE35 {
+	font-size: 16px;
+	font-weight: bold;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+.STYLE36 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+}
+.STYLE41 {font-size: 16px; font-family: Arial, Helvetica, sans-serif;}
+.STYLE42 {font-family: Verdana, Arial, sans-serif}
+.STYLE45 {font-family: Verdana, Arial, sans-serif; color: #6600FF; }
+.STYLE46 {color: #6600FF}
+.STYLE53 {font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 14px; }
+.STYLE57 {font-weight: bold; color: #6600FF; font-family: Verdana, Arial, sans-serif;}
+.STYLE60 {font-family: Geneva, Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; color: #993300; }
+.STYLE62 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; color: #993300; }
+.STYLE63 {color: #993300}
+.STYLE64 {font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 14px; color: #993300; }
+.STYLE67 {color: #993300; font-weight: bold; }
+.STYLE69 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000000;
+	font-size: 16px;
+	font-weight: bold;
+}
+.STYLE71 {
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #6600FF;
+}
+.STYLE72 {font-weight: bold; font-family: Arial, Helvetica, sans-serif; color: #000000; }
+.STYLE77 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #993300;
+	font-weight: bold;
+}
+.STYLE82 {
+	color: #996600;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+
+<body background="bg/bg3.jpg">
+
+<table width="1300" border="5" align="center" bordercolor="#0000FF">
+  <tr>
+    <td height="136" bgcolor="#6666FF"><h1 align="center" class="STYLE1"><strong>CS 591I Computational Photography</strong></h1>
+      <h1 align="center" class="STYLE1"><strong>Project 1: Hybrid Image </strong></h1>
+      <div align="center">
+        <p class="STYLE3">Designer: Xue Yang </p>
+        <p class="STYLE3">Date: September 8th, 2012 </p>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="1500" border="3" bordercolor="#000000">
+  <tr>
+    <td width="1248" bgcolor="#66FFFF"><h2><span class="STYLE9"> Catalog</span></h2></td>
+  </tr>
+</table>
+<ul class="STYLE7">
+  <li class="STYLE12">
+    <h2><a href=#introduction>Introduction</a></h2>
+  </li>
+  <li class="STYLE12">
+    <h2><a href=#experiment1>Experiment #1: Magic faces of Mr.Bean</a> </h2>
+  </li>
+  <li class="STYLE12">
+    <h2><a href=#experiment2>Experiment #2: 2D Fourier Transform</a> </h2>
+  </li>
+  <li class="STYLE12">
+    <h2><a href=#experiment3>Experiment #3: Color Effect In Creating Hybrid Images</a></h2>
+  </li>
+  <li class="STYLE12">
+    <h2><a href=#experiment4>Experiment #4: Gaussian and Laplacian Pyramids</a></h2>
+  </li>
+  <li class="STYLE12">
+    <h2><a href=#experiment5>Experiment #5: Unsuccessful Hybrid Images </a> </h2>
+  </li>
+  <li></li>
+</ul>
+<h2 class="STYLE4"><a name="introduction" class="STYLE45" id="introduction">1. Introduction </a></h2>
+<h3 class="STYLE41">The technique of <cite>Hybrid Images</cite>[1] is allowed producing images with two interpretations that change as a function of viewing distance.   The basic idea is that the high frequency components in an image tend to dominate perception when it is available, but, at a distance, only the low frequency part can be seen at a short distance. By blending the high frequency portion of one image with the low-frequency portion of another, we get a hybrid image that leads to different interpretations at different distances. </h3>
+<h3 class="STYLE41">In this project, the technique of Hybrid Images is employed. In the following sections, several diverse experimental results are discussed and presented.</h3>
+<h2><span class="STYLE4"><a name="experiment1" class="STYLE45" id="experiment1">2. Experiment #1. Magic Faces of Mr. Bean</a></span></h2>
+<table width="943" border="5" align="center" bordercolor="#000000" bgcolor="#CCCCFF">
+  <tr>
+    <td width="459" height="323"><div align="center"><span class="STYLE4"><img src="group1/group1_lowpass.jpg" width="400" height="280" border="5" align="baseline" /></span></div></td>
+    <td><div align="center"><span class="STYLE4"><img src="group1/group1_highpass.jpg" width="400" height="280" border="5" /></span></div></td>
+  </tr>
+  <tr>
+    <td><div align="center"><span class="STYLE60">Puzzled Facial Expression (using low-pass filter) </span></div></td>
+    <td height="44" bordercolor="#000000"><div align="center"><span class="STYLE60">Scared Facial Expression (using high-pass filter) </span></div></td>
+  </tr>
+  <tr>
+    <td><ul class="STYLE28">
+      <li><strong>Recognizing in a far viewing distance </strong></li>
+      <li><strong>Using a low-pass filter </strong></li>
+    </ul></td>
+    <td width="460" height="53" bordercolor="#000000"><div align="left">
+      <ul>
+        <li class="STYLE22"> Recognizing in a near viewing distance</li>
+        <li class="STYLE22">Using a high-pass filter  </li>
+      </ul>
+    </div></td>
+  </tr>
+</table>
+<p align="center" class="STYLE36">Figure 1. Original Images of Experiment 1 </p>
+<p align="left" class="STYLE36">Mr. Bean is  a well-known actor all round world. Audience love his multivariate and exaggerate facial expressions. In the first experiment, I am trying to blend two distinct facial expressions (i.e., scared expression and puzzled expression) from Mr. Bean and generate a hybrid image which can be identified a scared face in a near viewing distance and a puzzled face in a far viewing distance. </p>
+<table width="1352" height="706" border="5" align="center" bordercolor="#000000" bgcolor="#CCCCFF">
+  <tr>
+    <td width="411"><div align="center"><span class="STYLE62">Image 1 </span></div></td>
+    <td width="411"><div align="center"><span class="STYLE62">Low-Pass Filtered Image 1 </span></div></td>
+    <td width="500"><div align="center"><span class="STYLE62">Hybrid Image </span></div></td>
+  </tr>
+  <tr>
+    <td height="318"><span class="STYLE4"><img src="group1/group1_lowpass.jpg" width="400" height="280" border="5" align="baseline" /></span></td>
+    <td><img src="group1/group1_lowpass_.jpg" width="400" height="280" border="5" /></td>
+    <td rowspan="3"><div id="imagecontainer">
+			<div align="center" class="STYLE34" id="imageResize">			</div>
+			</div>
+    <div id="thumbs">
+			<div align="justify"><a href="javascript:selectImage(1)"></a> 
+			  <div class="STYLE34" id="slider"></div>
+			  <p align="center" class="STYLE35">Move Slider To Zoom </p>
+			</div>
+	  </div>	</td>
+  </tr>
+  <tr>
+    <td><div align="center"><span class="STYLE62">Image 2 </span></div></td>
+    <td><div align="center"><span class="STYLE62">High-Pass Filtered Image 2 </span></div></td>
+  </tr>
+  <tr>
+    <td height="316"><span class="STYLE4"><img src="group1/group1_highpass.jpg" width="400" height="280" vspace="0" border="5" /></span></td>
+    <td><span class="STYLE4"><img src="group1/group1_highpass_.jpg" width="400" height="280" border="5" /></span></td>
+  </tr>
+</table>
+
+<p align="center" class="STYLE36">Figure 2. Use Gaussian Filter to get the low-pass filtered image1. Use impulse filter minus the Gaussian filter to get the high-pass filtered image2; Blend these two images to produce the target Hybrid Image. Use the slider to figure out the different faces when changing the size of the hybrid image. </p>
+<p class="STYLE36">Using the alignment function, we can find the best position to overlap the input images. In figure 2, the low-pass filters used for both image1 and image2 (impulse filter minus the gaussian filter to get the high-pass filter) are  Gaussian filters implemented in the spatial domain. And compute the convolutions between the filters and the target images to generate the filtered images. In low-pass filtered image, the picture looks blurry compared to its original image because of subtracting the high-frequency components. Similarly, the high-pass filtered image mainly consists of the high-frequency details and eliminates all the elements belonging to the low-frequency. </p>
+<p class="STYLE36">Since the result of Gaussian Function's Fourier Transform is till a Gaussian Function with a little difference in the expression as well as value of standard division <img alt="\sigma" src="http://upload.wikimedia.org/math/9/d/4/9d43cb8bbcb702e9d5943de477f099e2.png" /> and <span class="STYLE36"><img alt="\sigma_f" src="http://upload.wikimedia.org/math/d/1/7/d179e11d8a700231539a0c6831f0e6c7.png" />, </span><span class="STYLE36">there exists a relationship between these two parameters: </span><img alt="\sigma\cdot\sigma_f=\frac{1}{2\pi}" src="http://upload.wikimedia.org/math/0/3/8/0384a6425b063f8b48d8f36f9a99cbda.png" />. And we can get the cut-off frequency of the Gaussian filter through:   <img alt="f_c = \sqrt{2\ln(c)}\cdot\sigma_f " src="http://upload.wikimedia.org/math/e/3/4/e34930adf955c7b9126a2debb5e35881.png" /> , where c = 2 represents the point with frequency resulting in the 1/2 amplitude gain. From these two formulas we can conclude that there exists a reciprocal relationship between the standard division  <img alt="\sigma" src="http://upload.wikimedia.org/math/9/d/4/9d43cb8bbcb702e9d5943de477f099e2.png" />  and the cut-off frequency <img width="15" height="25" src="formulas/index_clip_image002_0005.png" />. Therefore, i<span class="STYLE36">nstead of using cut-off frequency as a parameter in the frequency domain, </span>the standard division σ can play the same role in spatial domain (reciprocal relationship). Generally speaking the selected standard division as well as the cut-off frequency control the visual distance for the corresponding filtered images. For instance, if we choose a small standard division for the high-pass filter, it will turn out that only the components with quite high-frequency can be preserved in short distance and will be quickly disappear with enlarging the viewing distance. Oppositely we need to employ a large cut-off frequency to get the same phenomenon. In the first experiment, the standard divisions are <img width="69" height="25" src="formulas/index_clip_image002_0010.png" /> and <img width="75" height="27" src="formulas/index_clip_image002_0011.png" />.</p>
+<p class="STYLE36">&nbsp;</p>
+<h2 class="STYLE42"><a name="experiment2" class="STYLE46">3. Experiment #2. 2D Fourier Transform </a></h2>
+<p class="STYLE36">In experiment 2, I still used images from our lovely Mr. Bean. </p>
+<table width="1227" border="5" align="center" bordercolor="#000000" bgcolor="#CCCCFF">
+  <tr>
+    <td width="135"><div align="center" class="STYLE63"><span class="STYLE53"> Change of facial expression </span></div></td>
+    <td width="141"><div align="center" class="STYLE63"><span class="STYLE53">Image 1 </span></div></td>
+    <td width="119"><div align="center" class="STYLE63"><span class="STYLE53">Image 1 (Low-pass Filtered) </span></div></td>
+    <td width="283"><div align="center" class="STYLE64">Hybrid Image </div></td>
+    <td width="321"><div align="center" class="STYLE63"><span class="STYLE53">Image 2 (High-pass filtered) </span></div></td>
+    <td width="184"><div align="center" class="STYLE63"><span class="STYLE53">Image 2 </span></div></td>
+  </tr>
+  <tr>
+    <td bordercolor="#FFFFFF"><div align="center" class="STYLE63"><span class="STYLE53"> Spatial domain </span></div></td>
+    <td><img src="group2/mu.jpg" width="250" height="300" border="5" /></td>
+    <td><img src="group2/im1_lowfrequency_color.jpg" width="250" height="300" border="5" /></td>
+    <td><img src="group2/2.jpg" width="250" height="300" border="5" /></td>
+    <td><img src="group2/im2_highfrequency_color.jpg" width="250" height="300" /></td>
+    <td><img src="group2/hi.jpg" width="250" height="300" border="5" /></td>
+  </tr>
+  <tr>
+    <td height="314" bgcolor="#CCCCFF"><div align="center" class="STYLE63"><span class="STYLE53"> Frequency domain </span></div></td>
+    <td><img src="group2/FFT/fft_low.jpg" width="250" height="300" border="5" /></td>
+    <td><img src="group2/FFT/fft_low_.jpg" width="250" height="300" border="5" /></td>
+    <td><img src="group2/FFT/fft_hybrid.jpg" width="250" height="300" border="5" /></td>
+    <td><img src="group2/FFT/fft_high_.jpg" width="250" height="300" border="5" /></td>
+    <td><img src="group2/FFT/fft_high.jpg" width="250" height="300" border="5" /></td>
+  </tr>
+</table>
+<p align="center" class="STYLE36">Figure 3. The log magnitude of the Fourier Transform of the two input images, the filtered images, and the hybrid image. </p>
+<p class="STYLE36">To conduct the frequency analysis, the following image Figure 3 shows the log magnitude of the Fourier Transform of these six images in the spatial domain. From the generated images in frequency domain, we can conclude that: 1)   comparing Image 1 and (low-pass filtered) Image 1 in the frequency domain, the high-frequency magnitudes are highly suppressed; 2) comparing Image 2 and (high-pass filtered) Image 2 in the frequency domain, the low-frequency magnitudes are compressed.  </p>
+<p class="STYLE36">&nbsp;</p>
+<h2 class="STYLE57"><a name="experiment3">4. Experiment #3. Color Effect In Creating Hybrid Images </a></h2>
+<p class="STYLE36">Through experiments, we realize that color is a  significant factor when creating a hybrid image. Since human's optical system is more sensitive to colorful components, we take advantage of this interesting point and utilize color as a grouping cue that can be used to create more compelling.</p>
+<table width="645" border="3" align="center" bordercolor="#000000" bgcolor="#CCCCFF">
+  <tr>
+    <td width="271"><div align="center"><span class="STYLE64">Image 1 (to use low-pass filter) </span></div></td>
+    <td width="354"><div align="center"><span class="STYLE64">Image 2(to use high pass filter) </span></div></td>
+  </tr>
+  <tr>
+    <td><img src="group3/1.jpg" width="480" height="523" border="5" /></td>
+    <td><img src="group3/2.jpg" width="480" height="523" border="5" /></td>
+  </tr>
+</table>
+<p align="center"><span class="STYLE36">Figure 4. The original images </span></p>
+<p align="center">&nbsp;</p>
+<p class="STYLE36">In this experiment, I used image1 as the low-pass filtered image and image2 as the high-pass filtered image. According to different color combinations, the program generated four diverse hybrid images in Figure 5. Hybrid Image1(using color images for both the high-pass filter and the low-pass filter) looks quite the same as Hybrid Image2(using color image for low-pass filter and gray image for high-pass filter). And the high-frequency components in Hybrid Image4 looks more obvious than the other three hybrid images. Therefore, we can infer that color used only in the high partial frequencies will enhance the high-frequency elements and reinforce the interpretation of the low-frequency portion as shadows when the hybrid image is viewed up close. </p>
+<table width="1448" border="5" align="center" bordercolor="#000000" bgcolor="#CCCCFF">
+  <tr>
+    <td width="166" rowspan="2"><div align="center" class="STYLE82"><span class="STYLE41">Hybrid Images </span></div></td>
+    <td><div align="center"><strong><span class="STYLE28">Hybrid Image 1 </span></strong></div></td>
+    <td><div align="center"><strong><span class="STYLE28">Hybrid Image 2 </span></strong></div></td>
+    <td><div align="center"><strong><span class="STYLE28">Hybrid Image 3 </span></strong></div></td>
+    <td><div align="center"><strong><span class="STYLE28">Hybrid Image 4 </span></strong></div></td>
+  </tr>
+  <tr>
+    <td width="310"><img src="group3/CroppedHybridImage.jpg" width="300" height="350" border="5" /></td>
+    <td width="310"><img src="group3/CroppedHybridImage_highgray.jpg" width="300" height="350" border="5" /></td>
+    <td width="310"><img src="group3/CroppedHybridImage_gray.jpg" width="300" height="350" border="5" /></td>
+    <td width="310"><img src="group3/CroppedHybridImage_lowgray .jpg" width="300" height="350" border="5" /></td>
+  </tr>
+  <tr>
+    <td><div align="center" class="STYLE22">
+      <div align="center">Low-Pass Filtered Image </div>
+    </div></td>
+    <td><div align="center"><span class="STYLE22">Color</span></div></td>
+    <td><div align="center"><span class="STYLE22">Color</span></div></td>
+    <td><div align="center"><span class="STYLE22">Gray</span></div></td>
+    <td><div align="center"><span class="STYLE22">Gray</span></div></td>
+  </tr>
+  <tr>
+    <td><div align="center" class="STYLE22">
+      <div align="center">High-pass Filter Image </div>
+    </div></td>
+    <td><div align="center"><span class="STYLE22">Color</span></div></td>
+    <td><div align="center"><span class="STYLE22">Gray</span></div></td>
+    <td><div align="center"><span class="STYLE22">Gray</span></div></td>
+    <td><div align="center"><span class="STYLE22">Color</span></div></td>
+  </tr>
+</table>
+<p align="center"><span class="STYLE36">Figure 4. Using different color scales for both low-pass filtered image and high-pass filtered image to generate four different types of hybrid images. </span></p>
+<p align="center">&nbsp;</p>
+<h2 class="STYLE45"><a name="experiment4"></a>5. Experiment #4. Gaussian and Laplacian Pyramids </h2>
+<table width="1074" border="5" align="center">
+  <tr>
+    <td width="665" bordercolor="#000000" bgcolor="#CCCCFF"><p class="STYLE36">Constructing Gaussian and Laplacian Pyramids can be done according to the following steps:</p>
+      <p class="STYLE36">Repeat i = 1: num_levels { </p>
+    <p class="STYLE36"> 1). Use the image in level <img width="19" height="22" src="formulas/index_clip_image002_0000.png" /> gaussian pyramid <img width="28" height="22" src="formulas/index_clip_image002_0003.png" /> to convolution with the fixed Gaussian Filter <img width="9" height="22" src="formulas/index_clip_image002_0004.png" /> and get the temporary level <img width="4" height="25" src="formulas/index_clip_image002_0001.png" /><img width="60" height="22" src="formulas/index_clip_image004.png" />Gaussian Pyramid <img width="60" height="22" src="formulas/index_clip_image002_0005_.png" />. </p>
+    <p align="center" class="STYLE36"><img width="133" height="22" src="formulas/index_clip_image002_0002.png" /></p>
+    <p class="STYLE36">2).  Subtract the temporary level <img width="60" height="22" src="formulas/index_clip_image002_0005_.png" />.from the level <img width="19" height="22" src="formulas/index_clip_image002_0000.png" /> Gaussian Pyramid to get the level <img width="19" height="22" src="formulas/index_clip_image002_0000.png" /> Laplacian Pyramid <img width="26" height="22" src="formulas/index_clip_image002_0008_.png" />.</p>
+    <p align="center" class="STYLE36"><img width="153" height="22" src="formulas/index_clip_image002_0006.png" /></p>
+    <p class="STYLE36">3). Sub-sample the temporary level <img width="60" height="22" src="formulas/index_clip_image004.png" />image to get the level <img width="60" height="22" src="formulas/index_clip_image004.png" />Gaussian Pyramid.} </p>    </td>
+    <td width="389"><span class="STYLE45"><img src="group4/Image_Pyramid.gif" width="388" height="317" /></span></td>
+  </tr>
+</table>
+<p align="center" class="STYLE69">Figure 5. The principles of constructing Gaussian and Laplacian Pyramids </p>
+<table width="814" border="5" align="center" bordercolor="#000000" bgcolor="#CCCCFF">
+  <tr>
+    <td width="78"><div align="center" class="STYLE22">
+      <div align="center">Level Number </div>
+    </div></td>
+    <td width="303"><div align="center" class="STYLE22">Level 1 </div></td>
+    <td width="287"><div align="center" class="STYLE22">Level 2 </div></td>
+    <td width="291" bordercolor="#000000"><div align="center" class="STYLE22">Level 3 </div></td>
+    <td width="300"><div align="center" class="STYLE22">Level 4 </div>      <div align="center" class="STYLE22"></div>      <div align="center" class="STYLE22"></div></td>
+  </tr>
+  <tr>
+    <td><div align="center" class="STYLE41"><span class="STYLE67">Gaussian Pyramid </span></div></td>
+    <td colspan="4"><img src="group4/GaussianPyramid.jpg" width="1199" height="292" /></td>
+  </tr>
+  <tr>
+    <td><div align="center" class="STYLE41"><span class="STYLE67">Laplacian Pyramid </span></div></td>
+    <td colspan="4"><img src="group4/Laplacian.jpg" width="1199" height="290" /></td>
+  </tr>
+</table>
+<p align="center"><span class="STYLE69">Figure 6.The experimental images of Gaussian and Laplacian Pyramids </span></p>
+<p class="STYLE36">To implement the Gaussian and Laplacian Pyramids, I use the interesting facial expressions from another famous comedy star   Jim Carrey. From the levels in Gaussian Pyramid, we notice that in the hybrid image the high-frequency elements gradually extinct and the low-frequency components  show up as the levels increasing. Actually, the eliminated high-frequency components build the corresponding levels in Laplacian Pyramid.</p>
+<p class="STYLE36">&nbsp;</p>
+<h2 align="left" class="STYLE71"><a name="experiment5">6. Experiment #5. Unsuccessful Hybrid Images </a></h2>
+<p align="left" class="STYLE69">No experiments can be absolutely successful. During the implementation of creating hybrid image, I have failed several times in both choosing the appropriate images and the suitable parameters (e.g., standard division and the size of gaussian filter kernel).</p>
+<table width="1525" height="966" border="5" align="center" bordercolor="#000000" bgcolor="#CCCCFF">
+  <tr>
+    <td height="45" colspan="4"><div align="center"><span class="STYLE22">Unsuccessful Hybrid Image </span></div></td>
+  </tr>
+  <tr>
+    <td width="350" height="46"><div align="center"><span class="STYLE22">Image1 (to use low-pass filter) </span></div></td>
+    <td width="352"><div align="center"><span class="STYLE22">Image 2 (to use high-pass filter) </span></div></td>
+    <td width="350"><div align="center"><span class="STYLE22">Hybrid Image </span></div></td>
+    <td width="437"><div align="center"><span class="STYLE22">Analysis of failure</span></div></td>
+  </tr>
+  <tr>
+    <td height="373"><img src="group5/1.jpg" width="340" height="250" border="5" /></td>
+    <td><img src="group5/3.jpg" width="340" height="250" border="5" /></td>
+    <td><img src="group5/hybridImage_color.jpg" width="340" height="250" border="5" /></td>
+    <td bordercolor="#000000"><p class="STYLE77">It is a failed hybrid image. We can still identify the high-frequency components from the small sized hybrid image below. The reasons can be concluded as following: </p>
+      <p class="STYLE77">1. The region of interests in these two images failed to perfectly match each other. It will case some troubles in aligning these two images. Therefore, we should notice that it is a vital factor for creating a successful hybrid image that choosing the almost same sized target objects in image that will become the overlapping portion of hybrid images.</p>
+      <p class="STYLE77">2. The cut-off frequency for the high-pass filter is a little small which will increase the visual distance for high-frequency components in the hybrid image. </p>
+    <p align="center" class="STYLE77"><img src="group5/hybridImage_color.jpg" width="150" height="120" border="2" /></p></td>
+  </tr>
+  <tr>
+    <td height="45" colspan="4"><div align="center"><span class="STYLE22">Successful Hybrid Image </span></div></td>
+  </tr>
+  <tr>
+    <td height="51"><div align="center"><span class="STYLE22">Image1 (to use low-pass filter) </span></div></td>
+    <td><div align="center"><span class="STYLE22">Image 2 (to use high-pass filter) </span></div></td>
+    <td><div align="center"><span class="STYLE22">Hybrid Image </span></div></td>
+    <td bordercolor="#000000"><div align="center"><span class="STYLE22">Analysis of success </span></div></td>
+  </tr>
+  <tr>
+    <td height="378"><img src="group5/1.png" width="340" height="320" border="5" /></td>
+    <td><img src="group5/2.png" width="340" height="320" border="5" /></td>
+    <td><img src="group5/CroppedHybridImage.jpg" width="340" height="320" border="5" /></td>
+    <td bordercolor="#000000"><p class="STYLE77">It is a successful hybrid image. We can identify the low-frequency components from the small sized hybrid image below without the disturbance of the high-frequency portion. The reasons can be concluded as following: </p>
+      <p class="STYLE77">1. The region of interests in these two images can perfectly match each other.</p>
+    <p class="STYLE77">2. The cut-off frequencies for both the high-pass filter and the low-pass filter are appropriate to create a goo hybrid image. </p>
+    <p class="STYLE77">3. The alignment for both images are suitable.</p>
+    <p align="center" class="STYLE77"><img src="group5/CroppedHybridImage.jpg" width="150" height="120" /> </p></td>
+  </tr>
+</table>
+<p align="center" class="STYLE72"><span class="STYLE69">Figure 6. An example of failed hybrid image and an example of successful hybrid image </span></p>
+<p align="center" class="STYLE72">&nbsp; </p>
+</body>
+</html>

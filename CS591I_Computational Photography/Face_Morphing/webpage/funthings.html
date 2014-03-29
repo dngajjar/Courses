@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Assignment3--Face Morphing</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.STYLE3 {font-size: smaller}
+.STYLE5 {
+	font-size: large;
+	font-weight: bold;
+}
+.STYLE9 {font-size: 24px}
+.STYLE14 {
+	font-weight: bold;
+	font-size: 18px;
+}
+.STYLE16 {margin: 0}
+.STYLE17 {margin-top: 0}
+.STYLE21 {
+	font-weight: bold;
+	border-bottom-color: #FFFFFF;
+	border-bottom: 20;
+	font-size: 18px;
+}
+.STYLE22 {font-size: 18px; font-weight: bold; color: #4369D1; }
+.STYLE24 {font-weight: bold; font-size: 16pt; }
+.STYLE25 {font-weight: bold; font-size: 18px; }
+.STYLE29 {font-size: 18px}
+-->
+</style>
+</head>
+<body>
+<div id="header">
+	<h1 align="right"><a href="#" class="heading STYLE3"> Computational PhotographY <span class="STYLE9">--Assignment 3: Face Morphing</span> </a></h1>
+	<h2 align="right">&nbsp;</h2>
+	<h2 align="right">&nbsp;</h2>
+	<h2 align="right"><span class="STYLE5"><a href="http://www.freecsstemplates.org/">--xue yang (10/28/2012) </a></span></h2>
+</div>
+<div id="content">
+	<div class="STYLE14" id="posts">
+	  <div class="post">
+			<h2 class="STYLE16">&nbsp;</h2>
+			<h2 class="STYLE16">Mean Face</h2>
+			<p class="STYLE16">&nbsp;</p>
+			<p class="STYLE16"> After generating the mean face, several interesting operations can be done, such as   using mean face to produce caricatures, masculitizing and feminizing transforms and indicating specific transforms. </p>
+			<p class="STYLE16">&nbsp;</p>
+			<p class="STYLE16">&nbsp;</p>
+			<div class="STYLE25" id="layer">
+              <div class="post">
+                <h2 class="STYLE16">&nbsp;</h2>
+                <h2 class="STYLE16">Results</h2>
+                <h3 class="STYLE17">&nbsp;</h3>
+              </div>
+        </div>
+	        <p>1.    Caricatures (Outward or Inward Mean Face) </p>
+	        <p>- Compute the deviation of a given person from the average face, which is the same as the difference between an individual face and the average. This vector is the essence of that person, and we can scale that vector outward or inward to make a person more or less like themselves.  </p>
+	        <table width="200" border="3">
+              <tr>
+                <td><div align="center"></div></td>
+                <td><div align="center">Original</div></td>
+                <td><div align="center">-0.2*Difference</div></td>
+                <td><div align="center">-0.4*Difference</div></td>
+                <td><div align="center">-0.6*Difference</div></td>
+                <td><div align="center">-0.8*Difference</div></td>
+                <td><div align="center">-1.0*Difference(average)</div></td>
+              </tr>
+              <tr>
+                <td><div align="center">Inward Average </div></td>
+                <td><img src="results/group2/2/difference0.jpg" alt="" width="199" height="260" /></td>
+                <td><img src="results/group2/2/difference0.2.jpg" alt="" width="200" height="260" /></td>
+                <td><img src="results/group2/2/difference0.4.jpg" alt="" width="201" height="261" /></td>
+                <td><img src="results/group2/2/difference0.6.jpg" alt="" width="200" height="261" /></td>
+                <td><img src="results/group2/2/difference0.8.jpg" alt="" width="200" height="261" /></td>
+                <td><img src="results/group2/2/difference1.jpg" alt="" width="201" height="260" /></td>
+              </tr>
+              <tr>
+                <td><div align="center"></div></td>
+                <td><div align="center">Original</div></td>
+                <td><div align="center">+0.2*Difference</div></td>
+                <td><div align="center">+0.4*Difference</div></td>
+                <td><div align="center">+0.6*Difference</div></td>
+                <td><div align="center">+0.8*Difference</div></td>
+                <td><div align="center">+1.0*Difference</div></td>
+              </tr>
+              <tr>
+                <td><div align="center">Outward Average</div></td>
+                <td><img src="results/group2/2/difference0.jpg" alt="" width="199" height="260" /></td>
+                <td><img src="results/group2/2/difference-0.2.jpg" alt="" width="201" height="261" /></td>
+                <td><img src="results/group2/2/difference-0.4.jpg" alt="" width="201" height="262" /></td>
+                <td><img src="results/group2/2/difference-0.6.jpg" alt="" width="201" height="261" /></td>
+                <td><img src="results/group2/2/difference-0.8.jpg" alt="" width="200" height="260" /></td>
+                <td><img src="results/group2/2/difference-1.jpg" alt="" width="198" height="262" /></td>
+              </tr>
+            </table>
+	        <p>* Notice:   There is a limit to how far the caricature vector can be pushed though, as the triangle mesh will begin to break down at a certain point.  </p>
+	        <p>2.   Masculitizing and Feminizing Transforms  </p>
+	        <p>- Since the unequal number of males and females in our class (# of males = 14, # of females = 3). I gave the different weights for the correspondence points of males and females in order to get the new average shape based on the qualized male and female points, which means that the control points for males and females play the same important roles. </p>
+	        <table width="200" border="3">
+              <tr>
+                <td>Averaged Male Face </td>
+                <td>Averaged Female Face </td>
+                <td>Average Male and Female Face </td>
+                <td>Chaning From Male to Female Face </td>
+              </tr>
+              <tr>
+                <td><img src="results/group2/3/meanface-0.0-1.0.jpg" alt="" width="300" height="400" /></td>
+                <td><img src="results/group2/3/meanface-1.0-0.0.jpg" alt="" width="300" height="400" /></td>
+                <td><img src="results/group2/3/meanface-0.5-0.5.jpg" alt="" width="300" height="400" /></td>
+                <td><img src="results/group2/3/male-to-female.gif" alt="" width="300" height="400" /></td>
+              </tr>
+            </table>
+	        <p>3. Another Type of    Caricatures  </p>
+	        <p>- After getting the mean face, I tried another type of operation that I provided the mean face with specific shape and using the algorithm I can get the new face corresponding to the given geometry. </p>
+	        <table width="200" border="3" align="center">
+              <tr>
+                <td><div align="center">Image A </div></td>
+                <td><div align="center">Image A with Triangle </div></td>
+                <td><div align="center">ImageB</div></td>
+                <td><div align="center">Image B with Triangle</div></td>
+                <td><div align="center">Output Image </div></td>
+              </tr>
+              <tr>
+                <td><div align="center"></div>
+                <img src="results/group2/4/1.jpg" alt="" width="225" height="300" /></td>
+                <td><img src="results/group2/4/im1_triangulation.jpg" alt="" width="225" height="316" /></td>
+                <td><img src="results/group2/4/4.jpg" alt="" width="225" height="316" /></td>
+                <td><img src="results/group2/4/im2_triangulation.jpg" alt="" width="226" height="314" /></td>
+                <td><img src="results/group2/4/resultscaricature3.jpg" alt="" width="261" height="310" /></td>
+              </tr>
+            </table>
+	        <p>- I tried the following two caricatures pictures  </p>
+	        <table width="200" border="3" align="center">
+              <tr>
+                <td>Image A</td>
+                <td>Image B </td>
+                <td><p>Output Image </p>                </td>
+              </tr>
+              <tr>
+                <td><img src="results/group2/4/1.jpg" alt="" width="300" height="400" /></td>
+                <td><img src="results/group2/4/2.jpg" alt="" width="300" height="400" /></td>
+                <td><img src="results/group2/4/caricatures1.jpg" alt="" width="300" height="400" /></td>
+              </tr>
+              <tr>
+                <td>Image A</td>
+                <td>Image B </td>
+                <td><p>Output Image </p></td>
+              </tr>
+
+              <tr>
+                <td><img src="results/group2/4/1.jpg" alt="" width="300" height="400" /></td>
+                <td><img src="results/group2/4/3.jpg" alt="" width="300" height="400" /></td>
+                <td><img src="results/group2/4/resultscaricature2.jpg" alt="" width="300" height="400" /></td>
+              </tr>
+            </table>
+	        <p>&nbsp;</p>
+	        <p>&nbsp;</p>
+	        <p>&nbsp; </p>
+	        <p>&nbsp; </p>
+	        <p>&nbsp;</p>
+	  </div>
+  </div>
+	<div id="archives" class="boxed">
+		<h2 class="heading STYLE14">CATALOG</h2>
+		<div class="content">
+			<ul>
+				
+				<li class="STYLE24">
+                  <div align="left" class="STYLE25"><a href="index.html"> Introduction			    </a></div>
+			  </li>
+				<li class="STYLE24">
+				  <div align="left" class="STYLE25"><a href="Morph2Images.html">Morphing Two Images</a>			    </div>
+			  </li>
+				<li class="STYLE21">
+				  <div align="left"><a href="MeanFace.html"><strong>Mean Face </strong></a></div>
+			  </li>
+				<li class="STYLE21">
+				  <h3>Bells &amp; Whistles </h3>
+				</li>
+				<li class="STYLE21">
+				  <div align="left" class="STYLE22"><a href="funthings.html">Fun Things </a></div>
+				</li>
+				<li>
+				  <div align="left" class="STYLE22"><a href="PCA.html">PCA</a></div>
+				</li>
+				<li></li>
+			</ul>
+	  </div>
+  </div>
+	<div id="search" class="boxed">
+		<h2 class="heading">&nbsp;</h2>
+		</div>
+</div>
+</body>
+</html>
+<span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span>

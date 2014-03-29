@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Title      : Vertical
+Version    : 1.0
+Released   : 20080915
+Description: A two-column, fixed-width and lightweight template ideal for 1024x768 resolutions. Suitable for blogs and small websites.
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Computational Photography -- Assignment 2</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.STYLE3 {color: #669966}
+.STYLE5 {font-size: 16px; font-family: Geneva, Arial, Helvetica, sans-serif; font-weight: bold; }
+.STYLE8 {font-family: Geneva, Arial, Helvetica, sans-serif; color: #28737B; font-weight: bold; font-size: 16px; }
+.STYLE11 {	color: #28737B;
+	font-weight: bold;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 18;
+	margin-top: -20px;
+	line-height: 25px;
+}
+.STYLE15 {color: #6633FF; font-weight: bold; }
+.STYLE16 {color: #6633FF}
+.STYLE17 {font-weight: bold}
+.STYLE19 {font-weight: bold}
+.STYLE21 {color: #0000FF; font-weight: bold; }
+.STYLE24 {font-weight: bold}
+.STYLE25 {font-weight: bold}
+.STYLE26 {font-weight: bold}
+.STYLE27 {font-weight: bold}
+-->
+</style>
+</head>
+<body>
+<div id="wrapper">
+<!-- start header -->
+<div id="header">
+	<div id="logo">
+		<h1>COMPUTATIONAL PHOTOGRAPHY</h1>
+		<h2>&nbsp;</h2>
+		<h2>&nbsp;</h2>
+		<h2><span class="STYLE5">Project 2<span class="STYLE3">- <a href="http://www.win.tue.nl/~wstahw/2IV05/seamcarving.pdf"><u>Seam Carving for Content-Aware Image Resizing</u></a></span></span></h2>
+		<h2>&nbsp;</h2>
+		<h2><span class="STYLE8">Student Name: Xue Yang </span></h2>
+		<h2>&nbsp;</h2>
+	</div>
+	<p>&nbsp;</p>
+	<div id="menu">
+		<ul>
+			<li class="active"><a href="http://www.csee.wvu.edu/~gidoretto/courses/2012-fall-cp/"><strong>Homepage</strong></a></li>
+			<li><a href="mailto:xuyang@mix.wvu.edu"><strong>Contact Me </strong></a></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</div>
+<!-- end header -->
+<!-- start page -->
+<div id="page">
+	<!-- start content -->
+	<div id="content">
+		<div class="post">
+			<h1 align="left" class="title"> Vertical Carving </h1>
+			<div class="entry">
+				<p align="left" class="STYLE11">&nbsp;</p>
+				<p align="left" class="STYLE11">Vertical carving is to find pathes from top to bottom of the image with the smallest total energy. Then remove these determined pixels and shift all the other pixels  up in order to reduce the height of the image to the target size.  </p>
+				<p align="left" class="STYLE11">And the calculation process can be expressed as : </p>
+				<p align="left" class="STYLE11"><img width="425" height="20" src="formula/002.png" /></p>
+				<p align="left" class="STYLE11">Where e(i,j) is the value of point (i,j) in the energy map, and M(i,j) is the total lowest energy value for the path from the top to the current location (i,j). </p>
+				<p align="left" class="STYLE11">Using dynamic programming, I can accumulately calculate each path with the lowest energy. For instance, the computation starts from the second row, since the first row has stored the pixels' values. Then for each pixel in the second row (2, k), where <em>k=1~imgWidth</em>, find its connected pixel in the first row (1, k-1), (1, k), (1, k+1) with the lowest energy, add the value and store in the corresponding pixel (2, k) on the second row. Repeatly conduct the calculation until reach the final row. After the computation, the values on the last row are the total energy from the top to the corresponding pixels on the last row with the lowest energy. Then order the final row of the modified energy map in order to get the smallest number. Finally backtrack the path to figure out each coordinate in the determined path.</p>
+				<p align="left" class="STYLE11">Actually, this calculating procedures can be done using the same horizontal carving function with the input parameter of the <em>transposed energy map</em>. And repeat this process several times in order to carve a number of horizontal seams.</p>
+		  </div>
+	  </div>
+	</div>
+	<!-- end content -->
+	<!-- start sidebar -->
+	<div id="sidebar">
+		<ul>
+
+		  <li>
+            <h2 align="center"><strong>Introduction </strong></h2>
+		    <ul>
+              <li class="STYLE17">
+                <div align="center"><a href="index.html">Project Introduction </a></div>
+              </li>
+	        </ul>
+	      </li>
+		  <li><ul><li>
+				  <h2 align="center"><strong>Seam Carving </strong></h2>
+				  <ul>
+				    <li class="STYLE19">
+				      <div align="center"><a href="horizontalcarving.html">Horizontal Carving </a></div>
+				    </li>
+				    <li>
+				      <div align="center"><span class="STYLE21"><a href="verticalcarving.html">Vertical Carving </a></span></div>
+				    </li>
+			        <li></li>
+			    </ul>
+			      </li>
+			    <li>
+			      <ul>
+			        <li>
+			          <h2 align="center"><strong>Bells &amp; whistle</strong></h2>
+	                </li>
+		            <li>
+		              <div align="center"><a href="optimal diagonal resize.html">Optimal Diagonal Resize</a></div>
+		            </li>
+		            <li class="STYLE25">
+		              <div align="center"><a href="seam insertion.html">Seam Insertion</a></div>
+		            </li>
+		            <li class="STYLE26">
+		              <div align="center"><a href="object removal.html">Object Removal</a></div>
+		            </li>
+		            <li class="STYLE27">
+		              <div align="center"><a href="my masterpieces.html">My Masterpieces</a></div>
+		            </li>
+		            <li class="STYLE27">
+		              <div align="center"><strong><a href="different energy function.html">Different Energy Function</a></strong></div>
+		            </li>
+		            <li>
+		              <div align="center"><strong><a href="bad result.html">Bad Results </a></strong></div>
+		            </li>
+		            <li></li>
+		            <li></li>
+		          </ul>
+		        </li>
+			  </ul>
+		  </li>
+	  </ul>
+  </div>
+	<!-- end sidebar -->
+		<div style="clear: both;">&nbsp;
+	  <div class="post">
+	  <h1 align="left" class="title"> Examples </h1>
+	  <p>&nbsp;</p>
+	  <p><span class="STYLE11">In the vertical seam carving experiment, I tried different number of seams to cut (1, 50, 100, 150) in several images, and the output images are shown below.</span></p>
+	  <table width="1200" border="3" align="center" bordercolor="#66CCFF">
+        <tr>
+          <td width="502"><div align="center"><span class="STYLE15">Original Image </span></div></td>
+          <td width="481"><div align="center"><span class="STYLE15">Image Labled with the Seam </span></div></td>
+          <td width="191"><div align="center"><strong><span class="STYLE16"># of Horizontal Seams Carving </span></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><img src="images/group70/1.jpg" alt="" width="500" height="334" /></div></td>
+          <td><div align="center"><img src="images/group70/vertical.gif" alt="" width="500" height="334" /></div></td>
+          <td><div align="center"><strong>30</strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><span class="STYLE15">Original Image (500 * 332) </span></div></td>
+          <td><div align="center"><span class="STYLE15">Resized Image (450 * 332)</span></div></td>
+          <td><div align="center"><strong><span class="STYLE16"># of Horizontal Seams Carving </span></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><img src="images/group6/original.jpg" alt="" width="500" height="333" /></div></td>
+          <td><div align="center"><img src="images/group6/horizontal70.jpg" alt="" width="500" height="263" /></div></td>
+          <td><div align="center" class="STYLE15">70</div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><span class="STYLE15">Original Image (500 * 500) </span></div></td>
+          <td><div align="center"><span class="STYLE15">Resized Image (500 * 400)</span></div></td>
+          <td><div align="center"><strong><span class="STYLE16"># of Horizontal Seams Carving </span></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><img src="images/group7/original.jpg" alt="" width="500" height="500" /></div></td>
+          <td><div align="center"><img src="images/group7/horizontal100.jpg" alt="" width="500" height="400" /></div></td>
+          <td><div align="center" class="STYLE15">100</div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><span class="STYLE15">Original Image (500 * 500) </span></div></td>
+          <td><div align="center">
+            <div align="center"><span class="STYLE15">Resized Image (500 * 350)</span></div>
+          </div></td>
+          <td><div align="center"><strong><span class="STYLE16"># of Horizontal Seams Carving </span></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><img src="images/group8/original.jpg" alt="" width="500" height="500" /></div></td>
+          <td><div align="center"><img src="images/group8/horizontal150.jpg" alt="" width="500" height="350" /></div></td>
+          <td><div align="center" class="STYLE15">150</div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><span class="STYLE15">Original Image (500 * 332) </span></div></td>
+          <td><div align="center">
+            <div align="center"><span class="STYLE15">Resized Image (450 * 332)</span></div>
+          </div></td>
+          <td><div align="center"><strong><span class="STYLE16"># of Horizontal Seams Carving </span></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"><img src="images/group9/original.jpg" alt="" width="500" height="500" /></div></td>
+          <td><div align="center"><img src="images/group9/horizontal70.jpg" alt="" width="500" height="250" /></div></td>
+          <td><div align="center" class="STYLE16"><strong>250</strong></div></td>
+        </tr>
+      </table>
+	</div>
+</div>
+<!-- end page -->
+<!-- start footer -->
+
+</div>
+<!-- end footer -->
+</body>
+</html>

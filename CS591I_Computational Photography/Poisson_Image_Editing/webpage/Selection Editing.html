@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Begrimed  
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20090830
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>CS591I Computational Photography - Final Project</title>
+<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #534616;
+	font-weight: bold;
+}
+.STYLE2 {font-weight: bold}
+.STYLE4 {font-size: 18px}
+.STYLE5 {	font-size: 12px;
+	color: #666666;
+}
+-->
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+	  <div id="logo">
+			<h1><a href="#"><strong>CS591I COMPUTATIONAL PHOTOGRAPHY -- Project: Poisson Image Editing </strong></a></h1>
+			<p class="STYLE1">Xue Yang 2012-11-7 </p>
+	  </div>
+      <p class="STYLE1">&nbsp;</p>
+  </div>
+	<!-- end #header -->
+	<div id="menu">
+		<ul>
+			<li class="current_page_item"><a href="index.html">Home</a></li>
+			<li></li>
+			<li></li>
+			<li><a href="http://www.csee.wvu.edu/~gidoretto/courses/2012-fall-cp/">Course Link</a></li>
+			<li><a href="mailto: yangxue0823@gmail.com">Contact Me</a></li>
+		</ul>
+	</div>
+	<!-- end #menu -->
+	<div id="page">
+	<div id="page-bgtop">
+	<div id="page-bgbtm">
+		<div id="content">
+			<div class="post">
+				<h2 class="title"><a href="#">Selection Editing </a></h2>
+				<div class="entry">
+					<p>The Selection Editing Algorithm is a kind of in-place image transformations that the guidance field is entirely dependent on the source image. By defining different guidance field of the source image, I acquired several functions of local image selection editing, such as changing the illumination or flatening the content of the selected region and tiling the same image in a seamless way. These tools are introduced in the following section.</p>
+					<table width="660" height="58" border="1" bordercolor="#FFFFFF">
+                      <tr>
+                        <td height="52" bgcolor="#C9E9CA" class="STYLE4">1. Texture Flatening </td>
+                      </tr>
+                    </table>
+					<p>The guidance field is defined as following:</p>
+					<p><img src="project images/img12.png" alt="" width="535" height="76" /> </p>
+					<p align="left">From the function we can see that the algorithm flatens the content between the edges and preserve the edges information. However, when the edge information is complex and huge, the results become less visible.</p>
+					<p align="left"><img src="project images/img13.png" alt="" width="662" height="219" /> <img src="project images/img14.png" alt="" width="667" height="205" /></p>
+					<table width="660" border="1" bordercolor="#FFFFFF">
+                      <tr>
+                        <td height="48" bgcolor="#C9E9CA" class="STYLE4"><p>2.Local Illumination Changes </p>
+                        </td>
+                      </tr>
+                    </table>
+					<p>The guidance field is defined as following:</p>
+					<p><img src="project images/img15.png" alt="" width="275" height="44" /></p>
+					<p align="left">The effect of employing the guidance field is to decrease the large gradients and increase the small gradients. This algorithm works well for reducing the specular reflections or correcting under-exposed images. By changing the values of the alpha and beta, we can adjust the illumination changes towards our expectation. In the designed GUI, users can set the alpha and beta parameters, and perceive the outcomes. </p>
+					<p align="left"><img src="project images/img16.png" alt="" width="643" height="251" /> </p>
+					<table width="660" border="1" bordercolor="#FFFFFF">
+                      <tr>
+                        <td height="48" bgcolor="#C9E9CA" class="STYLE4"><p>3.Seamless Tiling </p></td>
+                      </tr>
+                    </table>
+					<p align="left">If we want to combine the source image to a larger size, we can still use the Poisson Image Editing Algorithm. Before conducting the Poisson Solver, we need to do some manipulations on the corresponding pair of boundaries on the source image as the function described below:</p>
+					<p align="left"><img src="project images/img17.png" alt="" width="561" height="82" /> </p>
+					<p align="left">In the designed GUI, users can choose the enlarge size by adjusting the number of images in the row and columns. The examples shown below are using the new size of 3 images in each row and 2 images in each column.</p>
+					<p align="left"><img src="project images/img18.png" alt="" width="658" height="258" /> <img src="project images/img19.png" alt="" width="660" height="276" />However, there are some conditions for using this algorithm to tile images. If the seams of the boundaries are not significant and the color as well as the objects' structures on the borders are comparatively uniform, we can obtain some good results. The example shown below is a bad instance that because of complex structures of the objects on the boundaires, the tiling output is quite obvious.</p>
+					<p align="center"><img src="project images/img20.png" alt="" width="540" height="604" /></p>
+					<p align="right">&nbsp;</p>
+					<p align="right"><span class="STYLE5">All the images used in the project are from google images. </span></p>
+			  </div>
+			</div>
+	     </div>
+		<!-- end #content -->
+		<div id="sidebar">
+			<ul>
+			  <li>
+					<h2>Categories</h2>
+					<ul class="STYLE2">
+						<li><a href="index.html">Introduction</a></li>
+						<li><a href="GUI Design.html">GUI Design </a></li>
+						<li><a href="Seamless Cloning.html">Seamless Cloning</a></li>
+					    <li><a href="Mixing Gradients.html">Mixing Gradients</a></li>
+					    <li><a href="Selection Editing.html">Selection Editing</a></li>
+					    <li><a href="Conclusion.html">Conclusion</a></li>
+					</ul>
+			  </li>
+		  </ul>
+		</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	</div>
+	</div>
+	<!-- end #page -->
+</div>
+<!-- end #footer -->
+</body>
+</html>
+<span style="display:none;"><a href="http://www.mobanwang.com" title="��ҳģ������">��ҳģ��</a></span>
